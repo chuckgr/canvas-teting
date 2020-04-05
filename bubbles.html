@@ -109,14 +109,12 @@
                 context.beginPath();context
                 context.lineWidth = 2;
                 context.strokeStyle = "rgb(166,144,255)";
-
-                //console.log("Drawing circle..."+xOffset+" "+yOffset);
-                // drawPoint(context, yOffset+step);
-            // -------------------------------------------------------------
-        // Base class for a circle
-        // -------------------------------------------------------------
-        class Circle {
+                context.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+                context.stroke();
+            }
+            
         }
+
         // -------------------------------------------------------------
         // Draw a bunch of circles and make them move
         // -------------------------------------------------------------
