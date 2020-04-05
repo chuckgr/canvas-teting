@@ -32,7 +32,7 @@ class Circle extends Shape {
 }
 
 // -------------------------------------------------------------
-// Class for a circle
+// Class for a Square
 // -------------------------------------------------------------
 class Square extends Shape {
     constructor(x, y, l) {
@@ -44,7 +44,7 @@ class Square extends Shape {
         context.beginPath();context
         context.lineWidth = 2;
         context.strokeStyle = "rgb(166,144,255)";
-        context.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+        context.strokeRect(this.x, this.y, this.l, this.l);
         context.stroke();
     }
     

@@ -2,121 +2,11 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bubbles</title>
     <script type="text/javascript" src="shapes.js"></script>
     <script type="text/javascript">
-        /*
-        function showAxes(ctx,axes) {
-            var width = ctx.canvas.width;
-            var height = ctx.canvas.height;
-            var xMin = 0;
-            
-            ctx.beginPath();
-            ctx.strokeStyle = "rgb(128,128,128)";
-            
-            // X-Axis
-            ctx.moveTo(xMin, height/2);
-            ctx.lineTo(width, height/2);
-            
-            // Y-Axis
-            ctx.moveTo(width/2, 0);
-            ctx.lineTo(width/2, height);
-
-            // Starting line
-            ctx.moveTo(0, 0);
-            ctx.lineTo(0, height);
-            
-            ctx.stroke();
-        }
-        */
-        /*
-        function drawPoint(ctx, y) {            
-            var radius = 3;
-            ctx.beginPath();
-
-            // Hold x constant at 4 so the point only moves up and down.
-            ctx.arc(4, y, radius, 0, 2 * Math.PI, false);
-
-            ctx.fillStyle = 'red';
-            ctx.fill();
-            ctx.lineWidth = 1;
-            ctx.stroke();
-        }
-        */ 
-        function plotSine(ctx, xOffset, yOffset) {
-            var width = ctx.canvas.width;
-            var height = ctx.canvas.height;
-            var scale = 20;
-
-            ctx.beginPath();
-            ctx.lineWidth = 2;
-            ctx.strokeStyle = "rgb(66,44,255)";
-
-            // console.log("Drawing point...");Sine Wave
-            // drawPoint(ctx, yOffset+step);
-            
-            var x = 4;
-            var y = 0;
-            var amplitude = 40;
-            var frequency = 20;
-            //ctx.moveTo(x, y);
-            ctx.moveTo(x, 50);
-            while (x < width) {
-                y = height/2 + amplitude * Math.sin((x+xOffset)/frequency);
-                ctx.lineTo(x, y);
-                x++;
-                // console.log("x="+x+" y="+y);
-            }
-            ctx.stroke();
-            ctx.save();
-
-            console.log("Drawing point at y=" + y);
-            drawPoint(ctx, y);step
-            ctx.stroke();
-            ctx.restore();
-        }
-
-        // -------------------------------------------------------------
-        // Base class for a animation object
-        // -------------------------------------------------------------
-        class Animation {
-            constructor(x, y ) {
-                this.x = x;
-                this.y = y;
-                
-            }
-        }
-
-        // -------------------------------------------------------------
-        // Base class for a shape
-        // -------------------------------------------------------------
-        /*
-        class Shape {
-            constructor(x, y) {
-                this.x = x;
-                this.y = y;
-            }
-        }
-
-        // -------------------------------------------------------------
-        // Class for a circle
-        // -------------------------------------------------------------
-        class Circle extends Shape {
-            constructor(x, y, r) {
-                super(x ,y);
-                this.r = r;
-            }
-
-            draw(context) {
-                context.beginPath();context
-                context.lineWidth = 2;
-                context.strokeStyle = "rgb(166,144,255)";
-                context.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
-                context.stroke();
-            }
-            
-        }
-*/ 
         // -------------------------------------------------------------
         // Draw a bunch of circles and make them move
         // -------------------------------------------------------------
@@ -142,30 +32,34 @@
         function draw(objects) {
             var canvas = document.getElementById("canvas");
             var context = canvas.getContext("2d");
-            
-            //cc.draw(context);
-            objects.draw(context);
+
+            for (let i=0; i<objects.length; i++) {
+                objects[i].draw(context);
+            }
 
             context.restore();
-            
+            /*
             // update the object locations
             if (objects.x > context.canvas.width) {
                 x = Math.random() * context.canvas.height;
                 step = -4;
                 console.log('New x = '+step+' y = '+y);
             } 
-
+            */
             window.requestAnimationFrame(function(ts) {
-                console.log(objects);
+                //console.log(objects);
                 draw(objects);
             });
         }
 
         function init() {
-            let cc = new Circle(Math.random()*500, Math.random()*500, Math.random()*10);
+            objs = [new Circle(Math.random()*500, Math.random()*500, (Math.random()*10)+2),
+                    new Square(Math.random()*500, Math.random()*500, Math.random()*50+2)
+                    ];
+
             window.requestAnimationFrame(function(ts) {
-                console.log(cc);
-                draw(cc);
+                //console.log(cc);
+                draw(objs);
             });
         }
 
@@ -180,8 +74,8 @@
 </head>
 
 <body onload="init()">
-    <h3>Bubbles moving</h3>
-    <canvas id="canvas" width="500" height="500"></canvas>
+    <h3>Shapes moving</h3>
+    <canvas id="canvas" width="750" height="500" style="border: solid 5pt orange"></canvas>
     <p/>   
 </body>
 
