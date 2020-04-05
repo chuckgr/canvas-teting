@@ -11,3 +11,41 @@ class Shape {
         this.y = y;
     }
 }
+
+// -------------------------------------------------------------
+// Class for a circle
+// -------------------------------------------------------------
+class Circle extends Shape {
+    constructor(x, y, r) {
+        super(x ,y);
+        this.r = r;
+    }
+
+    draw(context) {
+        context.beginPath();context
+        context.lineWidth = 2;
+        context.strokeStyle = "rgb(166,144,255)";
+        context.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+        context.stroke();
+    }
+    
+}
+
+// -------------------------------------------------------------
+// Class for a circle
+// -------------------------------------------------------------
+class Square extends Shape {
+    constructor(x, y, l) {
+        super(x ,y);
+        this.l = l;
+    }
+
+    draw(context) {
+        context.beginPath();context
+        context.lineWidth = 2;
+        context.strokeStyle = "rgb(166,144,255)";
+        context.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+        context.stroke();
+    }
+    
+}
