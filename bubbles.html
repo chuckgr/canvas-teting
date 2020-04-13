@@ -7,28 +7,7 @@
     <title>Bubbles</title>
     <script type="text/javascript" src="shapes.js"></script>
     <script type="text/javascript">
-        // -------------------------------------------------------------
-        // Draw a bunch of circles and make them move
-        // -------------------------------------------------------------
-        function drawCircle(ctx, xOffset, yOffset) {
-            var width = ctx.canvas.width;
-            var height = ctx.canvas.height;
-            var scale = 20;
-
-            ctx.beginPath();
-            ctx.lineWidth = 2;
-            ctx.strokeStyle = "rgb(66,44,255)";
-
-            //console.log("Drawing circle..."+xOffset+" "+yOffset);
-            // drawPoint(ctx, yOffset+step);
-            
-            var x = 4;
-            var y = 0;
-
-            ctx.arc(xOffset, yOffset, 5, 0, 2 * Math.PI);
-            ctx.stroke();
-        }
-
+    
         function draw(objects) {
             var canvas = document.getElementById("canvas");
             var context = canvas.getContext("2d");

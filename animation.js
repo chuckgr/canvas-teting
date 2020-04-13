@@ -2,9 +2,15 @@
 // Base class for a animation object
 // -------------------------------------------------------------
 class Animation {
-    constructor(x, y ) {
-        this.x = x;
-        this.y = y;
+    constructor() {
+        this.dx = 0;
+        this.dy = 0;
+    }
+
+    //---------------------------------------------------------
+    // Move the object to new x,y based on animation type
+    //---------------------------------------------------------
+    animate() {
         
     }
 }
