@@ -7,12 +7,11 @@
     <title>Bubbles</title>
     <script type="text/javascript" src="shapes.js"></script>
     <script type="text/javascript">
-    
         function draw(objects) {
             var canvas = document.getElementById("canvas");
             var context = canvas.getContext("2d");
 
-            for (let i=0; i<objects.length; i++) {
+            for (let i = 0; i < objects.length; i++) {
                 objects[i].draw(context);
             }
 
@@ -25,18 +24,23 @@
                 console.log('New x = '+step+' y = '+y);
             } 
             */
-            window.requestAnimationFrame(function(ts) {
+            window.requestAnimationFrame(function (ts) {
                 //console.log(objects);
                 draw(objects);
             });
         }
 
         function init() {
-            objs = [new Circle(Math.random()*500, Math.random()*500, (Math.random()*10)+2),
-                    new Square(Math.random()*500, Math.random()*500, Math.random()*50+2)
-                    ];
+            // Get the canvas we are drawing to
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
 
-            window.requestAnimationFrame(function(ts) {
+            objs = [
+                new Circle(Math.random() * canvas.width, Math.random() * canvas.height, (Math.random() * 10) + 2),
+                new Square(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 50 + 2)
+            ];
+
+            window.requestAnimationFrame(function (ts) {
                 //console.log(cc);
                 draw(objs);
             });
@@ -46,16 +50,16 @@
         // globals
         //----------------------------------------------------------
         let step = -4;
-        let y = 250; 
+        let y = 250;
 
-        let locs = [Math.random() * (500/2), Math.random() * (500/2), Math.random() * (500/2)]
+        let locs = [Math.random() * (500 / 2), Math.random() * (500 / 2), Math.random() * (500 / 2)]
     </script>
 </head>
 
 <body onload="init()">
     <h3>Shapes moving</h3>
     <canvas id="canvas" width="750" height="500" style="border: solid 5pt orange"></canvas>
-    <p/>   
+    <p />
 </body>
 
 </html>
