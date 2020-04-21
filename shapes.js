@@ -17,18 +17,18 @@ class Shape {
 // -------------------------------------------------------------
 class Circle extends Shape {
     constructor(x, y, r) {
-        super(x ,y);
+        super(x, y);
         this.r = r;
     }
 
     draw(context) {
-        context.beginPath();context
+        context.beginPath();
         context.lineWidth = 2;
         context.strokeStyle = "rgb(166,144,255)";
         context.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
         context.stroke();
     }
-    
+
 }
 
 // -------------------------------------------------------------
@@ -36,16 +36,16 @@ class Circle extends Shape {
 // -------------------------------------------------------------
 class Square extends Shape {
     constructor(x, y, l) {
-        super(x ,y);
+        super(x, y);
         this.l = l;
     }
 
     draw(context) {
-        context.beginPath();context
+        context.beginPath();
         context.lineWidth = 2;
         context.strokeStyle = "rgb(166,144,255)";
         context.strokeRect(this.x, this.y, this.l, this.l);
         context.stroke();
     }
-    
+
 }
