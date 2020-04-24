@@ -27,7 +27,10 @@
         //----------------------------------------------------------
         function createAnimations(shapes) {
             for (let i = 0; i < shapes.length; i++) {
-                shapes[i].addAnimation(new LinearAnimation(5, 5, 5));
+                shapes[i].addAnimation(new LinearAnimation(
+                    Math.floor((Math.random() * 5) + 2),
+                    Math.floor((Math.random() * 5) + 2),
+                    Math.floor((Math.random() * 5) + 1)));
             }
         }
 
@@ -44,14 +47,7 @@
             }
 
             context.restore();
-            /*
-            // update the object locations
-            if (objects.x > context.canvas.width) {
-                x = Math.random() * context.canvas.height;
-                step = -4;
-                console.log('New x = '+step+' y = '+y);
-            } 
-            */
+
             window.requestAnimationFrame(function (ts) {
                 //console.log(objects);
                 draw(objects);
@@ -79,7 +75,7 @@
             objs[0].addAnimation(new LinearAnimation(5, 5, 5));
             objs[1].addAnimation(new LinearAnimation(2, 2, 2));
 
-            let shapes = createShapes(10);
+            let shapes = createShapes(50);
             createAnimations(shapes);
 
             window.requestAnimationFrame(function (ts) {
@@ -90,8 +86,8 @@
         //----------------------------------------------------------
         // globals
         //----------------------------------------------------------
-        let step = -4;
-        let y = 250;
+        //let debug = true;
+        let debug = false;
 
         let locs = [Math.random() * (500 / 2), Math.random() * (500 / 2), Math.random() * (500 / 2)]
     </script>
@@ -99,7 +95,7 @@
 
 <body onload="init()">
     <h3>Shapes moving</h3>
-    <canvas id="canvas" width="750" height="500" style="border: solid 5pt orange"></canvas>
+    <canvas id="canvas" width="750" height="500" style="border: solid 3pt rgb(248, 224, 8)"></canvas>
     <p />
 </body>
 
