@@ -5,11 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bubbles</title>
+    <script type="text/javascript" src="animation.js"></script>
     <script type="text/javascript" src="shapes.js"></script>
     <script type="text/javascript">
         function draw(objects) {
             var canvas = document.getElementById("canvas");
             var context = canvas.getContext("2d");
+            context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 
             for (let i = 0; i < objects.length; i++) {
                 objects[i].draw(context);
@@ -36,9 +38,16 @@
             var ctx = canvas.getContext("2d");
 
             objs = [
-                new Circle(Math.random() * canvas.width, Math.random() * canvas.height, (Math.random() * 10) + 2),
-                new Square(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 50 + 2)
+                new Circle(Math.floor(Math.random() * canvas.width),
+                    Math.floor(Math.random() * canvas.height),
+                    Math.floor(Math.random() * 10) + 2),
+                new Square(Math.random() * canvas.width,
+                    Math.floor(Math.random() * canvas.height),
+                    Math.floor(Math.random() * 50) + 2)
             ];
+
+            // Add animation to this shape
+            objs[0].addAnimation(new LinearAnimation(5, 5, 5));
 
             window.requestAnimationFrame(function (ts) {
                 //console.log(cc);

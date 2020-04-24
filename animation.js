@@ -2,15 +2,50 @@
 // Base class for a animation object
 // -------------------------------------------------------------
 class Animation {
-    constructor() {
-        this.dx = 0;
-        this.dy = 0;
+    constructor(step, xSpeed, ySpeed) {
+        this.step = step;
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
     }
 
     //---------------------------------------------------------
     // Move the object to new x,y based on animation type
     //---------------------------------------------------------
-    animate() {
-        
+    animate() {}
+}
+
+// -------------------------------------------------------------
+//  Linear animation object
+// -------------------------------------------------------------
+class LinearAnimation extends Animation {
+    constructor(step, xSpeed, ySpeed) {
+        super(step, xSpeed, ySpeed);
+    }
+
+    //---------------------------------------------------------
+    // Move the object to new x,y linearly around the canvas
+    //---------------------------------------------------------
+    animate(ctx, x, y) {
+        // just bounce around
+        console.log(`LinearAnimation:animate:start(${x}, ${y}, ${this.xSpeed}, ${this.ySpeed})`);
+        x += this.xSpeed;
+        y += this.ySpeed;
+
+        // Check if we hit the walls
+        if (x >= ctx.canvas.width) {
+            this.xSpeed = this.xSpeed * -1;
+        } else if (x <= 0) {
+            this.xSpeed = this.step;
+            //obj.xStep =objs[i].xStep;
+        }
+
+        // Check if we hit the top/bottom
+        if (y >= ctx.canvas.height) {
+            this.ySpeed = this.ySpeed * -1;
+        } else if (y <= 0) {
+            this.ySpeed = this.step;
+        }
+        console.log(`LinearAnimation:animate:end (${x}, ${y}, ${this.xSpeed}, ${this.ySpeed})`);
+        return [x, y];
     }
 }

@@ -10,6 +10,14 @@ class Shape {
         this.x = x;
         this.y = y;
     }
+
+    // -------------------------------------------------------------
+    // Add the class that will determine the next x,y location of 
+    // this object based on the type of animation type
+    // -------------------------------------------------------------
+    addAnimation(anim) {
+        this.anim = anim;
+    }
 }
 
 // -------------------------------------------------------------
@@ -25,6 +33,11 @@ class Circle extends Shape {
         context.beginPath();
         context.lineWidth = 2;
         context.strokeStyle = "rgb(166,144,255)";
+        if (this.anim != null) {
+            let newLoc = this.anim.animate(context, this.x, this.y);
+            this.x = newLoc[0];
+            this.y = newLoc[1];
+        }
         context.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
         context.stroke();
     }
