@@ -8,6 +8,32 @@
     <script type="text/javascript" src="animation.js"></script>
     <script type="text/javascript" src="shapes.js"></script>
     <script type="text/javascript">
+        //----------------------------------------------------------
+        // Create all the shapes we will put on the canvas
+        //----------------------------------------------------------
+        function createShapes(count) {
+            let shapes = [];
+            for (let i = 0; i < count; i++) {
+                shapes.push(new Circle(Math.floor(Math.random() * canvas.width),
+                    Math.floor(Math.random() * canvas.height),
+                    Math.floor(Math.random() * 10) + 2));
+            }
+
+            return shapes;
+        }
+
+        //----------------------------------------------------------
+        // Create the animations for the shapes passed
+        //----------------------------------------------------------
+        function createAnimations(shapes) {
+            for (let i = 0; i < shapes.length; i++) {
+                shapes[i].addAnimation(new LinearAnimation(5, 5, 5));
+            }
+        }
+
+        //----------------------------------------------------------
+        // Draw loop for the shapes created
+        //----------------------------------------------------------
         function draw(objects) {
             var canvas = document.getElementById("canvas");
             var context = canvas.getContext("2d");
@@ -32,6 +58,9 @@
             });
         }
 
+        //----------------------------------------------------------
+        // This is the routine called when the page is loaded
+        //----------------------------------------------------------
         function init() {
             // Get the canvas we are drawing to
             var canvas = document.getElementById("canvas");
@@ -46,12 +75,15 @@
                     Math.floor(Math.random() * 50) + 2)
             ];
 
-            // Add animation to this shape
+            // Add animation to the shapes
             objs[0].addAnimation(new LinearAnimation(5, 5, 5));
+            objs[1].addAnimation(new LinearAnimation(2, 2, 2));
+
+            let shapes = createShapes(10);
+            createAnimations(shapes);
 
             window.requestAnimationFrame(function (ts) {
-                //console.log(cc);
-                draw(objs);
+                draw(shapes);
             });
         }
 

@@ -26,8 +26,7 @@ class LinearAnimation extends Animation {
     // Move the object to new x,y linearly around the canvas
     //---------------------------------------------------------
     animate(ctx, x, y) {
-        // just bounce around
-        console.log(`LinearAnimation:animate:start(${x}, ${y}, ${this.xSpeed}, ${this.ySpeed})`);
+
         x += this.xSpeed;
         y += this.ySpeed;
 
@@ -36,7 +35,6 @@ class LinearAnimation extends Animation {
             this.xSpeed = this.xSpeed * -1;
         } else if (x <= 0) {
             this.xSpeed = this.step;
-            //obj.xStep =objs[i].xStep;
         }
 
         // Check if we hit the top/bottom
@@ -45,7 +43,8 @@ class LinearAnimation extends Animation {
         } else if (y <= 0) {
             this.ySpeed = this.step;
         }
-        console.log(`LinearAnimation:animate:end (${x}, ${y}, ${this.xSpeed}, ${this.ySpeed})`);
+        //console.log(`LinearAnimation:animate:end (${x}, ${y}, ${this.xSpeed}, ${this.ySpeed})`);
+
         return [x, y];
     }
 }

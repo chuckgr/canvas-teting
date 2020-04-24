@@ -57,6 +57,11 @@ class Square extends Shape {
         context.beginPath();
         context.lineWidth = 2;
         context.strokeStyle = "rgb(166,144,255)";
+        if (this.anim != null) {
+            let newLoc = this.anim.animate(context, this.x, this.y);
+            this.x = newLoc[0];
+            this.y = newLoc[1];
+        }
         context.strokeRect(this.x, this.y, this.l, this.l);
         context.stroke();
     }
