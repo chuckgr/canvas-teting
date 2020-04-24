@@ -9,6 +9,9 @@ class Shape {
     constructor(x, y) {
         this.x = x;
         this.y = y;
+        this.strokeStyle = "rgb(" + Math.floor((Math.random() * 255)) + "," +
+            Math.floor((Math.random() * 255)) + "," +
+            Math.floor((Math.random() * 255)) + ")";
     }
 
     // -------------------------------------------------------------
@@ -32,8 +35,9 @@ class Circle extends Shape {
     draw(context) {
         context.beginPath();
         context.lineWidth = 2;
-        context.strokeStyle = "rgb(066,044,255)";
-        context.fillStyle = "rgb(066,044,255)";
+        context.strokeStyle = this.strokeStyle;
+        context.fillStyle = this.strokeStyle;
+
         if (this.anim != null) {
             let newLoc = this.anim.animate(context, this.x, this.y);
             this.x = newLoc[0];
@@ -62,13 +66,15 @@ class Square extends Shape {
     draw(context) {
         context.beginPath();
         context.lineWidth = 2;
-        context.strokeStyle = "rgb(166,144,255)";
+        context.strokeStyle = this.strokeStyle;
+        context.fillStyle = this.strokeStyle;
+
         if (this.anim != null) {
             let newLoc = this.anim.animate(context, this.x, this.y);
             this.x = newLoc[0];
             this.y = newLoc[1];
         }
-        context.strokeRect(this.x, this.y, this.l, this.l);
+        context.fillRect(this.x, this.y, this.l, this.l);
         if (debug) {
             context.font = '12px monospace';
             context.fillText(this.x + "," + this.y, this.x + this.l, this.y);

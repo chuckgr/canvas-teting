@@ -13,10 +13,19 @@
         //----------------------------------------------------------
         function createShapes(count) {
             let shapes = [];
+            let shapeType = Math.round(Math.random() * 2);
+
             for (let i = 0; i < count; i++) {
-                shapes.push(new Circle(Math.floor(Math.random() * canvas.width),
-                    Math.floor(Math.random() * canvas.height),
-                    Math.floor(Math.random() * 10) + 2));
+                if (shapeType == 1) {
+                    shapes.push(new Circle(Math.floor(Math.random() * canvas.width),
+                        Math.floor(Math.random() * canvas.height),
+                        Math.floor(Math.random() * 20) + 5));
+                } else {
+                    shapes.push(new Square(Math.floor(Math.random() * canvas.width),
+                        Math.floor(Math.random() * canvas.height),
+                        Math.floor(Math.random() * 40) + 2));
+                }
+                shapeType = Math.floor(Math.random() * 5);
             }
 
             return shapes;
@@ -35,12 +44,26 @@
         }
 
         //----------------------------------------------------------
+        // Grab the data from the form and update the screen
+        //----------------------------------------------------------
+        function getForm() {
+            //console.log("Count:" + document.getElementById("count").value);
+            //alert("Count:" + document.getElementById("count").value);
+            count = document.getElementById("count").value;
+            init();
+        }
+
+        //----------------------------------------------------------
         // Draw loop for the shapes created
         //----------------------------------------------------------
         function draw(objects) {
             var canvas = document.getElementById("canvas");
             var context = canvas.getContext("2d");
             context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+            if (debug) {
+                context.font = '12px monospace';
+                context.fillText("Number of shapes = " + objects.length, 5, 15)
+            }
 
             for (let i = 0; i < objects.length; i++) {
                 objects[i].draw(context);
@@ -62,20 +85,7 @@
             var canvas = document.getElementById("canvas");
             var ctx = canvas.getContext("2d");
 
-            objs = [
-                new Circle(Math.floor(Math.random() * canvas.width),
-                    Math.floor(Math.random() * canvas.height),
-                    Math.floor(Math.random() * 10) + 2),
-                new Square(Math.random() * canvas.width,
-                    Math.floor(Math.random() * canvas.height),
-                    Math.floor(Math.random() * 50) + 2)
-            ];
-
-            // Add animation to the shapes
-            objs[0].addAnimation(new LinearAnimation(5, 5, 5));
-            objs[1].addAnimation(new LinearAnimation(2, 2, 2));
-
-            let shapes = createShapes(50);
+            let shapes = createShapes(count);
             createAnimations(shapes);
 
             window.requestAnimationFrame(function (ts) {
@@ -86,8 +96,9 @@
         //----------------------------------------------------------
         // globals
         //----------------------------------------------------------
-        //let debug = true;
-        let debug = false;
+        let debug = true;
+        //let debug = false;
+        let count = 50;
 
         let locs = [Math.random() * (500 / 2), Math.random() * (500 / 2), Math.random() * (500 / 2)]
     </script>
@@ -95,7 +106,17 @@
 
 <body onload="init()">
     <h3>Shapes moving</h3>
-    <canvas id="canvas" width="750" height="500" style="border: solid 3pt rgb(248, 224, 8)"></canvas>
+    <div>
+        <canvas id="canvas" width="750" height="500" style="border: solid 3pt rgb(248, 224, 8)"></canvas>
+    </div>
+    <div>
+        <form onsubmit="JavaScript:getForm()">
+            Number of shapes (1-100):
+            <input type="number" id="count" name="max" l min="1" max="100" value="50"> <br><br>
+            <input name="Submit" type="submit" value="Update" />
+        </form>
+    </div>
+
     <p />
 </body>
 
