@@ -50,6 +50,7 @@
             //console.log("Count:" + document.getElementById("count").value);
             //alert("Count:" + document.getElementById("count").value);
             count = document.getElementById("count").value;
+            console.log(count);
             init();
         }
 
@@ -70,17 +71,22 @@
             }
 
             context.restore();
-
-            window.requestAnimationFrame(function (ts) {
-                //console.log(objects);
-                draw(objects);
-            });
+            if (debug) {
+                stopCount++;
+            }
+            if (stopCount < stopOn) {
+                window.requestAnimationFrame(function (ts) {
+                    //console.log(objects);
+                    draw(objects);
+                });
+            }
         }
 
         //----------------------------------------------------------
         // This is the routine called when the page is loaded
         //----------------------------------------------------------
         function init() {
+            //alert("init: Count:" + count);
             // Get the canvas we are drawing to
             var canvas = document.getElementById("canvas");
             var ctx = canvas.getContext("2d");
@@ -96,27 +102,29 @@
         //----------------------------------------------------------
         // globals
         //----------------------------------------------------------
-        let debug = true;
-        //let debug = false;
+        let debug =
+            true;
+        //false;
         let count = 50;
-
-        let locs = [Math.random() * (500 / 2), Math.random() * (500 / 2), Math.random() * (500 / 2)]
+        let stopCount = 0;
+        const stopOn = 10000;
     </script>
 </head>
 
 <body onload="init()">
     <h3>Shapes moving</h3>
-    <div>
-        <canvas id="canvas" width="750" height="500" style="border: solid 3pt rgb(248, 224, 8)"></canvas>
+    <div class="container" style="display: flex; height: 500px;">
+        <div style="width: 50%;">
+            <canvas id="canvas" width="750" height="500" style="border: solid 3pt rgb(248, 224, 8)"></canvas>
+        </div>
+        <div style="flex-grow: 1;">
+            <form onsubmit="JavaScript:getForm()">
+                Number of shapes (1-100):
+                <input type="number" id="count" name="max" l min="1" max="100" value="50"> <br><br>
+                <input name="Submit" type="submit" value="Update" />
+            </form>
+        </div>
     </div>
-    <div>
-        <form onsubmit="JavaScript:getForm()">
-            Number of shapes (1-100):
-            <input type="number" id="count" name="max" l min="1" max="100" value="50"> <br><br>
-            <input name="Submit" type="submit" value="Update" />
-        </form>
-    </div>
-
     <p />
 </body>
 
