@@ -48,3 +48,38 @@ class LinearAnimation extends Animation {
         return [x, y];
     }
 }
+
+// -------------------------------------------------------------
+//  Baloon animation object
+// -------------------------------------------------------------
+class BallonAnimation extends Animation {
+    constructor(step, xSpeed, ySpeed) {
+        super(step, xSpeed, ySpeed);
+    }
+
+    //---------------------------------------------------------
+    // Move the object to new y to the top canvas and bounce
+    // off the ceiling
+    //---------------------------------------------------------
+    animate(ctx, x, y) {
+
+        y += this.ySpeed;
+
+        // Check if we hit the walls
+        if (x >= ctx.canvas.width) {
+            this.xSpeed = this.xSpeed * -1;
+        } else if (x <= 0) {
+            this.xSpeed = this.step;
+        }
+
+        // Check if we hit the top/bottom
+        if (y >= ctx.canvas.height) {
+            this.ySpeed = this.ySpeed * -1;
+        } else if (y <= 0 + 5) {
+            this.ySpeed = 0;
+        }
+        //console.log(`BubbleAnimation:animate:end (${x}, ${y}, ${this.xSpeed}, ${this.ySpeed})`);
+
+        return [x, y];
+    }
+}
