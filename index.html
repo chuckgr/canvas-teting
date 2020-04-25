@@ -13,19 +13,23 @@
         //----------------------------------------------------------
         function createShapes(count) {
             let shapes = [];
-            let shapeType = Math.round(Math.random() * 2);
+            let shapeType = Math.round(Math.random() * 3);
 
             for (let i = 0; i < count; i++) {
-                if (shapeType == 1) {
+                if (shapeType == 0) {
                     shapes.push(new Circle(Math.floor(Math.random() * canvas.width),
                         Math.floor(Math.random() * canvas.height),
                         Math.floor(Math.random() * 20) + 5));
-                } else {
+                } else if (shapeType == 1) {
                     shapes.push(new Square(Math.floor(Math.random() * canvas.width),
                         Math.floor(Math.random() * canvas.height),
                         Math.floor(Math.random() * 40) + 2));
+                } else if (shapeType == 2) {
+                    shapes.push(new UserImage(Math.floor(Math.random() * canvas.width),
+                        Math.floor(Math.random() * canvas.height),
+                        Math.floor(Math.random() * 40) + 2));
                 }
-                shapeType = Math.floor(Math.random() * 5);
+                shapeType = Math.floor(Math.random() * 3);
             }
 
             return shapes;
@@ -38,9 +42,9 @@
             for (let i = 0; i < shapes.length; i++) {
                 if (type == 'Linear') {
                     shapes[i].addAnimation(new LinearAnimation(
-                        Math.floor((Math.random() * 5) + 2),
-                        Math.floor((Math.random() * 5) + 2),
-                        Math.floor((Math.random() * 5) + 1)));
+                        Math.floor((Math.random() * 2) + 2),
+                        Math.floor((Math.random() * 1) + 2),
+                        Math.floor((Math.random() * -2) + 1)));
                 } else if (type == 'Balloon') {
                     shapes[i].addAnimation(new BallonAnimation(
                         Math.floor((Math.random() * 1) + 1),
@@ -100,8 +104,8 @@
             var ctx = canvas.getContext("2d");
 
             let shapes = createShapes(count);
-            //createAnimations(shapes, 'Linear');
-            createAnimations(shapes, 'Balloon');
+            createAnimations(shapes, 'Linear');
+            //createAnimations(shapes, 'Balloon');
 
             window.requestAnimationFrame(function (ts) {
                 draw(shapes);
@@ -112,13 +116,12 @@
         // globals
         //----------------------------------------------------------
         let debug =
-            true;
-        //false;
-        let count = 50;
+            //true;
+            false;
+        let count = 20;
         let stopCount = 0;
-        const stopOn = 10000;
+        const stopOn = 5000;
         let reDraw = false;
-        
     </script>
 </head>
 

@@ -83,3 +83,39 @@ class Square extends Shape {
     }
 
 }
+
+// -------------------------------------------------------------
+// Class for a image
+// -------------------------------------------------------------
+class UserImage extends Shape {
+    constructor(x, y, l, image) {
+        super(x, y);
+        this.l = l;
+    }
+
+    draw(context) {
+        context.beginPath();
+
+        let image = new Image();
+        image.src = "andybeshear-headshot_6.png";
+        context.drawImage(image, this.x, this.y, 90, 80);
+        /*
+        image.onload = function () {
+            context.drawImage(image, this.x, this.y, 70, 50);
+        };
+        */
+
+        if (this.anim != null) {
+            let newLoc = this.anim.animate(context, this.x, this.y);
+            this.x = newLoc[0];
+            this.y = newLoc[1];
+        }
+
+        if (debug) {
+            context.font = '12px monospace';
+            context.fillText(this.x + "," + this.y, this.x + this.l, this.y);
+        }
+        context.stroke();
+    }
+
+}
