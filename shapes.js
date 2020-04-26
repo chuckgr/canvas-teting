@@ -12,6 +12,7 @@ class Shape {
         this.strokeStyle = "rgb(" + Math.floor((Math.random() * 255)) + "," +
             Math.floor((Math.random() * 255)) + "," +
             Math.floor((Math.random() * 255)) + ")";
+        this.alive = true;
     }
 
     // -------------------------------------------------------------
@@ -20,6 +21,13 @@ class Shape {
     // -------------------------------------------------------------
     addAnimation(anim) {
         this.anim = anim;
+    }
+
+    // -------------------------------------------------------------
+    // Mark this shape as dead and do not draw on the canvas
+    // -------------------------------------------------------------
+    kill() {
+        this.alive = false;
     }
 }
 
@@ -33,23 +41,25 @@ class Circle extends Shape {
     }
 
     draw(context) {
-        context.beginPath();
-        context.lineWidth = 2;
-        context.strokeStyle = this.strokeStyle;
-        context.fillStyle = this.strokeStyle;
+        if (this.alive) {
+            context.beginPath();
+            context.lineWidth = 2;
+            context.strokeStyle = this.strokeStyle;
+            context.fillStyle = this.strokeStyle;
 
-        if (this.anim != null) {
-            let newLoc = this.anim.animate(context, this.x, this.y);
-            this.x = newLoc[0];
-            this.y = newLoc[1];
+            if (this.anim != null) {
+                let newLoc = this.anim.animate(context, this.x, this.y);
+                this.x = newLoc[0];
+                this.y = newLoc[1];
+            }
+            context.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+            if (debug) {
+                context.font = '12px monospace';
+                context.fillText(this.x + "," + this.y, this.x + this.r, this.y);
+            }
+            context.fill();
+            context.stroke();
         }
-        context.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
-        if (debug) {
-            context.font = '12px monospace';
-            context.fillText(this.x + "," + this.y, this.x + this.r, this.y);
-        }
-        context.fill();
-        context.stroke();
     }
 
 }
@@ -64,22 +74,24 @@ class Square extends Shape {
     }
 
     draw(context) {
-        context.beginPath();
-        context.lineWidth = 2;
-        context.strokeStyle = this.strokeStyle;
-        context.fillStyle = this.strokeStyle;
+        if (this.alive) {
+            context.beginPath();
+            context.lineWidth = 2;
+            context.strokeStyle = this.strokeStyle;
+            context.fillStyle = this.strokeStyle;
 
-        if (this.anim != null) {
-            let newLoc = this.anim.animate(context, this.x, this.y);
-            this.x = newLoc[0];
-            this.y = newLoc[1];
+            if (this.anim != null) {
+                let newLoc = this.anim.animate(context, this.x, this.y);
+                this.x = newLoc[0];
+                this.y = newLoc[1];
+            }
+            context.fillRect(this.x, this.y, this.l, this.l);
+            if (debug) {
+                context.font = '12px monospace';
+                context.fillText(this.x + "," + this.y, this.x + this.l, this.y);
+            }
+            context.stroke();
         }
-        context.fillRect(this.x, this.y, this.l, this.l);
-        if (debug) {
-            context.font = '12px monospace';
-            context.fillText(this.x + "," + this.y, this.x + this.l, this.y);
-        }
-        context.stroke();
     }
 
 }
@@ -95,30 +107,34 @@ class UserImage extends Shape {
     }
 
     draw(context) {
-        context.beginPath();
+        if (this.alive) {
+            context.beginPath();
 
-        let image = new Image();
-        //image.src = "andybeshear-headshot_6.png";
-        //image.src = "Coronavirus-CDC.png";
-        image.src = this.img;
-        context.drawImage(image, this.x, this.y, 70, 70);
-        /*
-        image.onload = function () {
-            context.drawImage(image, this.x, this.y, 70, 50);
-        };
-        */
+            let image = new Image();
+            image.src = this.img;
+            this.width = image.width;
+            this.height = image.height;
 
-        if (this.anim != null) {
-            let newLoc = this.anim.animate(context, this.x, this.y);
-            this.x = newLoc[0];
-            this.y = newLoc[1];
+            context.drawImage(image, this.x, this.y, 70, 70);
+
+            /*
+            image.onload = function () {
+                context.drawImage(image, this.x, this.y, 70, 50);
+            };
+            */
+
+            if (this.anim != null) {
+                let newLoc = this.anim.animate(context, this.x, this.y);
+                this.x = newLoc[0];
+                this.y = newLoc[1];
+            }
+
+            if (debug) {
+                context.font = '12px monospace';
+                context.fillText(this.x + "," + this.y, this.x + this.l, this.y);
+            }
+            context.stroke();
         }
-
-        if (debug) {
-            context.font = '12px monospace';
-            context.fillText(this.x + "," + this.y, this.x + this.l, this.y);
-        }
-        context.stroke();
     }
 
 }

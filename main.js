@@ -92,7 +92,7 @@ function draw(objects) {
   context.clearRect(0, 0, context.canvas.width, context.canvas.height);
   if (debug) {
     context.font = '12px monospace';
-    context.fillText("Number of shapes = " + objects.length, 5, 15)
+    context.fillText("Number of shapes = " + objects.length, 5, 15);
   }
 
   for (let i = 0; i < objects.length; i++) {
@@ -115,8 +115,8 @@ function draw(objects) {
 // This is the routine called when the page is loaded
 //----------------------------------------------------------
 function init() {
-  //alert("init: Count:" + count);
-  console.trace(count);
+  //console.trace(count);
+
   // Get the canvas we are drawing to
   var canvas = document.getElementById("canvas");
   var ctx = canvas.getContext("2d");
@@ -127,6 +127,9 @@ function init() {
   createAnimations(shapes, 'Linear');
   //createAnimations(shapes, 'Balloon');
 
+  // Listen for mouse events
+  addListener(canvas, shapes);
+
   window.requestAnimationFrame(function (ts) {
     draw(shapes);
   });
@@ -136,7 +139,7 @@ function init() {
 // globals
 //----------------------------------------------------------
 let debug =
-  //true;
+  // true;
   false;
 let count = 40;
 let stopCount = 0;
