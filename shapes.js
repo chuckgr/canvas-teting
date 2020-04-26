@@ -88,17 +88,20 @@ class Square extends Shape {
 // Class for a image
 // -------------------------------------------------------------
 class UserImage extends Shape {
-    constructor(x, y, l, image) {
+    constructor(x, y, l, img) {
         super(x, y);
         this.l = l;
+        this.img = img;
     }
 
     draw(context) {
         context.beginPath();
 
         let image = new Image();
-        image.src = "andybeshear-headshot_6.png";
-        context.drawImage(image, this.x, this.y, 90, 80);
+        //image.src = "andybeshear-headshot_6.png";
+        //image.src = "Coronavirus-CDC.png";
+        image.src = this.img;
+        context.drawImage(image, this.x, this.y, 70, 70);
         /*
         image.onload = function () {
             context.drawImage(image, this.x, this.y, 70, 50);
