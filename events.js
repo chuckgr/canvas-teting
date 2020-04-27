@@ -19,12 +19,18 @@ function addListener(canvElem, shapes) {
   function handleClick(event) {
     let x = event.pageX - canvLeft;
     let y = event.pageY - canvTop;
+    // Shoot the gun
+    let shot = new Audio("laser-shot1.mp3");
+    shot.play();
 
     console.log(`event at ${x}, ${y}`);
     for (let i = 0; i < shapes.length; i++) {
       if (y > shapes[i].y && y < shapes[i].y + shapes[i].height && x > shapes[i].x && x < shapes[i].x + shapes[i].width) {
-        shapes[i].alive = false;
-        console.log(`Hit at ${x}, ${y} for item at [${i}] at ${shapes[i].x}, ${shapes[i].y}, ${shapes[i].width}, ${shapes[i].height}`);
+        shapes[i].explode();
+
+        if (debug) {
+          console.log(`Hit at ${x}, ${y} for item at [${i}] at ${shapes[i].x}, ${shapes[i].y}, ${shapes[i].width}, ${shapes[i].height}`);
+        }
         break;
       }
     }

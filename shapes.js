@@ -13,6 +13,8 @@ class Shape {
             Math.floor((Math.random() * 255)) + "," +
             Math.floor((Math.random() * 255)) + ")";
         this.alive = true;
+        this.exploding = 0;
+        this.eFactor = 2;
     }
 
     // -------------------------------------------------------------
@@ -28,6 +30,14 @@ class Shape {
     // -------------------------------------------------------------
     kill() {
         this.alive = false;
+    }
+
+    // -------------------------------------------------------------
+    // Mark this shape as exploded, then remove
+    // -------------------------------------------------------------
+    explode() {
+        this.img = "explosion.png";
+        this.exploding = 6;
     }
 }
 
@@ -59,6 +69,7 @@ class Circle extends Shape {
             }
             context.fill();
             context.stroke();
+
         }
     }
 
@@ -104,18 +115,24 @@ class UserImage extends Shape {
         super(x, y);
         this.l = l;
         this.img = img;
+        this.width = 60;
+        this.height = 60;
     }
 
+
+    // -------------------------------------------------------------
+    // Draw the shape on the canvas with the current x,y location
+    // -------------------------------------------------------------
     draw(context) {
         if (this.alive) {
             context.beginPath();
 
             let image = new Image();
             image.src = this.img;
-            this.width = image.width;
-            this.height = image.height;
+            //this.width = image.width;
+            //this.height = image.height;
 
-            context.drawImage(image, this.x, this.y, 70, 70);
+            context.drawImage(image, this.x, this.y, this.width, this.height);
 
             /*
             image.onload = function () {
@@ -134,7 +151,39 @@ class UserImage extends Shape {
                 context.fillText(this.x + "," + this.y, this.x + this.l, this.y);
             }
             context.stroke();
+
+            // Are we exploding?
+            if (this.exploding > 0) {
+                this.exploding--;
+
+                // reposition based on the size of the shape
+                console.log(`draw:before  x=${this.x} y=${this.y} w=${this.width} h=${this.height}`);
+                this.x = this.x + (this.width - (this.width / this.eFactor));
+                this.y = this.y + (this.height - (this.height / this.eFactor));
+                this.width = this.width / this.eFactor;
+                this.height = this.height / this.eFactor;
+                console.log(`draw:after  x=${this.x} y=${this.y} w=${this.width} h=${this.height}`);
+                if (this.exploding <= 0) {
+                    this.alive = false;
+                }
+            }
         }
+    }
+
+    // -------------------------------------------------------------
+    // Mark this shape as exploded, then remove
+    // -------------------------------------------------------------
+    explode() {
+        this.img = "explosion.png";
+        this.exploding = 3;
+
+        console.log(`explode:before x=${this.x} y=${this.y} w=${this.width} h=${this.height}`);
+        this.x = this.x - ((this.width * this.eFactor) - this.width);
+        this.y = this.y - ((this.height * this.eFactor) - this.height);
+        this.width = this.width * this.eFactor;
+        this.height = this.height * this.eFactor;
+        console.log(`explode:after x=${this.x} y=${this.y} w=${this.width} h=${this.height}`);
+
     }
 
 }
