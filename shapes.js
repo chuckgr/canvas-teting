@@ -117,6 +117,7 @@ class UserImage extends Shape {
         this.img = img;
         this.width = 60;
         this.height = 60;
+        this.type = "";
     }
 
 

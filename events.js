@@ -22,14 +22,18 @@ function addListener(canvElem, shapes) {
     // Shoot the gun
     let shot = new Audio("laser-shot1.mp3");
     shot.play();
+    let explode = new Audio("explosion1.mp3");
 
     console.log(`event at ${x}, ${y}`);
     for (let i = 0; i < shapes.length; i++) {
       if (y > shapes[i].y && y < shapes[i].y + shapes[i].height && x > shapes[i].x && x < shapes[i].x + shapes[i].width) {
         shapes[i].explode();
+        if (shapes[i].type == 1) {
+          explode.play();
+        }
 
         if (debug) {
-          console.log(`Hit at ${x}, ${y} for item at [${i}] at ${shapes[i].x}, ${shapes[i].y}, ${shapes[i].width}, ${shapes[i].height}`);
+          console.log(`Hit at ${x}, ${y} for item at [${i}] at ${shapes[i].x}, ${shapes[i].y}, ${shapes[i].width}, ${shapes[i].height} type=${shapes[i].type}`);
         }
         break;
       }

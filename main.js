@@ -36,16 +36,21 @@ function createShapes(count) {
 function createImageShapes(count) {
   let shapes = [];
   let shapeType = Math.round(Math.random() * 2);
+  let shape = "";
 
   for (let i = 0; i < count; i++) {
     if (shapeType == 0) {
-      shapes.push(new UserImage(Math.floor(Math.random() *
+      shape = new UserImage(Math.floor(Math.random() *
         canvas.width), Math.floor(Math.random() * canvas.height), Math.floor(Math.random() *
-        40) + 2, "andybeshear-headshot_6.png"));
+        40) + 2, "andy-headshot1.png");
+      shape.type = shapeType;
+      shapes.push(shape);
     } else if (shapeType == 1) {
-      shapes.push(new UserImage(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() *
+      shape = new UserImage(Math.floor(Math.random() * canvas.width), Math.floor(Math.random() *
           canvas.height),
-        Math.floor(Math.random() * 40) + 2, "Coronavirus-CDC.png"));
+        Math.floor(Math.random() * 40) + 2, "Coronavirus-CDC.png");
+      shape.type = shapeType;
+      shapes.push(shape);
     }
     shapeType = Math.floor(Math.random() * 2);
   }
