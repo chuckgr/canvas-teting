@@ -158,12 +158,16 @@ class UserImage extends Shape {
                 this.exploding--;
 
                 // reposition based on the size of the shape
-                console.log(`draw:before  x=${this.x} y=${this.y} w=${this.width} h=${this.height}`);
+                if (debug) {
+                    console.log(`draw:before  x=${this.x} y=${this.y} w=${this.width} h=${this.height}`);
+                }
                 this.x = this.x + (this.width - (this.width / this.eFactor));
                 this.y = this.y + (this.height - (this.height / this.eFactor));
                 this.width = this.width / this.eFactor;
                 this.height = this.height / this.eFactor;
-                console.log(`draw:after  x=${this.x} y=${this.y} w=${this.width} h=${this.height}`);
+                if (debug) {
+                    console.log(`draw:after  x=${this.x} y=${this.y} w=${this.width} h=${this.height}`);
+                }
                 if (this.exploding <= 0) {
                     this.alive = false;
                 }
@@ -178,12 +182,16 @@ class UserImage extends Shape {
         this.img = "explosion.png";
         this.exploding = 3;
 
-        console.log(`explode:before x=${this.x} y=${this.y} w=${this.width} h=${this.height}`);
-        this.x = this.x - ((this.width * this.eFactor) - this.width);
-        this.y = this.y - ((this.height * this.eFactor) - this.height);
+        if (debug) {
+            console.log(`explode:before x=${this.x} y=${this.y} w=${this.width} h=${this.height}`);
+        }
+        this.x = this.x - (((this.width * this.eFactor) - this.width) / 2);
+        this.y = this.y - (((this.height * this.eFactor) - this.height) / 2);
         this.width = this.width * this.eFactor;
         this.height = this.height * this.eFactor;
-        console.log(`explode:after x=${this.x} y=${this.y} w=${this.width} h=${this.height}`);
+        if (debug) {
+            console.log(`explode:after x=${this.x} y=${this.y} w=${this.width} h=${this.height}`);
+        }
 
     }
 

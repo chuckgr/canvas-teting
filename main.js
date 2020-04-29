@@ -120,7 +120,6 @@ function draw(objects) {
 // This is the routine called when the page is loaded
 //----------------------------------------------------------
 function init() {
-  //console.trace(count);
 
   // Get the canvas we are drawing to
   var canvas = document.getElementById("canvas");
@@ -135,6 +134,9 @@ function init() {
   // Listen for mouse events
   addListener(canvas, shapes);
 
+  // Intro sound
+  //intro.play();
+
   window.requestAnimationFrame(function (ts) {
     draw(shapes);
   });
@@ -144,9 +146,24 @@ function init() {
 // globals
 //----------------------------------------------------------
 let debug =
-  // true;
-  false;
+  true;
+//false;
 let count = 40;
 let stopCount = 0;
 const stopOn = 5000;
 let reDraw = false;
+
+// Audio files to play
+const shot = new Audio("laser-shot1.mp3");
+shot.load();
+const explode = new Audio("explosion1.mp3");
+explode.load();
+const intro = new Audio("intro.mp3");
+intro.load();
+// This looks good and all but you are no longer allowed to play sounds
+// without the user allpwing it....so loading screen needed
+/*
+intro.addEventListener("canplaythrough", event => {
+  intro.play();
+});
+*/

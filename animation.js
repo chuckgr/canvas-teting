@@ -78,7 +78,9 @@ class BallonAnimation extends Animation {
         } else if (y <= 0 + 5) {
             this.ySpeed = 0;
         }
-        //console.log(`BubbleAnimation:animate:end (${x}, ${y}, ${this.xSpeed}, ${this.ySpeed})`);
+        if (debug) {
+            console.log(`BubbleAnimation:animate:end (${x}, ${y}, ${this.xSpeed}, ${this.ySpeed})`);
+        }
 
         return [x, y];
     }
