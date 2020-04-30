@@ -16,7 +16,7 @@ function addListener(canvElem, shapes) {
   //----------------------------------------------------------
   // Gets called when the mouse is clicked in the canvas
   //
-  // Sound from M4A to MP3
+  // Convert sound from M4A to MP3
   // ffmpeg -i New\ Recording.m4a -acodec mp3 -ac 2 -ab 192k we-will-get-through-this.mp3
   //----------------------------------------------------------
   function handleClick(event) {
@@ -26,7 +26,9 @@ function addListener(canvElem, shapes) {
     // Shoot the gun
     shot.play();
 
-    console.log(`event at ${x}, ${y}`);
+    if (debug) {
+      console.log(`event at ${x}, ${y}`);
+    }
     for (let i = 0; i < shapes.length; i++) {
       if (y > shapes[i].y && y < shapes[i].y + shapes[i].height && x > shapes[i].x && x < shapes[i].x + shapes[i].width) {
         shapes[i].explode();
