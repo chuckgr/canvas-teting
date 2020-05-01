@@ -2,8 +2,9 @@
 // Contains the controller class to manage the game
 //--------------------------------------------------------------
 class Controller {
-  constructor() {
-
+  constructor(ctx) {
+    this.ctx = ctx;
+    this.state = "";
   }
 
   //----------------------------------------------------------
@@ -12,7 +13,13 @@ class Controller {
   // is loaded and run.
   //----------------------------------------------------------
   splash() {
-
+    const x = 0,
+      y = 0;
+    this.ctx.beginPath();
+    let image = new Image();
+    image.src = document.getElementById("teamky");
+    this.ctx.drawImage(image.src, x, y, ctx.width, ctx.height);
+    this.ctx.stroke();
   }
 
   //----------------------------------------------------------

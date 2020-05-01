@@ -4,6 +4,17 @@
 //--------------------------------------------------------------
 
 //--------------------------------------------------------------
+// Create a background for the game board
+//--------------------------------------------------------------
+function createBackground(context) {
+  context.beginPath();
+  let image = new Image();
+  image.src = "teamky-white.png";
+  context.drawImage(image, 0, 190, 750, 190);
+  context.stroke();
+}
+
+//--------------------------------------------------------------
 // Create all the shapes we will put on the canvas
 //--------------------------------------------------------------
 function createShapes(count) {
@@ -94,7 +105,11 @@ function getForm() {
 function draw(objects) {
   var canvas = document.getElementById("canvas");
   var context = canvas.getContext("2d");
+
   context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+
+  createBackground(context);
+
   if (debug) {
     context.font = '12px monospace';
     context.fillText("Number of shapes = " + objects.length, 5, 15);
@@ -120,13 +135,13 @@ function draw(objects) {
 // This is the routine called when the page is loaded
 //----------------------------------------------------------
 function init() {
-
+  let shapes = [];
   // Get the canvas we are drawing to
   var canvas = document.getElementById("canvas");
   var ctx = canvas.getContext("2d");
 
   //let shapes = createShapes(count);
-  let shapes = createImageShapes(count);
+  shapes = createImageShapes(count);
 
   createAnimations(shapes, 'Linear');
   //createAnimations(shapes, 'Balloon');
