@@ -122,3 +122,43 @@ class ExplosionAnimation extends Animation {
         return [x, y];
     }
 }
+
+// -------------------------------------------------------------
+//  Bobblehead animation object
+// -------------------------------------------------------------
+class BobbleHeadAnimation extends Animation {
+    constructor(step, xSpeed, ySpeed) {
+        super(step, xSpeed, ySpeed);
+        this.frames = 10;
+        this.current = 1;
+        this.direction = 1;
+        this.count = 5;
+    }
+
+    //---------------------------------------------------------
+    // Set the initial direction of the image
+    //---------------------------------------------------------
+    setDirection(d) {
+        this.direction = d;
+    }
+
+    //---------------------------------------------------------
+    // Move the object left and right to simulate bobble
+    //---------------------------------------------------------
+    animate(ctx, x, y) {
+
+        //console.log(`initial x=${x}`);
+        this.current++;
+        if (this.current % this.frames == 0) {
+            this.direction *= -1;
+            this.current = 0;
+            x = x + (this.count * this.direction);
+        }
+
+        if (debug) {
+            console.log(`BobbleHeadAnimation:animate:end (${x}, ${y}, ${this.xSpeed}, ${this.ySpeed})`);
+        }
+
+        return [x, y];
+    }
+}
