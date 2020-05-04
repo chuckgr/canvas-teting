@@ -20,6 +20,7 @@ class Controller {
     this.andy = "";
     this.rona = "";
     this.playIcon = "";
+    this.score = "";
   }
 
   //----------------------------------------------------------
@@ -83,18 +84,6 @@ class Controller {
     // Show the Play button
     this.playIcon.draw(this.ctx);
 
-    /*
-    this.ctx.strokeStyle = "rgb(" + Math.floor((Math.random() * 255)) + "," +
-      Math.floor((Math.random() * 255)) + "," +
-      Math.floor((Math.random() * 255)) + ")";
-    this.ctx.strokeStyle = "rgb(111,022,033)";
-    this.ctx.lineWidth = 2;
-    this.ctx.font = '35px arial';
-    this.ctx.strokeRect(330, 420, 120, 40);
-    //this.ctx.fillText("Play", 350, 450);
-    this.ctx.strokeText("Play", 350, 450);
-    */
-    //this.ctx.stroke();
   }
 
   //----------------------------------------------------------
@@ -108,8 +97,12 @@ class Controller {
     this.shapes = createImageShapes(count);
     createAnimations(this.shapes, 'Linear');
 
+    // Create score object
+    this.score = new Score(this.ctx);
+    this.score.drawScore();
+
     // Listen for mouse click event on the canvas
-    addListener(this.canvas, this.shapes);
+    addListener(this.canvas, this.shapes, this.score);
 
     // Intro sound
     intro.play();
@@ -140,6 +133,8 @@ class Controller {
     for (let i = 0; i < this.shapes.length; i++) {
       this.shapes[i].draw(this.ctx);
     }
+
+    this.score.drawScore();
 
     this.ctx.restore();
     if (debug) {

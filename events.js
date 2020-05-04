@@ -6,7 +6,7 @@
 // Method to add the listener to the canvas and specify
 // the function to call when fired for game play
 //----------------------------------------------------------
-function addListener(canvElem, shapes) {
+function addListener(canvElem, shapes, score) {
   let canvLeft = canvElem.offsetLeft + canvElem.clientLeft;
   let canvTop = canvElem.offsetTop + canvElem.clientTop;
   let ctx = canvElem.getContext('2d');
@@ -35,12 +35,17 @@ function addListener(canvElem, shapes) {
         // if it's the rona play the explosion sound
         if (shapes[i].type == 1) {
           explode.play();
+          score.updateScore(1);
+        } else {
+          score.updateScore(2);
         }
-
         if (debug) {
           console.log(`Hit at ${x}, ${y} for item at [${i}] at ${shapes[i].x}, ${shapes[i].y}, ${shapes[i].width}, ${shapes[i].height} type=${shapes[i].type}`);
         }
         break;
+      } else {
+        //score.updateScore(3);
+        //console.log('miss');
       }
     }
   }

@@ -142,7 +142,7 @@ class UserImage extends Shape {
             */
 
             if (this.anim != null) {
-                let newLoc = this.anim.animate(context, this.x, this.y);
+                let newLoc = this.anim.animate(context, this.x, this.y, this.width, this.height);
                 this.x = newLoc[0];
                 this.y = newLoc[1];
             }
