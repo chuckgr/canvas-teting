@@ -4,7 +4,7 @@
 
 //----------------------------------------------------------
 // Method to add the listener to the canvas and specify
-// the function to call when fired
+// the function to call when fired for game play
 //----------------------------------------------------------
 function addListener(canvElem, shapes) {
   let canvLeft = canvElem.offsetLeft + canvElem.clientLeft;
@@ -43,5 +43,20 @@ function addListener(canvElem, shapes) {
         break;
       }
     }
+  }
+}
+
+//----------------------------------------------------------
+// Method that gets called on the canvas click event 
+// for the start of the game with a logo and instructions
+//----------------------------------------------------------
+function splashListener(event) {
+  // Check for correct event and remove the listeners
+  if (event.type === "click" || (event.type === "keydown" && event.code === "Enter")) {
+    // remove events
+    let canvas = document.getElementById("canvas");
+    canvas.removeEventListener("click", splashListener);
+    //canvas.removeEventListener("keydown", splashIO);
+    controller.state = controller.playSetup;
   }
 }

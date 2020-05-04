@@ -8,14 +8,15 @@
     <script type="text/javascript" src="animation.js"></script>
     <script type="text/javascript" src="shapes.js"></script>
     <script type="text/javascript" src="events.js"></script>
+    <script type="text/javascript" src="controller.js"></script>
     <script type="text/javascript" src="main.js"></script>
 </head>
 
-<body onload="init()">
+<body onload="initGame()">
     <h3>Pandemic</h3>
     <div class="container" style="display: flex; height: 500px;">
         <div style="width: 50%;">
-            <canvas id="canvas" width="750" height="500" style="border: solid 3pt rgb(248, 224, 8)"></canvas>
+            <canvas id="canvas" width="750" height="500" style="border: solid 3pt rgb(8, 112, 248)"></canvas>
         </div>
         <div style="flex-grow: 1;">
             <form onsubmit="JavaScript:getForm()">

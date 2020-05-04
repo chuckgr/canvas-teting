@@ -157,6 +157,32 @@ function init() {
   });
 }
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+// All below is the new code for game control...
+// cleanup on isle 3 after it is working
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+
+//----------------------------------------------------------
+// This is the routine called when the page is loaded
+// TODO - switch to this function when the Controller class 
+//        is finished
+//----------------------------------------------------------
+function initGame() {
+  // This is the main controller for the game
+  controller = new Controller();
+  controller.state = controller.splash;
+  mainLoop();
+}
+
+//----------------------------------------------------------
+// main animation loop
+//----------------------------------------------------------
+function mainLoop() {
+  controller.state(); // run current game state
+  requestAnimationFrame(mainLoop);
+}
+
 //----------------------------------------------------------
 // globals
 //----------------------------------------------------------
@@ -165,8 +191,11 @@ let debug =
 //false;
 let count = 40;
 let stopCount = 0;
-const stopOn = 5000;
+const stopOn = 50;
 let reDraw = false;
+
+// This is the main controller for the game
+let controller;
 
 // Audio files to play
 const shot = new Audio("laser-shot1.mp3");
