@@ -110,18 +110,23 @@ class ExplosionAnimation extends Animation {
     //---------------------------------------------------------
     animate(ctx, shape) {
 
+        shape.img = this.img;
         if (this.expFrames == 3) {
             shape.x = shape.x - (((shape.width * this.eFactor) - shape.width) / 2);
             shape.y = shape.y - (((shape.height * this.eFactor) - shape.height) / 2);
             shape.width = shape.width * this.eFactor;
             shape.height = shape.height * this.eFactor;
         } else {
-            shape.x = shape.x + ((w - (w / this.eFactor)) * 2);
-            shape.y = shape.y + ((h - (h / this.eFactor)) * 2);
+            shape.x = shape.x + ((shape.width - (shape.width / this.eFactor)) / 2);
+            shape.y = shape.y + ((shape.height - (shape.height / this.eFactor)) / 2);
             shape.width = shape.width / this.eFactor;
             shape.height = shape.height / this.eFactor;
         }
 
+        this.expFrames--;
+        if (this.expFrames == 0) {
+            shape.alive = false;
+        }
 
         if (debug) {
             console.log(`ExplosionAnimation:animate:end (${x}, ${y}, ${this.xSpeed}, ${this.ySpeed})`);
