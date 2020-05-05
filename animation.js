@@ -170,3 +170,50 @@ class BobbleHeadAnimation extends Animation {
         return [x, y];
     }
 }
+
+//-------------------------------------------------------------
+// Bobble animation object
+// TODO - Make the heads bobble from center point at bottom
+//-------------------------------------------------------------
+class BobbleAnimation extends Animation {
+    constructor(step, xSpeed, ySpeed) {
+        super(step, xSpeed, ySpeed);
+        this.frames = 20;
+        this.current = 1;
+        this.direction = 1;
+        this.count = 5;
+        this.deg = 1; // Radians to rotate the object
+    }
+
+    //---------------------------------------------------------
+    // Set the initial direction of the image
+    //---------------------------------------------------------
+    setDirection(d) {
+        this.direction = d;
+    }
+
+    //---------------------------------------------------------
+    // Move the object left and right to simulate bobble
+    //---------------------------------------------------------
+    animate(ctx, x, y) {
+
+        this.current++;
+        ctx.translate(ctx.width / 2, ctx.height);
+        if (this.current % this.frames == 0) {
+            if (this.direction > 0) {
+                ctx.rotate(this.deg * Math.PI / 180);
+            } else {
+                ctx.rotate(this.deg * this.direction * Math.PI / 180);
+            }
+            this.direction *= -1;
+            this.current = 0;
+            //x = x + (this.count * this.direction);
+        }
+
+        if (debug) {
+            //console.log(`BobbleAnimation:animate:end (${x}, ${y}, ${this.xSpeed}, ${this.ySpeed})`);
+        }
+
+        return [x, y];
+    }
+}

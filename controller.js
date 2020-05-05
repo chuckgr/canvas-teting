@@ -44,6 +44,7 @@ class Controller {
     this.andy.width = 400;
     this.andy.height = 400;
     this.andy.addAnimation(new BobbleHeadAnimation(10, 10, 10));
+    //this.andy.addAnimation(new BobbleAnimation(10, 10, 10)); // not ready yet
 
     // Show the Play button
     this.playIcon = new UserImage(350, 320, 400, "play1.png");

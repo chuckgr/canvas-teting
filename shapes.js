@@ -128,12 +128,19 @@ class UserImage extends Shape {
     //-------------------------------------------------------------
     draw(context) {
         if (this.alive) {
+            context.save();
             context.beginPath();
 
             let image = new Image();
             image.src = this.img;
             //this.width = image.width;
             //this.height = image.height;
+
+            if (this.anim != null) {
+                let newLoc = this.anim.animate(context, this.x, this.y, this.width, this.height);
+                this.x = newLoc[0];
+                this.y = newLoc[1];
+            }
 
             context.drawImage(image, this.x, this.y, this.width, this.height);
 
@@ -143,17 +150,12 @@ class UserImage extends Shape {
             };
             */
 
-            if (this.anim != null) {
-                let newLoc = this.anim.animate(context, this.x, this.y, this.width, this.height);
-                this.x = newLoc[0];
-                this.y = newLoc[1];
-            }
-
             if (debug) {
                 context.font = '12px monospace';
                 context.fillText(this.x + "," + this.y, this.x + this.l, this.y);
             }
             context.stroke();
+            context.restore();
 
             // Are we exploding?
             if (this.exploding > 0) {

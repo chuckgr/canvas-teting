@@ -10,7 +10,7 @@ function createBackground(context) {
   context.beginPath();
   let image = new Image();
   image.src = "teamky-white.png";
-  context.drawImage(image, 0, 160, 750, 190);
+  context.drawImage(image, 154, 166);
   context.stroke();
 }
 
