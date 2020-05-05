@@ -27,29 +27,29 @@ class LinearAnimation extends Animation {
     //---------------------------------------------------------
     // Move the object to new x,y linearly around the canvas
     //---------------------------------------------------------
-    animate(ctx, x, y, w, h) {
+    animate(ctx, shape) {
 
-        x += this.xSpeed;
-        y += this.ySpeed;
+        shape.x += this.xSpeed;
+        shape.y += this.ySpeed;
 
         // Check if we hit the walls
-        if (x >= (ctx.canvas.width - w)) {
+        if (shape.x >= (ctx.canvas.width - shape.width)) {
             this.xSpeed = this.xSpeed * -1;
-        } else if (x <= 0) {
+        } else if (shape.x <= 0) {
             this.xSpeed = this.step;
         }
 
         // Check if we hit the top/bottom
-        if (y >= (ctx.canvas.height - h)) {
+        if (shape.y >= (ctx.canvas.height - shape.height)) {
             this.ySpeed = this.ySpeed * -1;
-        } else if (y <= 0) {
+        } else if (shape.y <= 0) {
             this.ySpeed = this.step;
         }
         if (debug) {
-            console.log(`LinearAnimation:animate:end (${x}, ${y}, ${this.xSpeed}, ${this.ySpeed})`);
+            console.log(`LinearAnimation:animate:end (${shape.x}, ${shape.y}, ${this.xSpeed}, ${this.ySpeed})`);
         }
 
-        return [x, y];
+        //return [shape.x, shape.y];
     }
 }
 
@@ -99,34 +99,35 @@ class BallonAnimation extends Animation {
 class ExplosionAnimation extends Animation {
     constructor(step, xSpeed, ySpeed) {
         super(step, xSpeed, ySpeed);
+        this.img = "explosion.png"; // Image to explode with
+        this.expFrames = 3; // Number of frames to animate the explosion
+        this.eFactor = 2; // Size to increase/reduce the image size per frame
     }
 
     //---------------------------------------------------------
     // Change the object to the explosion icon and animate over
     // n frames
     //---------------------------------------------------------
-    animate(ctx, x, y) {
+    animate(ctx, shape) {
 
-        y += this.ySpeed;
-
-        // Check if we hit the walls
-        if (x >= ctx.canvas.width) {
-            this.xSpeed = this.xSpeed * -1;
-        } else if (x <= 0) {
-            this.xSpeed = this.step;
+        if (this.expFrames == 3) {
+            shape.x = shape.x - (((shape.width * this.eFactor) - shape.width) / 2);
+            shape.y = shape.y - (((shape.height * this.eFactor) - shape.height) / 2);
+            shape.width = shape.width * this.eFactor;
+            shape.height = shape.height * this.eFactor;
+        } else {
+            shape.x = shape.x + ((w - (w / this.eFactor)) * 2);
+            shape.y = shape.y + ((h - (h / this.eFactor)) * 2);
+            shape.width = shape.width / this.eFactor;
+            shape.height = shape.height / this.eFactor;
         }
 
-        // Check if we hit the top/bottom
-        if (y >= ctx.canvas.height) {
-            this.ySpeed = this.ySpeed * -1;
-        } else if (y <= 0 + 5) {
-            this.ySpeed = 0;
-        }
+
         if (debug) {
-            console.log(`BubbleAnimation:animate:end (${x}, ${y}, ${this.xSpeed}, ${this.ySpeed})`);
+            console.log(`ExplosionAnimation:animate:end (${x}, ${y}, ${this.xSpeed}, ${this.ySpeed})`);
         }
 
-        return [x, y];
+        //return [x, y, w, h];
     }
 }
 
@@ -153,21 +154,21 @@ class BobbleHeadAnimation extends Animation {
     //---------------------------------------------------------
     // Move the object left and right to simulate bobble
     //---------------------------------------------------------
-    animate(ctx, x, y) {
+    animate(ctx, shape) {
 
         //console.log(`initial x=${x}`);
         this.current++;
         if (this.current % this.frames == 0) {
             this.direction *= -1;
             this.current = 0;
-            x = x + (this.count * this.direction);
+            shape.x = shape.x + (this.count * this.direction);
         }
 
         if (debug) {
-            console.log(`BobbleHeadAnimation:animate:end (${x}, ${y}, ${this.xSpeed}, ${this.ySpeed})`);
+            console.log(`BobbleHeadAnimation:animate:end (${shape.x}, ${shape.y}, ${this.xSpeed}, ${this.ySpeed})`);
         }
 
-        return [x, y];
+        //return [x, y];
     }
 }
 
@@ -195,7 +196,7 @@ class BobbleAnimation extends Animation {
     //---------------------------------------------------------
     // Move the object left and right to simulate bobble
     //---------------------------------------------------------
-    animate(ctx, x, y) {
+    animate(ctx, shape) {
 
         this.current++;
         ctx.translate(ctx.width / 2, ctx.height);
@@ -214,6 +215,6 @@ class BobbleAnimation extends Animation {
             //console.log(`BobbleAnimation:animate:end (${x}, ${y}, ${this.xSpeed}, ${this.ySpeed})`);
         }
 
-        return [x, y];
+        //return [x, y];
     }
 }

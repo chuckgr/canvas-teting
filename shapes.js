@@ -137,9 +137,16 @@ class UserImage extends Shape {
             //this.height = image.height;
 
             if (this.anim != null) {
-                let newLoc = this.anim.animate(context, this.x, this.y, this.width, this.height);
+                //let newLoc = this.anim.animate(context, this.x, this.y, this.width, this.height);
+                let newLoc = this.anim.animate(context, this);
+                /*
                 this.x = newLoc[0];
                 this.y = newLoc[1];
+                if (newLoc.length == 4) {
+                    this.width = newLoc[2];
+                    this.height = newLoc[3];
+                }
+                */
             }
 
             context.drawImage(image, this.x, this.y, this.width, this.height);
@@ -189,10 +196,12 @@ class UserImage extends Shape {
         if (debug) {
             console.log(`explode:before x=${this.x} y=${this.y} w=${this.width} h=${this.height}`);
         }
+
         this.x = this.x - (((this.width * this.eFactor) - this.width) / 2);
         this.y = this.y - (((this.height * this.eFactor) - this.height) / 2);
         this.width = this.width * this.eFactor;
         this.height = this.height * this.eFactor;
+
         if (debug) {
             console.log(`explode:after x=${this.x} y=${this.y} w=${this.width} h=${this.height}`);
         }
