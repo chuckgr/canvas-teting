@@ -14,9 +14,11 @@ class Animation {
     animate() {}
 }
 
-// -------------------------------------------------------------
-//  Linear animation object
-// -------------------------------------------------------------
+//-------------------------------------------------------------
+// Linear animation object
+// TODO - Fix step section to better represent random object
+//        movement and the x,y step values
+//-------------------------------------------------------------
 class LinearAnimation extends Animation {
     constructor(step, xSpeed, ySpeed) {
         super(step, xSpeed, ySpeed);
@@ -51,9 +53,10 @@ class LinearAnimation extends Animation {
     }
 }
 
-// -------------------------------------------------------------
-//  Baloon animation object
-// -------------------------------------------------------------
+//-------------------------------------------------------------
+// Baloon animation object
+// TODO - Finish the animation over several frames as needed
+//-------------------------------------------------------------
 class BallonAnimation extends Animation {
     constructor(step, xSpeed, ySpeed) {
         super(step, xSpeed, ySpeed);
@@ -88,17 +91,19 @@ class BallonAnimation extends Animation {
     }
 }
 
-// -------------------------------------------------------------
-//  Explosion animation object
-// -------------------------------------------------------------
+//-------------------------------------------------------------
+// Explosion animation object
+// TODO - Implement function as per the code in the shapes.js
+//        for the UserImage explode() function
+//-------------------------------------------------------------
 class ExplosionAnimation extends Animation {
     constructor(step, xSpeed, ySpeed) {
         super(step, xSpeed, ySpeed);
     }
 
     //---------------------------------------------------------
-    // Move the object to new y to the top canvas and bounce
-    // off the ceiling
+    // Change the object to the explosion icon and animate over
+    // n frames
     //---------------------------------------------------------
     animate(ctx, x, y) {
 
@@ -125,9 +130,10 @@ class ExplosionAnimation extends Animation {
     }
 }
 
-// -------------------------------------------------------------
-//  Bobblehead animation object
-// -------------------------------------------------------------
+//-------------------------------------------------------------
+// Bobblehead animation object
+// TODO - Make the heads bobble from center point at bottom
+//-------------------------------------------------------------
 class BobbleHeadAnimation extends Animation {
     constructor(step, xSpeed, ySpeed) {
         super(step, xSpeed, ySpeed);

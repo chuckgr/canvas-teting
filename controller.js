@@ -72,9 +72,6 @@ class Controller {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.ctx.beginPath();
 
-    // Put out the background image
-    //this.ctx.drawImage(this.background, x, y, 750, 190);
-
     // Draw the rona
     this.rona.draw(this.ctx);
 

@@ -121,9 +121,11 @@ class UserImage extends Shape {
     }
 
 
-    // -------------------------------------------------------------
+    //-------------------------------------------------------------
     // Draw the shape on the canvas with the current x,y location
-    // -------------------------------------------------------------
+    // TODO - Fix issue with loading resources at game time
+    //      - Move explosion code to new ExplosionAnimation class 
+    //-------------------------------------------------------------
     draw(context) {
         if (this.alive) {
             context.beginPath();

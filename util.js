@@ -4,6 +4,7 @@
 
 //--------------------------------------------------------------
 // Create a background for the game board
+// TODO - fix hard coded values
 //--------------------------------------------------------------
 function createBackground(context) {
   context.beginPath();
@@ -11,33 +12,6 @@ function createBackground(context) {
   image.src = "teamky-white.png";
   context.drawImage(image, 0, 160, 750, 190);
   context.stroke();
-}
-
-//--------------------------------------------------------------
-// Create all the shapes we will put on the canvas
-//--------------------------------------------------------------
-function createShapes(count) {
-  let shapes = [];
-  let shapeType = Math.round(Math.random() * 3);
-
-  for (let i = 0; i < count; i++) {
-    if (shapeType == 0) {
-      shapes.push(new Circle(Math.floor(Math.random() * canvas.width),
-        Math.floor(Math.random() * canvas.height),
-        Math.floor(Math.random() * 20) + 5));
-    } else if (shapeType == 1) {
-      shapes.push(new Square(Math.floor(Math.random() * canvas.width),
-        Math.floor(Math.random() * canvas.height),
-        Math.floor(Math.random() * 40) + 2));
-    } else if (shapeType == 2) {
-      shapes.push(new UserImage(Math.floor(Math.random() * canvas.width),
-        Math.floor(Math.random() * canvas.height),
-        Math.floor(Math.random() * 40) + 2, "Coronavirus-CDC.png"));
-    }
-    shapeType = Math.floor(Math.random() * 3);
-  }
-
-  return shapes;
 }
 
 //----------------------------------------------------------
@@ -140,17 +114,10 @@ class Score {
   // Draw the score in the upper left corner
   //--------------------------------------------------------------
   drawScore() {
-
-    //this.ctx.strokeStyle = "rgb(" + Math.floor((Math.random() * 255)) + "," +
-    //  Math.floor((Math.random() * 255)) + "," +
-    //  Math.floor((Math.random() * 255)) + ")";
     this.ctx.strokeStyle = "rgb(111,022,033)";
     this.ctx.lineWidth = 2;
     this.ctx.font = '20px arial';
-    //this.ctx.strokeRect(330, 420, 120, 40);
     this.ctx.fillText("Score: " + this.score, 10, 20);
-    //this.ctx.strokeText("Play", 350, 450);
-
     this.ctx.stroke();
   }
 }
