@@ -32,6 +32,25 @@ function createImageShapes(count) {
   return shapes;
 }
 
+//--------------------------------------------------------------
+// Create the speed and direction coordinate for a new shape
+// based on the location of the object
+//--------------------------------------------------------------
+function getVector(canvas) {
+  let v = 0;
+  let xf = Math.floor(Math.random() * canvas.width);
+  let yf = Math.floor(Math.random() * canvas.height);
+  /*
+  if (xf > (canvas.width / 2)) {
+    xf *= -1;
+  }
+  if (yf > (canvas.height / 2)) {
+    yf *= -1;
+  }
+*/
+  return [xf, yf];
+}
+
 //----------------------------------------------------------
 // Create all the shapes we will put on the canvas
 //----------------------------------------------------------
@@ -73,9 +92,10 @@ function createAnimations(shapes, type) {
         vy = -1;
       }
       shapes[i].addAnimation(new LinearAnimation(
-        Math.floor(((Math.random() * 2) + 2) * vx),
-        Math.floor(((Math.random() * 2) + 2) * vy),
-        Math.floor((Math.random() * 2) + 1)));
+        Math.floor((Math.random() * SPEEDMAX) + 1),
+        Math.floor(((Math.random() * SPEEDMAX) + 1) * vx),
+        Math.floor(((Math.random() * SPEEDMAX) + 1) * vy)
+      ));
 
     } else if (type == 'Balloon') {
       shapes[i].addAnimation(new BallonAnimation(
@@ -84,25 +104,6 @@ function createAnimations(shapes, type) {
         Math.floor((Math.random() * 1) + 1)));
     }
   }
-}
-
-//--------------------------------------------------------------
-// Create the speed and direction coordinate for a new shape
-// based on the location of the object
-//--------------------------------------------------------------
-function getVector(canvas) {
-  let v = 0;
-  let xf = Math.floor(Math.random() * canvas.width);
-  let yf = Math.floor(Math.random() * canvas.height);
-  if (xf > (canvas.width / 2)) {
-    xf *= -1;
-  }
-  if (yf > (canvas.height / 2)) {
-    yf *= -1;
-  }
-
-
-  return [xf, yf];
 }
 
 //--------------------------------------------------------------
@@ -145,14 +146,23 @@ class Score {
 //--------------------------------------------------------------
 function checkCollisions(shapes, infected) {
   let nub = 0;
+  let found = false;
   for (let i = 0; i < infected.length; i++) {
     for (let j = 0; j < shapes.length; j++) {
       if (shapes[infected[i]].alive && !shapes[j].infected && shapes[j].alive) {
         if (infected[i] != j) {
           if (shapes[infected[i]].x <= shapes[j].x && shapes[infected[i]].x + 60 <= shapes[j].x &&
             shapes[infected[i]].y <= shapes[j].y && shapes[infected[i]].y + 60 <= shapes[j].y) {
-            shapes[j].infect();
-            controller.infectedShapes.push(j);
+
+            shapes[j].touch();
+            found = infected.find(function (s) {
+              if (s == this.j) {
+                return true;
+              }
+            }, this);
+            if (!found && shapes[j].infected) {
+              infected.push(j);
+            }
           }
         }
       }

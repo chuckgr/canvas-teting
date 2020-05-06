@@ -15,11 +15,12 @@
 //  innoculated the game ends (or if everyone dies).
 //
 // This file Contains all of the methods for the main loop and setup 
+//
+// Copyright Charles Grieshaber, all rights reserved
 //--------------------------------------------------------------
 
 //----------------------------------------------------------
 // This is the routine called when the page is loaded
-// TODO - 
 //----------------------------------------------------------
 function initGame() {
   // This is the main controller for the game
@@ -42,12 +43,17 @@ function mainLoop() {
 // TODO - Remove unneeded variables and clean up per reqs.
 //----------------------------------------------------------
 let debug =
-  //  true;
-  false;
-let count = 40;
+  true;
+//false;
+let count = 10;
 let stopCount = 0;
 const stopOn = 50;
 let reDraw = false;
+let timerCount = 0;
+const INCUBATIONDAYS = 10;
+const DEATHDAYS = 40;
+const TOUCHESTOINFECT = 10;
+const SPEEDMAX = 5;
 
 // This is the main controller for the game
 let controller;

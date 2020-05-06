@@ -107,8 +107,8 @@ class Controller {
 
     // Start a 1 second timer
     window.setInterval(function (shapes, infected) {
+      timerCount++;
       // Bump the count of infected days for all infected people
-      //console.log(`infected=${infected} infected[0]=${infected[0]}`);
       if (shapes.length > 0) {
         for (let i = 0; i < infected.length; i++) {
           shapes[infected[i]].addInfectedDay();
@@ -136,7 +136,9 @@ class Controller {
 
     if (debug) {
       this.ctx.font = '12px monospace';
-      this.ctx.fillText("Number of shapes = " + this.shapes.length, 5, 15);
+      this.ctx.fillText("Number of shapes = " + this.shapes.length, 525, 15);
+      this.ctx.fillText("Infected shapes  = " + this.infectedShapes.length, 525, 25);
+      this.ctx.fillText("Timer count      = " + timerCount, 525, 35);
     }
 
     // Draw all of the shapes on the canvas
@@ -155,7 +157,7 @@ class Controller {
     if (debug) {
       stopCount++;
       if (stopCount >= stopOn) {
-        return;
+        //this.state = this.end;
       }
     }
 

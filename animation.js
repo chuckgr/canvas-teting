@@ -28,22 +28,26 @@ class LinearAnimation extends Animation {
     // Move the object to new x,y linearly around the canvas
     //---------------------------------------------------------
     animate(ctx, shape) {
-
+        // Go to new x,y
         shape.x += this.xSpeed;
         shape.y += this.ySpeed;
 
         // Check if we hit the walls
         if (shape.x >= (ctx.canvas.width - shape.width)) {
-            this.xSpeed = this.xSpeed * -1;
+            this.xSpeed *= -1; // reverse direction
+            shape.x = ctx.canvas.width - shape.width;
         } else if (shape.x <= 0) {
-            this.xSpeed = this.step;
+            shape.x = 0;
+            this.xSpeed *= -1;
         }
 
         // Check if we hit the top/bottom
         if (shape.y >= (ctx.canvas.height - shape.height)) {
-            this.ySpeed = this.ySpeed * -1;
+            this.ySpeed *= -1;
+            shape.y = ctx.canvas.height - shape.height;
         } else if (shape.y <= 0) {
-            this.ySpeed = this.step;
+            shape.y = 0;
+            this.ySpeed *= -1;
         }
     }
 }

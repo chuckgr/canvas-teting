@@ -34,7 +34,7 @@ function addListener(canvElem, shapes, score) {
       if (y > shapes[i].y && y < shapes[i].y + shapes[i].height && x > shapes[i].x && x < shapes[i].x + shapes[i].width) {
         shapes[i].explode();
         // if it's the rona play the explosion sound
-        if (shapes[i].type == 1) {
+        if (shapes[i].infected || shapes[i].alive) {
           explode.play();
           score.updateScore(1);
         } else {
@@ -43,9 +43,10 @@ function addListener(canvElem, shapes, score) {
         if (debug) {
           console.log(`Hit at ${x}, ${y} for item at [${i}] at ${shapes[i].x}, ${shapes[i].y}, ${shapes[i].width}, ${shapes[i].height} type=${shapes[i].type}`);
         }
+
         break;
       } else {
-        //score.updateScore(3);
+        score.updateScore(3);
         //console.log('miss');
       }
     }
