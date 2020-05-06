@@ -15,6 +15,8 @@ class Shape {
         this.alive = true;
         this.exploding = 0;
         this.eFactor = 2;
+        this.infected = false;
+        this.infectedDays = 0;
     }
 
     // -------------------------------------------------------------
@@ -112,10 +114,9 @@ class Square extends Shape {
 class UserImage extends Shape {
     constructor(x, y, l, img) {
         super(x, y);
-        this.l = l;
         this.img = img;
-        this.width = 60;
-        this.height = 60;
+        this.width = l;
+        this.height = l;
         this.type = "";
     }
 
@@ -155,4 +156,10 @@ class UserImage extends Shape {
         this.addAnimation(new ExplosionAnimation(10, 10, 10));
     }
 
+    // -------------------------------------------------------------
+    // Mark this shape as exploded, then remove
+    // -------------------------------------------------------------
+    infect() {
+        this.infected = true;
+    }
 }

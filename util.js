@@ -19,6 +19,24 @@ function createBackground(context) {
 //----------------------------------------------------------
 function createImageShapes(count) {
   let shapes = [];
+  let shape = "";
+  let v = [];
+
+  for (let i = 0; i < count; i++) {
+    v = getVector(canvas);
+    shape = new UserImage(v[0], v[1], 60, "andy-headshot1.png");
+    shape.type = 0;
+    shapes.push(shape);
+  }
+
+  return shapes;
+}
+
+//----------------------------------------------------------
+// Create all the shapes we will put on the canvas
+//----------------------------------------------------------
+function createImageShapesOld(count) {
+  let shapes = [];
   let shapeType = Math.round(Math.random() * 2);
   let shape = "";
   let v = [];
@@ -26,11 +44,11 @@ function createImageShapes(count) {
   for (let i = 0; i < count; i++) {
     v = getVector(canvas);
     if (shapeType == 0) {
-      shape = new UserImage(v[0], v[1], Math.floor(Math.random() * 40) + 2, "andy-headshot1.png");
+      shape = new UserImage(v[0], v[1], 60, "andy-headshot1.png");
       shape.type = shapeType;
       shapes.push(shape);
     } else if (shapeType == 1) {
-      shape = new UserImage(v[0], v[1], Math.floor(Math.random() * 40) + 2, "Coronavirus-CDC.png");
+      shape = new UserImage(v[0], v[1], 60, "Coronavirus-CDC.png");
       shape.type = shapeType;
       shapes.push(shape);
     }

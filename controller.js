@@ -21,6 +21,7 @@ class Controller {
     this.rona = "";
     this.playIcon = "";
     this.score = "";
+    this.infectedShapes = [];
   }
 
   //----------------------------------------------------------
@@ -34,22 +35,16 @@ class Controller {
     }
     // Add in the rona
     this.rona = new UserImage(10, 60, 400, "Coronavirus-CDC.png");
-    this.rona.width = 380;
-    this.rona.height = 380;
     this.rona.setDirection = -1;
     this.rona.addAnimation(new BobbleHeadAnimation(10, 10, 10));
 
     // Add in the large Andy head
     this.andy = new UserImage(canvas.width / 2, 40, 400, "andy-headshot1.png");
-    this.andy.width = 400;
-    this.andy.height = 400;
     this.andy.addAnimation(new BobbleHeadAnimation(10, 10, 10));
     //this.andy.addAnimation(new BobbleAnimation(10, 10, 10)); // not ready yet
 
     // Show the Play button
-    this.playIcon = new UserImage(350, 320, 400, "play1.png");
-    this.playIcon.width = 100;
-    this.playIcon.height = 100;
+    this.playIcon = new UserImage(350, 320, 100, "play1.png");
 
     this.canvas.addEventListener('click', splashListener);
 
@@ -94,6 +89,11 @@ class Controller {
     // Create all of the shapes to be used and the animation for them
     this.shapes = createImageShapes(count);
     createAnimations(this.shapes, 'Linear');
+
+    // Infect one of the shapes with the 'Rona
+    let infectLocation = Math.floor(Math.random() * count);
+    this.infectedShapes.push(infectLocation);
+    this.shapes[infectLocation].infect();
 
     // Create score object
     this.score = new Score(this.ctx);
