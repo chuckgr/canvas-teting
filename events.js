@@ -1,5 +1,6 @@
 //--------------------------------------------------------------
-// Contains all of the methods to manage events on the canvas
+// Contains all of the methods to manage events on the canvas 
+// and timers.
 //--------------------------------------------------------------
 
 //----------------------------------------------------------

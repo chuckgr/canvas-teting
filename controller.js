@@ -105,6 +105,17 @@ class Controller {
     // Intro sound
     intro.play();
 
+    // Start a 1 second timer
+    window.setInterval(function (shapes, infected) {
+      // Bump the count of infected days for all infected people
+      //console.log(`infected=${infected} infected[0]=${infected[0]}`);
+      if (shapes.length > 0) {
+        for (let i = 0; i < infected.length; i++) {
+          shapes[infected[i]].addInfectedDay();
+        }
+      }
+    }, 1000, this.shapes, this.infectedShapes);
+
     // Jump to the game
     this.state = this.play;
   }
@@ -135,6 +146,7 @@ class Controller {
     this.score.drawScore();
 
     this.ctx.restore();
+
     if (debug) {
       stopCount++;
       if (stopCount >= stopOn) {
