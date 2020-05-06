@@ -139,3 +139,23 @@ class Score {
     this.ctx.stroke();
   }
 }
+
+//--------------------------------------------------------------
+// Check for collisions
+//--------------------------------------------------------------
+function checkCollisions(shapes, infected) {
+  let nub = 0;
+  for (let i = 0; i < infected.length; i++) {
+    for (let j = 0; j < shapes.length; j++) {
+      if (shapes[infected[i]].alive && !shapes[j].infected && shapes[j].alive) {
+        if (infected[i] != j) {
+          if (shapes[infected[i]].x <= shapes[j].x && shapes[infected[i]].x + 60 <= shapes[j].x &&
+            shapes[infected[i]].y <= shapes[j].y && shapes[infected[i]].y + 60 <= shapes[j].y) {
+            shapes[j].infect();
+            controller.infectedShapes.push(j);
+          }
+        }
+      }
+    }
+  }
+}

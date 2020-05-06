@@ -139,10 +139,15 @@ class Controller {
       this.ctx.fillText("Number of shapes = " + this.shapes.length, 5, 15);
     }
 
+    // Draw all of the shapes on the canvas
     for (let i = 0; i < this.shapes.length; i++) {
       this.shapes[i].draw(this.ctx);
     }
 
+    // Check for collisions with infected head
+    checkCollisions(this.shapes, this.infectedShapes);
+
+    // Update the score
     this.score.drawScore();
 
     this.ctx.restore();

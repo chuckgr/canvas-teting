@@ -42,7 +42,7 @@ function mainLoop() {
 // TODO - Remove unneeded variables and clean up per reqs.
 //----------------------------------------------------------
 let debug =
-  //true;
+  //  true;
   false;
 let count = 40;
 let stopCount = 0;

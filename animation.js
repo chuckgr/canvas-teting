@@ -45,11 +45,6 @@ class LinearAnimation extends Animation {
         } else if (shape.y <= 0) {
             this.ySpeed = this.step;
         }
-        if (debug) {
-            console.log(`LinearAnimation:animate:end (${shape.x}, ${shape.y}, ${this.xSpeed}, ${this.ySpeed})`);
-        }
-
-        //return [shape.x, shape.y];
     }
 }
 
@@ -83,11 +78,6 @@ class BallonAnimation extends Animation {
         } else if (y <= 0 + 5) {
             this.ySpeed = 0;
         }
-        if (debug) {
-            console.log(`BubbleAnimation:animate:end (${x}, ${y}, ${this.xSpeed}, ${this.ySpeed})`);
-        }
-
-        return [x, y];
     }
 }
 
@@ -127,12 +117,6 @@ class ExplosionAnimation extends Animation {
         if (this.expFrames == 0) {
             shape.alive = false;
         }
-
-        if (debug) {
-            console.log(`ExplosionAnimation:animate:end (${x}, ${y}, ${this.xSpeed}, ${this.ySpeed})`);
-        }
-
-        //return [x, y, w, h];
     }
 }
 
@@ -168,12 +152,6 @@ class BobbleHeadAnimation extends Animation {
             this.current = 0;
             shape.x = shape.x + (this.count * this.direction);
         }
-
-        if (debug) {
-            console.log(`BobbleHeadAnimation:animate:end (${shape.x}, ${shape.y}, ${this.xSpeed}, ${this.ySpeed})`);
-        }
-
-        //return [x, y];
     }
 }
 
@@ -215,11 +193,5 @@ class BobbleAnimation extends Animation {
             this.current = 0;
             //x = x + (this.count * this.direction);
         }
-
-        if (debug) {
-            //console.log(`BobbleAnimation:animate:end (${x}, ${y}, ${this.xSpeed}, ${this.ySpeed})`);
-        }
-
-        //return [x, y];
     }
 }
