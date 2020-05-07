@@ -58,6 +58,7 @@ class UserImage extends Shape {
         this.height = l;
         this.type = "";
         this.touches = 0;
+        this.touched = false;
     }
 
     //-------------------------------------------------------------
@@ -76,17 +77,19 @@ class UserImage extends Shape {
 
             this.image.src = this.img;
 
+
             context.drawImage(this.image, this.x, this.y, this.width, this.height);
-            if (this.infected && (this.infectedDays >= 4 && this.infectedDays < DEATHDAYS)) {
+            if (this.infected && (this.infectedDays >= INCUBATIONDAYS && this.infectedDays < DEATHDAYS)) {
                 this.facemask.src = "facemask.png";
                 context.drawImage(this.facemask, this.x, this.y, this.width, this.height);
             }
 
             if (debug) {
                 context.font = '12px monospace';
-                context.fillText(this.x + "," + this.y, this.x + this.l, this.y);
-                context.fillText(this.touches, this.x + this.l, this.y + 10);
+                //context.fillText(this.x + "," + this.y, this.x + this.l, this.y);
+                context.fillText(this.infectedDays, this.x + this.l, this.y + 10);
             }
+
             context.stroke();
             context.restore();
         }
@@ -104,6 +107,7 @@ class UserImage extends Shape {
     // -------------------------------------------------------------
     touch() {
         this.touches++;
+        this.touched = true;
         if (this.touches > TOUCHESTOINFECT) {
             this.infected = true;
         }
@@ -118,12 +122,14 @@ class UserImage extends Shape {
 
     }
     // -------------------------------------------------------------
-    // Mark this shape as exploded, then remove
+    // Called from the timer tick to indicate a new day of incubation
     // -------------------------------------------------------------
     addInfectedDay() {
         this.infectedDays++;
         if (this.infectedDays == INCUBATIONDAYS) {
-            //this.img = "Coronavirus-CDC.png";
+            if (this.touched) {
+                this.infected = true;
+            }
         } else if (this.infectedDays == DEATHDAYS) {
             this.img = "red-skull.png";
         }

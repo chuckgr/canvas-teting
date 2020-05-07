@@ -45,8 +45,9 @@ function mainLoop() {
 let debug =
   true;
 //false;
-let count = 5;
+let count = 20;
 let stopCount = 0;
+let sameTouch = [];
 const stopOn = 50;
 let reDraw = false;
 let timerCount = 0;
