@@ -17,7 +17,7 @@ function createBackground(context) {
 //----------------------------------------------------------
 // Create all the shapes we will put on the canvas
 //----------------------------------------------------------
-function createImageShapes(count) {
+function createImageShapesOld(count) {
   let shapes = [];
   let shape = "";
   let v = [];
@@ -54,9 +54,10 @@ function getVector(canvas) {
 //----------------------------------------------------------
 // Create all the shapes we will put on the canvas
 //----------------------------------------------------------
-function createImageShapesOld(count) {
+function createImageShapes(count) {
+  const NUMSHAPES = 3;
   let shapes = [];
-  let shapeType = Math.round(Math.random() * 2);
+  let shapeType = Math.round(Math.random() * NUMSHAPES);
   let shape = "";
   let v = [];
 
@@ -67,11 +68,15 @@ function createImageShapesOld(count) {
       shape.type = shapeType;
       shapes.push(shape);
     } else if (shapeType == 1) {
-      shape = new UserImage(v[0], v[1], 60, "Coronavirus-CDC.png");
+      shape = new UserImage(v[0], v[1], 60, "stack.png");
+      shape.type = shapeType;
+      shapes.push(shape);
+    } else if (shapeType == 2) {
+      shape = new UserImage(v[0], v[1], 60, "virginia.png");
       shape.type = shapeType;
       shapes.push(shape);
     }
-    shapeType = Math.floor(Math.random() * 2);
+    shapeType = Math.floor(Math.random() * NUMSHAPES);
   }
   return shapes;
 }
@@ -119,6 +124,9 @@ class Score {
     this.ctx = ctx;
   }
 
+  //--------------------------------------------------------------
+  // Create object to hold the score
+  //--------------------------------------------------------------
   updateScore(type) {
     if (type == 1) {
       this.score = this.score + this.multi;
@@ -126,6 +134,9 @@ class Score {
       this.score = this.score - Math.floor(this.multi / 2);
     } else {
       this.score = this.score - this.miss;
+    }
+    if (debug) {
+      console.log(`Score update ${type}`);
     }
   }
 
@@ -151,8 +162,8 @@ function checkCollisions(shapes, infected) {
     for (let j = 0; j < shapes.length; j++) {
       if (shapes[infected[i]].alive && !shapes[j].infected && shapes[j].alive) {
         if (infected[i] != j) {
-          if (shapes[infected[i]].x <= shapes[j].x && shapes[infected[i]].x + 60 <= shapes[j].x &&
-            shapes[infected[i]].y <= shapes[j].y && shapes[infected[i]].y + 60 <= shapes[j].y) {
+          if ((shapes[infected[i]].x <= shapes[j].x && shapes[infected[i]].x + 60 >= shapes[j].x) &&
+            (shapes[infected[i]].y <= shapes[j].y && shapes[infected[i]].y + 60 >= shapes[j].y)) {
 
             shapes[j].touch();
             found = infected.find(function (s) {

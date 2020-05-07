@@ -45,7 +45,7 @@ function mainLoop() {
 let debug =
   true;
 //false;
-let count = 10;
+let count = 5;
 let stopCount = 0;
 const stopOn = 50;
 let reDraw = false;

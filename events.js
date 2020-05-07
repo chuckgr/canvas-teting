@@ -23,6 +23,7 @@ function addListener(canvElem, shapes, score) {
   function handleClick(event) {
     let x = event.pageX - canvLeft;
     let y = event.pageY - canvTop;
+    let hit = false;
 
     // Shoot the gun
     shot.play();
@@ -30,24 +31,28 @@ function addListener(canvElem, shapes, score) {
     if (debug) {
       console.log(`event at ${x}, ${y}`);
     }
-    for (let i = 0; i < shapes.length; i++) {
-      if (y > shapes[i].y && y < shapes[i].y + shapes[i].height && x > shapes[i].x && x < shapes[i].x + shapes[i].width) {
-        shapes[i].explode();
-        // if it's the rona play the explosion sound
-        if (shapes[i].infected || shapes[i].alive) {
-          explode.play();
-          score.updateScore(1);
-        } else {
-          score.updateScore(2);
-        }
-        if (debug) {
-          console.log(`Hit at ${x}, ${y} for item at [${i}] at ${shapes[i].x}, ${shapes[i].y}, ${shapes[i].width}, ${shapes[i].height} type=${shapes[i].type}`);
-        }
+    if (event.type === "click") {
+      for (let i = 0; i < shapes.length; i++) {
+        if (y > shapes[i].y && y < shapes[i].y + shapes[i].height && x > shapes[i].x && x < shapes[i].x + shapes[i].width) {
+          shapes[i].explode();
+          hit = true;
+          // if it's the rona play the explosion sound
+          if (shapes[i].infected || shapes[i].alive) {
+            explode.play();
+            score.updateScore(1);
+          } else {
+            score.updateScore(2);
+          }
+          if (debug) {
+            console.log(`Hit at ${x}, ${y} for item at [${i}] at ${shapes[i].x}, ${shapes[i].y}, ${shapes[i].width}, ${shapes[i].height} type=${shapes[i].type}`);
+          }
 
-        break;
-      } else {
+          break;
+        }
+      }
+      // No object was hit
+      if (!hit) {
         score.updateScore(3);
-        //console.log('miss');
       }
     }
   }
