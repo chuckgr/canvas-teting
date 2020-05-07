@@ -158,6 +158,7 @@ class Score {
 function checkCollisions(shapes, infected) {
   let nub = 0;
   const IMGWIDTH = 50;
+  let touchRan = 0;
   let found = false;
   for (let i = 0; i < infected.length; i++) {
     for (let j = 0; j < shapes.length; j++) {
@@ -168,7 +169,11 @@ function checkCollisions(shapes, infected) {
             shapes[infected[i]].y < shapes[j].y + IMGWIDTH &&
             shapes[infected[i]].y + IMGWIDTH > shapes[j].y) {
 
-            //shapes[j].infect();
+            touchRan = Math.round(Math.random() * TOUCHESTOINFECT);
+            if (touchRan === 5) {
+              shapes[j].infect();
+            }
+
             if (!sameTouch.includes(j)) {
               shapes[j].touch();
               sameTouch = [];
@@ -178,6 +183,7 @@ function checkCollisions(shapes, infected) {
             if (!infected.includes(j) && shapes[j].infected) {
               infected.push(j);
             }
+
           }
         }
       }

@@ -45,7 +45,7 @@ function mainLoop() {
 let debug =
   true;
 //false;
-let count = 20;
+let count = 15;
 let stopCount = 0;
 let sameTouch = [];
 const stopOn = 50;

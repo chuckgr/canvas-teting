@@ -86,6 +86,7 @@ class UserImage extends Shape {
 
             if (debug) {
                 context.font = '12px monospace';
+                context.strokeStyle = "rgb(111,022,033)";
                 //context.fillText(this.x + "," + this.y, this.x + this.l, this.y);
                 context.fillText(this.infectedDays, this.x + this.l, this.y + 10);
             }
@@ -108,7 +109,7 @@ class UserImage extends Shape {
     touch() {
         this.touches++;
         this.touched = true;
-        if (this.touches > TOUCHESTOINFECT) {
+        if (this.touches > TOUCHESTOINFECT * 5) {
             this.infected = true;
         }
     }
