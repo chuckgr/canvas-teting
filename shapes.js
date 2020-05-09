@@ -132,6 +132,7 @@ class UserImage extends Shape {
                 this.infected = true;
             }
         } else if (this.infectedDays == DEATHDAYS) {
+            //this.alive = false;
             this.img = "red-skull.png";
         }
     }

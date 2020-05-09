@@ -52,8 +52,8 @@ const stopOn = 50;
 let reDraw = false;
 let timerCount = 0;
 const INCUBATIONDAYS = 10;
-const DEATHDAYS = 40;
-const TOUCHESTOINFECT = 10;
+const DEATHDAYS = 30;
+const TOUCHESTOINFECT = 20;
 const SPEEDMAX = 5;
 
 // This is the main controller for the game

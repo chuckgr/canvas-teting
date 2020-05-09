@@ -190,3 +190,75 @@ function checkCollisions(shapes, infected) {
     }
   }
 }
+
+//--------------------------------------------------------------
+// Display shape debug info in debug canvas
+//--------------------------------------------------------------
+function debugCanvas(shapes) {
+  let canvas = document.getElementById("debug");
+  let ctx = canvas.getContext("2d");
+  let x = 10;
+  let y = 10;
+  const increment = 12;
+
+  let newFormat = "";
+  let modStr = "";
+
+  ctx.save();
+  // Clear the playing field
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.strokeStyle = "#000000";
+  ctx.font = '12px monospace';
+  ctx.fillText("  X     Y    Alive    Infected   Infected Days  Touches", x, y);
+  const format = "xxxx  yyyy   aaaaa      iiiii         dddd        oooo";
+  y += increment;
+  newFormat = format;
+  for (let i = 0; i < shapes.length; i++) {
+    modStr = numRep(shapes[i].x);
+    newFormat = newFormat.replace("xxxx", modStr);
+    modStr = numRep(shapes[i].y);
+    newFormat = newFormat.replace("yyyy", modStr);
+    modStr = strRep(shapes[i].alive);
+    newFormat = newFormat.replace("aaaaa", modStr);
+    modStr = strRep(shapes[i].infected);
+    newFormat = newFormat.replace("iiiii", modStr);
+    modStr = numRep(shapes[i].infectedDays);
+    newFormat = newFormat.replace("dddd", modStr);
+    modStr = numRep(shapes[i].touches);
+    newFormat = newFormat.replace("oooo", modStr);
+    //ctx.fillText(shapes[i].x + "   " + shapes[i].y + "   " + shapes[i].alive + "     " + shapes[i].infected + "     " + shapes[i].infectedDays + "     " + shapes[i].touches, x, y);
+    ctx.fillText(newFormat, x, y);
+    y += increment;
+    newFormat = format;
+  }
+
+  ctx.restore();
+
+  // Format the number to 3 digits
+  function numRep(n) {
+    let newStr = "";
+    let newN = parseInt(n);
+    if (newN === 0) {
+      newStr = "0000";
+    } else if (newN < 10) {
+      newStr = "000" + n;
+    } else if (newN < 100) {
+      newStr = "00" + n;
+    } else if (newN < 1000) {
+      newStr = "0" + n;
+    } else {
+      newStr = "" + n;
+    }
+    return newStr;
+  }
+
+  // Format the string to 5 chars
+  function strRep(s) {
+    let newStr = Boolean(s).toString();
+    if (newStr.length < 5) {
+      newStr = " " + s;
+    }
+    return newStr;
+  }
+}
