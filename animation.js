@@ -1,9 +1,41 @@
 // -------------------------------------------------------------
+// Base class for a animationfactory object
+// -------------------------------------------------------------
+class AnimationFactory {
+    constructor() {
+
+    }
+
+    createAnimation(type, shape) {
+        switch (type) {
+            case 'Linear':
+                let vx = 1,
+                    vy = 1;
+
+                if (shape.x > window.canvas.width) {
+                    vx = -1;
+                }
+                if (shape.y > window.canvas.height) {
+                    vy = -1;
+                }
+                return new LinearAnimation(
+                    Math.floor(((Math.random() * SPEEDMAX) + 1) * vx),
+                    Math.floor(((Math.random() * SPEEDMAX) + 1) * vy)
+                );
+
+            case 'BobbleHead':
+                return new BobbleHeadAnimation(10, 10);
+            default:
+                break;
+        }
+    }
+}
+
+// -------------------------------------------------------------
 // Base class for a animation object
 // -------------------------------------------------------------
 class Animation {
-    constructor(step, xSpeed, ySpeed) {
-        this.step = step;
+    constructor(xSpeed, ySpeed) {
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
     }
@@ -20,8 +52,8 @@ class Animation {
 //        movement and the x,y step values
 //-------------------------------------------------------------
 class LinearAnimation extends Animation {
-    constructor(step, xSpeed, ySpeed) {
-        super(step, xSpeed, ySpeed);
+    constructor(xSpeed, ySpeed) {
+        super(xSpeed, ySpeed);
     }
 
     //---------------------------------------------------------
@@ -57,8 +89,8 @@ class LinearAnimation extends Animation {
 // TODO - Finish the animation over several frames as needed
 //-------------------------------------------------------------
 class BallonAnimation extends Animation {
-    constructor(step, xSpeed, ySpeed) {
-        super(step, xSpeed, ySpeed);
+    constructor(xSpeed, ySpeed) {
+        super(xSpeed, ySpeed);
     }
 
     //---------------------------------------------------------
@@ -91,8 +123,8 @@ class BallonAnimation extends Animation {
 //        for the UserImage explode() function
 //-------------------------------------------------------------
 class ExplosionAnimation extends Animation {
-    constructor(step, xSpeed, ySpeed) {
-        super(step, xSpeed, ySpeed);
+    constructor(xSpeed, ySpeed) {
+        super(xSpeed, ySpeed);
         this.img = "explosion.png"; // Image to explode with
         this.expFrames = 3; // Number of frames to animate the explosion
         this.eFactor = 2; // Size to increase/reduce the image size per frame
@@ -129,8 +161,8 @@ class ExplosionAnimation extends Animation {
 // TODO - Make the heads bobble from center point at bottom
 //-------------------------------------------------------------
 class BobbleHeadAnimation extends Animation {
-    constructor(step, xSpeed, ySpeed) {
-        super(step, xSpeed, ySpeed);
+    constructor(xSpeed, ySpeed) {
+        super(xSpeed, ySpeed);
         this.frames = 10;
         this.current = 1;
         this.direction = 1;
@@ -164,8 +196,8 @@ class BobbleHeadAnimation extends Animation {
 // TODO - Make the heads bobble from center point at bottom
 //-------------------------------------------------------------
 class BobbleAnimation extends Animation {
-    constructor(step, xSpeed, ySpeed) {
-        super(step, xSpeed, ySpeed);
+    constructor(xSpeed, ySpeed) {
+        super(xSpeed, ySpeed);
         this.frames = 20;
         this.current = 1;
         this.direction = 1;
@@ -210,8 +242,8 @@ class BobbleAnimation extends Animation {
 // TODO - Implement
 //-------------------------------------------------------------
 class OuterEdgeAnimation extends Animation {
-    constructor(step, xSpeed, ySpeed) {
-        super(step, xSpeed, ySpeed);
+    constructor(xSpeed, ySpeed) {
+        super(xSpeed, ySpeed);
         this.frames = 20;
         this.current = 1;
         this.direction = 1;

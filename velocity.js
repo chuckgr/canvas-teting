@@ -21,12 +21,37 @@ class Velocity {
 // -------------------------------------------------------------
 // Class for the edge velocity
 //
+// This class is used to position all of the pieces on the 
+// game board randomly 
+// -------------------------------------------------------------
+class RandomVelocity extends Velocity {
+  constructor() {
+    super();
+
+  }
+
+  //---------------------------------------------------------
+  // Return the starting position for the game pieces
+  // on the outer edge, we need 
+  //---------------------------------------------------------
+  getVelocity() {
+    let v = 0;
+    let xf = Math.floor(Math.random() * canvas.width);
+    let yf = Math.floor(Math.random() * canvas.height);
+    return [xf, yf];
+  }
+
+}
+
+// -------------------------------------------------------------
+// Class for the edge velocity
+//
 // This class is used to position all of the pieces on the outer 
 // edge of the game board. 
 // -------------------------------------------------------------
 class EdgeVelocity extends Velocity {
   constructor() {
-
+    super();
   }
 
   //---------------------------------------------------------

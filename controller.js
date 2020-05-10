@@ -24,6 +24,9 @@ class Controller {
     this.playIcon = "";
     this.score = "";
     this.infectedShapes = [];
+    this.creator = "";
+    this.vel = "";
+    this.timerCount = 0;
   }
 
   //----------------------------------------------------------
@@ -38,12 +41,11 @@ class Controller {
     // Add in the rona
     this.rona = new UserImage(10, 60, 400, 400, "Coronavirus-CDC.png");
     this.rona.setDirection = -1;
-    this.rona.addAnimation(new BobbleHeadAnimation(10, 10, 10));
+    this.rona.addAnimation(new BobbleHeadAnimation(10, 10));
 
     // Add in the large Andy head
     this.andy = new UserImage(canvas.width / 2, 40, 400, 400, "andy-headshot1.png");
-    this.andy.addAnimation(new BobbleHeadAnimation(10, 10, 10));
-    //this.andy.addAnimation(new BobbleAnimation(10, 10, 10)); // not ready yet
+    this.andy.addAnimation(new BobbleHeadAnimation(10, 10));
 
     // Show the Play button
     this.playIcon = new UserImage(350, 320, 100, 100, "play1.png");
@@ -90,10 +92,10 @@ class Controller {
     }
     // Create all of the shapes to be used and the animation for them
     //
-    // this.creator = new EdgeAvitarCreator();
-    // this.shapes = this.creator.getAvitars();
-    this.shapes = createImageShapes(count);
-    createAnimations(this.shapes, 'Linear');
+    this.creator = new RandomAvitarCreator(new RandomVelocity(), new AnimationFactory(), count);
+    this.shapes = this.creator.getAvitars();
+    //this.shapes = createImageShapes(count);
+    //createAnimations(this.shapes, 'Linear');
 
     // Infect one of the shapes with the 'Rona
     let infectLocation = Math.floor(Math.random() * count);
@@ -114,7 +116,7 @@ class Controller {
     intro.play();
 
     // Start a 1 second timer
-    window.setInterval(function (shapes, infected) {
+    window.setInterval(function (shapes, infected, timerCount) {
       timerCount++;
       // Bump the count of infected days for all infected people
       if (shapes.length > 0) {
@@ -122,7 +124,7 @@ class Controller {
           shapes[infected[i]].addInfectedDay();
         }
       }
-    }, 1000, this.shapes, this.infectedShapes);
+    }, 1000, this.shapes, this.infectedShapes, this.timerCount);
 
     // Jump to the game
     this.state = this.play;
@@ -143,11 +145,11 @@ class Controller {
     createBackground(this.ctx);
 
     if (debug) {
-      this.ctx.font = '12px monospace';
-      this.ctx.fillText("Number of shapes = " + this.shapes.length, 525, 15);
-      this.ctx.fillText("Infected shapes  = " + this.infectedShapes.length, 525, 25);
-      this.ctx.fillText("Timer count      = " + timerCount, 525, 35);
-      this.debug.writeDebug(this.shapes);
+      //this.ctx.font = '12px monospace';
+      //this.ctx.fillText("Number of shapes = " + this.shapes.length, 525, 15);
+      //this.ctx.fillText("Infected shapes  = " + this.infectedShapes.length, 525, 25);
+      //this.ctx.fillText("Timer count      = " + timerCount, 525, 35);
+      this.debug.writeDebug(this);
     }
 
     // Draw all of the shapes on the canvas

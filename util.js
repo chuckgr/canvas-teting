@@ -16,6 +16,7 @@ function createBackground(context) {
 
 //----------------------------------------------------------
 // Create all the shapes we will put on the canvas
+// TODO - remove when AvitarCreator classes are working
 //----------------------------------------------------------
 function createImageShapesOld(count) {
   let shapes = [];
@@ -35,6 +36,7 @@ function createImageShapesOld(count) {
 //--------------------------------------------------------------
 // Create the speed and direction coordinate for a new shape
 // based on the location of the object
+// TODO - remove when velicity objects are working
 //--------------------------------------------------------------
 function getVector(canvas) {
   let v = 0;
@@ -53,6 +55,7 @@ function getVector(canvas) {
 
 //----------------------------------------------------------
 // Create all the shapes we will put on the canvas
+// TODO - remove when AvitarCreator classes are working
 //----------------------------------------------------------
 function createImageShapes(count) {
   const NUMSHAPES = 3;
@@ -84,6 +87,7 @@ function createImageShapes(count) {
 //----------------------------------------------------------
 // Create all the shapes we will put on the canvas
 //
+// TODO - remove when AvitarCreator classes are working
 //----------------------------------------------------------
 function createImageShapesSet(count) {
   const NUMSHAPES = 3;
@@ -128,14 +132,12 @@ function createAnimations(shapes, type) {
         vy = -1;
       }
       shapes[i].addAnimation(new LinearAnimation(
-        Math.floor((Math.random() * SPEEDMAX) + 1),
         Math.floor(((Math.random() * SPEEDMAX) + 1) * vx),
         Math.floor(((Math.random() * SPEEDMAX) + 1) * vy)
       ));
 
     } else if (type == 'Balloon') {
       shapes[i].addAnimation(new BallonAnimation(
-        Math.floor((Math.random() * 1) + 1),
         Math.floor((Math.random() * 1) + 1),
         Math.floor((Math.random() * 1) + 1)));
     }
@@ -201,7 +203,7 @@ class Debug {
   //--------------------------------------------------------------
   // Display shape debug info in debug canvas
   //--------------------------------------------------------------
-  writeDebug(shapes) {
+  writeDebug(ctl) {
 
     let canvas = document.getElementById("debug-canvas");
     let ctx = canvas.getContext("2d");
@@ -218,24 +220,30 @@ class Debug {
 
     ctx.strokeStyle = "#000000";
     ctx.font = '12px monospace';
+    ctx.fillText("Number of shapes = " + ctl.shapes.length, x, y);
+    y += increment;
+    ctx.fillText("Infected shapes  = " + ctl.infectedShapes.length, x, y);
+    //y += increment;
+    //ctx.fillText("Timer count      = " + ctl.timerCount, x, y);
+    y += (increment * 2);
     ctx.fillText("  X     Y    Alive    Infected   Infected Days  Touches", x, y);
     const format = "xxxx  yyyy   aaaaa      iiiii         dddd        oooo";
     y += increment;
     newFormat = format;
-    for (let i = 0; i < shapes.length; i++) {
-      modStr = numRep(shapes[i].x);
+    for (let i = 0; i < ctl.shapes.length; i++) {
+      modStr = numRep(ctl.shapes[i].x);
       newFormat = newFormat.replace("xxxx", modStr);
-      modStr = numRep(shapes[i].y);
+      modStr = numRep(ctl.shapes[i].y);
       newFormat = newFormat.replace("yyyy", modStr);
-      modStr = strRep(shapes[i].alive);
+      modStr = strRep(ctl.shapes[i].alive);
       newFormat = newFormat.replace("aaaaa", modStr);
-      modStr = strRep(shapes[i].infected);
+      modStr = strRep(ctl.shapes[i].infected);
       newFormat = newFormat.replace("iiiii", modStr);
-      modStr = numRep(shapes[i].infectedDays);
+      modStr = numRep(ctl.shapes[i].infectedDays);
       newFormat = newFormat.replace("dddd", modStr);
-      modStr = numRep(shapes[i].touches);
+      modStr = numRep(ctl.shapes[i].touches);
       newFormat = newFormat.replace("oooo", modStr);
-      //ctx.fillText(shapes[i].x + "   " + shapes[i].y + "   " + shapes[i].alive + "     " + shapes[i].infected + "     " + shapes[i].infectedDays + "     " + shapes[i].touches, x, y);
+
       ctx.fillText(newFormat, x, y);
       y += increment;
       newFormat = format;
