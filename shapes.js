@@ -49,13 +49,13 @@ class Shape {
 // Class for a image
 // -------------------------------------------------------------
 class UserImage extends Shape {
-    constructor(x, y, l, img) {
+    constructor(x, y, w, h, img) {
         super(x, y);
         this.image = new Image();
         this.facemask = new Image();
         this.img = img;
-        this.width = l;
-        this.height = l;
+        this.width = w;
+        this.height = h;
         this.type = "";
         this.touches = 0;
         this.touched = false;
@@ -109,7 +109,7 @@ class UserImage extends Shape {
     touch() {
         this.touches++;
         this.touched = true;
-        if (this.touches > TOUCHESTOINFECT * 5) {
+        if (this.touches >= TOUCHESTOINFECT) {
             this.infected = true;
         }
     }

@@ -24,7 +24,7 @@ function createImageShapesOld(count) {
 
   for (let i = 0; i < count; i++) {
     v = getVector(canvas);
-    shape = new UserImage(v[0], v[1], 60, "andy-headshot1.png");
+    shape = new UserImage(v[0], v[1], 60, 60, "andy-headshot1.png");
     shape.type = 0;
     shapes.push(shape);
   }
@@ -55,6 +55,38 @@ function getVector(canvas) {
 // Create all the shapes we will put on the canvas
 //----------------------------------------------------------
 function createImageShapes(count) {
+  const NUMSHAPES = 3;
+  let shapes = [];
+  let shapeType = Math.round(Math.random() * NUMSHAPES);
+  let shape = "";
+  let v = [];
+
+  for (let i = 0; i < count; i++) {
+    v = getVector(canvas);
+    if (shapeType == 0) {
+      shape = new UserImage(v[0], v[1], 60, 60, "andy-headshot1.png");
+      shape.type = shapeType;
+      shapes.push(shape);
+    } else if (shapeType == 1) {
+      shape = new UserImage(v[0], v[1], 60, 60, "stack.png");
+      shape.type = shapeType;
+      shapes.push(shape);
+    } else if (shapeType == 2) {
+      shape = new UserImage(v[0], v[1], 60, 60, "virginia.png");
+      shape.type = shapeType;
+      shapes.push(shape);
+    }
+    shapeType = Math.floor(Math.random() * NUMSHAPES);
+  }
+  return shapes;
+}
+
+//----------------------------------------------------------
+// Create all the shapes we will put on the canvas
+//
+
+//----------------------------------------------------------
+function createImageShapesSet(count) {
   const NUMSHAPES = 3;
   let shapes = [];
   let shapeType = Math.round(Math.random() * NUMSHAPES);
@@ -157,7 +189,7 @@ class Score {
 //--------------------------------------------------------------
 function checkCollisions(shapes, infected) {
   let nub = 0;
-  const IMGWIDTH = 50;
+  const IMGWIDTH = 30;
   let touchRan = 0;
   let found = false;
   for (let i = 0; i < infected.length; i++) {
@@ -169,12 +201,9 @@ function checkCollisions(shapes, infected) {
             shapes[infected[i]].y < shapes[j].y + IMGWIDTH &&
             shapes[infected[i]].y + IMGWIDTH > shapes[j].y) {
 
-            touchRan = Math.round(Math.random() * TOUCHESTOINFECT);
-            if (touchRan === 5) {
-              shapes[j].infect();
-            }
+            touchRan = Math.round(Math.random() * TOUCHRANDOM);
 
-            if (!sameTouch.includes(j)) {
+            if (!sameTouch.includes(j) && touchRan == 1) {
               shapes[j].touch();
               sameTouch = [];
               sameTouch.push(j);

@@ -199,3 +199,37 @@ class BobbleAnimation extends Animation {
         }
     }
 }
+
+//-------------------------------------------------------------
+// Outer Edge animation object
+//
+// This animation will position all of the shapes on the outer 
+// edge of the canvas with a velocity towards the middle at
+// different speeds.
+//
+// TODO - Implement
+//-------------------------------------------------------------
+class OuterEdgeAnimation extends Animation {
+    constructor(step, xSpeed, ySpeed) {
+        super(step, xSpeed, ySpeed);
+        this.frames = 20;
+        this.current = 1;
+        this.direction = 1;
+        this.count = 5;
+        this.deg = 1; // Radians to rotate the object
+    }
+
+    //---------------------------------------------------------
+    // Set the initial direction of the image
+    //---------------------------------------------------------
+    setDirection(d) {
+        this.direction = d;
+    }
+
+    //---------------------------------------------------------
+    // Move the object left and right to simulate bobble
+    //---------------------------------------------------------
+    animate(ctx, shape) {
+
+    }
+}

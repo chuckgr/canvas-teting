@@ -51,9 +51,10 @@ let sameTouch = [];
 const stopOn = 50;
 let reDraw = false;
 let timerCount = 0;
-const INCUBATIONDAYS = 10;
+const INCUBATIONDAYS = 4;
 const DEATHDAYS = 30;
-const TOUCHESTOINFECT = 20;
+const TOUCHESTOINFECT = 2;
+const TOUCHRANDOM = 3;
 const SPEEDMAX = 5;
 
 // This is the main controller for the game
