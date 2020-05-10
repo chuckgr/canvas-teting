@@ -8,7 +8,9 @@ class Controller {
   // on the state of the game
   //----------------------------------------------------------
   constructor() {
+    this.debug = "";
     if (debug) {
+      this.debug = new Debug();
       console.log('Controller:constructor');
     }
     this.canvas = document.getElementById("canvas");
@@ -87,6 +89,9 @@ class Controller {
       console.log('Controller:playSetup');
     }
     // Create all of the shapes to be used and the animation for them
+    //
+    // this.creator = new EdgeAvitarCreator();
+    // this.shapes = this.creator.getAvitars();
     this.shapes = createImageShapes(count);
     createAnimations(this.shapes, 'Linear');
 
@@ -142,7 +147,7 @@ class Controller {
       this.ctx.fillText("Number of shapes = " + this.shapes.length, 525, 15);
       this.ctx.fillText("Infected shapes  = " + this.infectedShapes.length, 525, 25);
       this.ctx.fillText("Timer count      = " + timerCount, 525, 35);
-      debugCanvas(this.shapes);
+      this.debug.writeDebug(this.shapes);
     }
 
     // Draw all of the shapes on the canvas
