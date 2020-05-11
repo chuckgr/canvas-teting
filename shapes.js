@@ -126,14 +126,16 @@ class UserImage extends Shape {
     // Called from the timer tick to indicate a new day of incubation
     // -------------------------------------------------------------
     addInfectedDay() {
-        this.infectedDays++;
-        if (this.infectedDays == INCUBATIONDAYS) {
-            if (this.touched) {
-                this.infected = true;
+        if (this.alive) {
+            this.infectedDays++;
+            if (this.infectedDays == INCUBATIONDAYS) {
+                if (this.touched) {
+                    this.infected = true;
+                }
+            } else if (this.infectedDays == DEATHDAYS) {
+                //this.alive = false;
+                this.img = "red-skull.png";
             }
-        } else if (this.infectedDays == DEATHDAYS) {
-            //this.alive = false;
-            this.img = "red-skull.png";
         }
     }
 
