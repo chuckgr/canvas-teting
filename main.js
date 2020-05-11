@@ -45,7 +45,7 @@ function mainLoop() {
 let debug =
   true;
 //false;
-let count = 15;
+let count = 16;
 let stopCount = 0;
 let sameTouch = [];
 const stopOn = 50;
@@ -55,7 +55,7 @@ const INCUBATIONDAYS = 4;
 const DEATHDAYS = 30;
 const TOUCHESTOINFECT = 2;
 const TOUCHRANDOM = 3;
-const SPEEDMAX = 5;
+const SPEEDMAX = 6;
 
 // This is the main controller for the game
 let controller;

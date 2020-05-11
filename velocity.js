@@ -8,7 +8,8 @@
 // -------------------------------------------------------------
 class Velocity {
   constructor() {
-
+    //this.ctx = ctx;
+    //this.count = count;
   }
 
   //---------------------------------------------------------
@@ -34,7 +35,7 @@ class RandomVelocity extends Velocity {
   // Return the starting position for the game pieces
   // on the outer edge, we need 
   //---------------------------------------------------------
-  getVelocity() {
+  getVelocity(ctx, count) {
     let v = 0;
     let xf = Math.floor(Math.random() * canvas.width);
     let yf = Math.floor(Math.random() * canvas.height);
@@ -48,10 +49,32 @@ class RandomVelocity extends Velocity {
 //
 // This class is used to position all of the pieces on the outer 
 // edge of the game board. 
+// TODO - How to get avitar size best way
 // -------------------------------------------------------------
 class EdgeVelocity extends Velocity {
-  constructor() {
+  constructor(count) {
     super();
+    this.locs = [];
+    this.currentAvitar = 0;
+    // Split the number of avitars with 4 walls
+    let perWall = Math.round(count / 4);
+
+    // How many pixels per avitar on top/bottom left/right
+    let xPixPerWall = Math.round(canvas.width / perWall);
+    let yPixPerWall = Math.round(canvas.height / perWall);
+
+    let increment = xPixPerWall;
+    for (let i = 0; i < count / 2; i++) {
+      if (i <= 3) {
+        this.locs.push([xPixPerWall * i, 0]);
+        this.locs.push([xPixPerWall * i, canvas.height - 60]);
+      }
+      if (i > 3 && i <= 7) {
+        this.locs.push([0, yPixPerWall * (i % 4)]);
+        this.locs.push([canvas.width - 60, yPixPerWall * (i % 4)]);
+      }
+
+    }
   }
 
   //---------------------------------------------------------
@@ -59,18 +82,8 @@ class EdgeVelocity extends Velocity {
   // on the outer edge, we need 
   //---------------------------------------------------------
   getVelocity() {
-    let v = 0;
-    let xf = Math.floor(Math.random() * canvas.width);
-    let yf = Math.floor(Math.random() * canvas.height);
-    /*
-      if (xf > (canvas.width / 2)) {
-        xf *= -1;
-      }
-      if (yf > (canvas.height / 2)) {
-        yf *= -1;
-      }
-    */
-    return [xf, yf];
+    this.currentAvitar++;
+    return this.locs[this.currentAvitar - 1];
   }
 
 }

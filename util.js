@@ -223,11 +223,11 @@ class Debug {
     ctx.fillText("Number of shapes = " + ctl.shapes.length, x, y);
     y += increment;
     ctx.fillText("Infected shapes  = " + ctl.infectedShapes.length, x, y);
-    //y += increment;
-    //ctx.fillText("Timer count      = " + ctl.timerCount, x, y);
+    y += increment;
+    ctx.fillText("Timer count      = " + ctl.timerCount, x, y);
     y += (increment * 2);
-    ctx.fillText("  X     Y    Alive    Infected   Infected Days  Touches", x, y);
-    const format = "xxxx  yyyy   aaaaa      iiiii         dddd        oooo";
+    ctx.fillText("  X     Y  Alive Infected Infected Days Touches", x, y);
+    const format = "xxxx  yyyy aaaaa   iiiii       dddd       oooo";
     y += increment;
     newFormat = format;
     for (let i = 0; i < ctl.shapes.length; i++) {

@@ -11,14 +11,26 @@
 // -------------------------------------------------------------
 class GameBoard {
   constructor() {
-    this.velocity = new EdgeVelocity();
-    
+    //this.velocity = new EdgeVelocity();
+    this.boardWidth = 800;
+    this.boardHeight = 600;
+
   }
 
   //---------------------------------------------------------
   // Return the game pieces for the current run
   //---------------------------------------------------------
   getShapes() {}
+
+  //---------------------------------------------------------
+  // Create the game board
+  //---------------------------------------------------------
+  createBoard() {
+    // Create canvas object (TODO - currently using index.html)
+    // Add quarentine location on right side taking up 100 px
+    
+
+  }
 }
 
 

@@ -92,7 +92,8 @@ class Controller {
     }
     // Create all of the shapes to be used and the animation for them
     //
-    this.creator = new RandomAvitarCreator(new RandomVelocity(), new AnimationFactory(), count);
+    this.creator = new AvitarCreator(new EdgeVelocity(count), new AnimationFactory(), count, this.ctx);
+    //this.creator = new AvitarCreator(new RandomVelocity(), new AnimationFactory(), count, this.ctx);
     this.shapes = this.creator.getAvitars();
     //this.shapes = createImageShapes(count);
     //createAnimations(this.shapes, 'Linear');
@@ -116,15 +117,17 @@ class Controller {
     intro.play();
 
     // Start a 1 second timer
-    window.setInterval(function (shapes, infected, timerCount) {
-      timerCount++;
+    window.setInterval(function (ctl) {
+      ctl.timerCount++;
+      let ctlCounter = ctl.timerCount;
       // Bump the count of infected days for all infected people
-      if (shapes.length > 0) {
-        for (let i = 0; i < infected.length; i++) {
-          shapes[infected[i]].addInfectedDay();
+      if (ctl.shapes.length > 0) {
+        for (let i = 0; i < ctl.infectedShapes.length; i++) {
+          ctl.shapes[ctl.infectedShapes[i]].addInfectedDay();
         }
       }
-    }, 1000, this.shapes, this.infectedShapes, this.timerCount);
+    }, 1000, this);
+    //}, 1000, this.shapes, this.infectedShapes, this.timerCount, this);
 
     // Jump to the game
     this.state = this.play;
