@@ -27,13 +27,13 @@ class AvitarCreator {
     for (let i = 0; i < count; i++) {
       v = this.vel.getVelocity(this.ctx.canvas, this.COUNT, this.AVITARSIZE);
       if (shapeType == 0) {
-        shape = new UserImage(v[0], v[1], this.AVITARSIZE, this.AVITARSIZE, "andy-headshot1.png");
+        shape = new UserImage(v[0], v[1], this.AVITARSIZE, this.AVITARSIZE, "img/andy-headshot1.png");
         shape.type = shapeType;
       } else if (shapeType == 1) {
-        shape = new UserImage(v[0], v[1], this.AVITARSIZE, this.AVITARSIZE, "stack.png");
+        shape = new UserImage(v[0], v[1], this.AVITARSIZE, this.AVITARSIZE, "img/stack.png");
         shape.type = shapeType;
       } else if (shapeType == 2) {
-        shape = new UserImage(v[0], v[1], this.AVITARSIZE, this.AVITARSIZE, "virginia.png");
+        shape = new UserImage(v[0], v[1], this.AVITARSIZE, this.AVITARSIZE, "img/virginia.png");
         shape.type = shapeType;
       }
       shape.addAnimation(this.anim.createAnimation('Linear', shape));

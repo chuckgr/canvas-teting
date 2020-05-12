@@ -40,7 +40,7 @@ class Shape {
     // Mark this shape as exploded, then remove
     // -------------------------------------------------------------
     explode() {
-        this.img = "explosion.png";
+        this.img = "img/explosion.png";
         this.exploding = 6;
     }
 }
@@ -134,7 +134,7 @@ class UserImage extends Shape {
                 }
             } else if (this.infectedDays == DEATHDAYS) {
                 //this.alive = false;
-                this.img = "red-skull.png";
+                this.img = "img/red-skull.png";
             }
         }
     }

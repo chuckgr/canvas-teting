@@ -9,7 +9,7 @@
 function createBackground(context) {
   context.beginPath();
   let image = new Image();
-  image.src = "teamky-white.png";
+  image.src = "img/teamky-white.png";
   context.drawImage(image, 154, 166);
   context.stroke();
 }

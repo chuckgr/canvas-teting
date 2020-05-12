@@ -61,9 +61,9 @@ const SPEEDMAX = 6;
 let controller;
 
 // Audio files to play
-const shot = new Audio("laser-shot1.mp3");
+const shot = new Audio("snd/laser-shot1.mp3");
 shot.load();
-const explode = new Audio("explode.mp3");
+const explode = new Audio("snd/explode.mp3");
 explode.load();
-const intro = new Audio("intro.mp3");
+const intro = new Audio("snd/intro.mp3");
 intro.load();

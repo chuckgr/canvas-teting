@@ -17,7 +17,7 @@ class Controller {
     this.ctx = canvas.getContext("2d");
     this.state = "";
     this.background = new Image();
-    this.background.src = "teamky-white.png";
+    this.background.src = "img/teamky-white.png";
     this.shapes = [];
     this.andy = "";
     this.rona = "";
@@ -39,16 +39,16 @@ class Controller {
       console.log('Controller:splashSetup');
     }
     // Add in the rona
-    this.rona = new UserImage(10, 60, 400, 400, "Coronavirus-CDC.png");
+    this.rona = new UserImage(10, 60, 400, 400, "img/Coronavirus-CDC.png");
     this.rona.setDirection = -1;
     this.rona.addAnimation(new BobbleHeadAnimation(10, 10));
 
     // Add in the large Andy head
-    this.andy = new UserImage(canvas.width / 2, 40, 400, 400, "andy-headshot1.png");
+    this.andy = new UserImage(canvas.width / 2, 40, 400, 400, "img/andy-headshot1.png");
     this.andy.addAnimation(new BobbleHeadAnimation(10, 10));
 
     // Show the Play button
-    this.playIcon = new UserImage(350, 320, 100, 100, "play1.png");
+    this.playIcon = new UserImage(350, 320, 100, 100, "img/play1.png");
 
     this.canvas.addEventListener('click', splashListener);
 
@@ -103,7 +103,7 @@ class Controller {
     this.infectedShapes.push(infectLocation);
     this.shapes[infectLocation].infect();
     if (debug) {
-      this.shapes[infectLocation].img = "chuck.png";
+      this.shapes[infectLocation].img = "img/chuck.png";
     }
 
     // Create score object

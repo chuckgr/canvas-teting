@@ -125,7 +125,7 @@ class BallonAnimation extends Animation {
 class ExplosionAnimation extends Animation {
     constructor(xSpeed, ySpeed) {
         super(xSpeed, ySpeed);
-        this.img = "explosion.png"; // Image to explode with
+        this.img = "img/explosion.png"; // Image to explode with
         this.expFrames = 3; // Number of frames to animate the explosion
         this.eFactor = 2; // Size to increase/reduce the image size per frame
     }

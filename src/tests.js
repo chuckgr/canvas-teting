@@ -12,7 +12,7 @@ function test_animation() {
   let canvas = document.getElementById("canvas");
   let ctx = canvas.getContext("2d");
 
-  let shape = new UserImage(10, 20, 30, 30, "andy-headshot1.png");
+  let shape = new UserImage(10, 20, 30, 30, "img/andy-headshot1.png");
   shape.addAnimation(new ExplosionAnimation(10, 10, 10));
   shape.type = 0;
   shape.explode();
