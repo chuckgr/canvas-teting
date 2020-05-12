@@ -148,10 +148,6 @@ class Controller {
     createBackground(this.ctx);
 
     if (debug) {
-      //this.ctx.font = '12px monospace';
-      //this.ctx.fillText("Number of shapes = " + this.shapes.length, 525, 15);
-      //this.ctx.fillText("Infected shapes  = " + this.infectedShapes.length, 525, 25);
-      //this.ctx.fillText("Timer count      = " + timerCount, 525, 35);
       this.debug.writeDebug(this);
     }
 
