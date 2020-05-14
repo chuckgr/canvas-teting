@@ -80,7 +80,7 @@ class UserImage extends Shape {
 
             context.drawImage(this.image, this.x, this.y, this.width, this.height);
             if (this.infected && (this.infectedDays >= INCUBATIONDAYS && this.infectedDays < DEATHDAYS)) {
-                this.facemask.src = "facemask.png";
+                this.facemask.src = "img/facemask.png";
                 context.drawImage(this.facemask, this.x, this.y, this.width, this.height);
             }
 

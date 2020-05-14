@@ -5,6 +5,14 @@
 //-------------------------------------------------------------
 
 //-------------------------------------------------------------
+// This gets called when the test page is loaded, add the
+// test(s) to run in the body of the function
+//-------------------------------------------------------------
+function test_harness() {
+  test_background();
+}
+
+//-------------------------------------------------------------
 // Test new animation class
 //-------------------------------------------------------------
 function test_animation() {
@@ -18,4 +26,12 @@ function test_animation() {
   shape.explode();
   shape.draw(ctx);
 
+}
+
+//-------------------------------------------------------------
+// Test new animation class
+//-------------------------------------------------------------
+function test_background() {
+  let board = new GameBoard();
+  board.displayBackground();
 }

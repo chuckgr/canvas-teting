@@ -14,6 +14,11 @@ class GameBoard {
     //this.velocity = new EdgeVelocity();
     this.boardWidth = 800;
     this.boardHeight = 600;
+    this.canvas = document.getElementById("canvas");
+    this.ctx = canvas.getContext("2d");
+    this.bkgImage = new Image();
+    //this.bkgImage.board = this;
+    this.bkgImage.src = "img/teamky-white.png";
 
   }
 
@@ -28,8 +33,29 @@ class GameBoard {
   createBoard() {
     // Create canvas object (TODO - currently using index.html)
     // Add quarentine location on right side taking up 100 px
-    
 
+
+  }
+
+  //---------------------------------------------------------
+  // Create/display the background image
+  //---------------------------------------------------------
+  displayBackground() {
+    this.ctx.beginPath();
+    //let image = this.bkgImage;
+    //image.board = this;
+    //image.onload = () => {
+    //  drawBackground();
+    //};
+    //image.src = "img/teamky-white.png";
+
+    //function drawBackground() {
+    // Center image on center of the canvas
+    let x = this.ctx.canvas.width / 2 - this.bkgImage.width / 2;
+    let y = this.ctx.canvas.height / 2 - this.bkgImage.height / 2;
+    this.ctx.drawImage(this.bkgImage, x, y);
+    //image.board.ctx.stroke();
+    //}
   }
 }
 

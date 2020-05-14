@@ -60,6 +60,9 @@ const SPEEDMAX = 6;
 // This is the main controller for the game
 let controller;
 
+// This is the gameboard
+let board;
+
 // Audio files to play
 const shot = new Audio("snd/laser-shot1.mp3");
 shot.load();

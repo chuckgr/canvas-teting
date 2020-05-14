@@ -13,6 +13,7 @@ class Controller {
       this.debug = new Debug();
       console.log('Controller:constructor');
     }
+    board = new GameBoard();
     this.canvas = document.getElementById("canvas");
     this.ctx = canvas.getContext("2d");
     this.state = "";
@@ -145,7 +146,8 @@ class Controller {
     // Clear the playing field
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    createBackground(this.ctx);
+    //createBackground(this.ctx);
+    board.displayBackground();
 
     if (debug) {
       this.debug.writeDebug(this);
