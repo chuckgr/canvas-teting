@@ -147,7 +147,9 @@ class Controller {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     //createBackground(this.ctx);
-    board.displayBackground();
+    board.createBoard();
+    //board.displayBackground();
+    //board.displayHealthyAtHome();
 
     if (debug) {
       this.debug.writeDebug(this);
@@ -163,6 +165,9 @@ class Controller {
 
     // Update the score
     this.score.drawScore();
+
+    // Check to see if the game is over
+
 
     this.ctx.restore();
 

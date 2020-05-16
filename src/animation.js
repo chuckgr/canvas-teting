@@ -65,18 +65,18 @@ class LinearAnimation extends Animation {
         shape.y += this.ySpeed;
 
         // Check if we hit the walls
-        if (shape.x >= (ctx.canvas.width - shape.width)) {
+        if (shape.x >= (board.mainAreaWidth - shape.width)) {
             this.xSpeed *= -1; // reverse direction
-            shape.x = ctx.canvas.width - shape.width;
+            shape.x = board.mainAreaWidth - shape.width;
         } else if (shape.x <= 0) {
             shape.x = 0;
             this.xSpeed *= -1;
         }
 
         // Check if we hit the top/bottom
-        if (shape.y >= (ctx.canvas.height - shape.height)) {
+        if (shape.y >= (board.mainAreaHeight - shape.height)) {
             this.ySpeed *= -1;
-            shape.y = ctx.canvas.height - shape.height;
+            shape.y = board.mainAreaHeight - shape.height;
         } else if (shape.y <= 0) {
             shape.y = 0;
             this.ySpeed *= -1;

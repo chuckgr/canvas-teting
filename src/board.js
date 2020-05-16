@@ -12,13 +12,16 @@
 class GameBoard {
   constructor() {
     //this.velocity = new EdgeVelocity();
+    this.canvas = "";
+    this.ctx = "";
+    this.hahSize = 120;
     this.boardWidth = 800;
     this.boardHeight = 600;
-    this.canvas = document.getElementById("canvas");
-    this.ctx = canvas.getContext("2d");
-    this.bkgImage = new Image();
+    this.mainAreaWidth = this.boardWidth - this.hahSize;
+    this.mainAreaHeight = this.boardHeight;
+    this.createCanvas();
+    this.bkgImage = document.getElementById("teamky");
     //this.bkgImage.board = this;
-    this.bkgImage.src = "img/teamky-white.png";
 
   }
 
@@ -28,12 +31,31 @@ class GameBoard {
   getShapes() {}
 
   //---------------------------------------------------------
+  // Create the canvas for the game board
+  //---------------------------------------------------------
+  createCanvas() {
+    this.canvas = document.createElement('canvas');
+    this.canvas.id = "canvas";
+    this.canvas.width = this.boardWidth;
+    this.canvas.height = this.boardHeight;
+    this.canvas.style.zIndex = 1;
+    this.canvas.style.border = "solid 2pt rgb(8, 112, 248)";
+    const div = document.getElementById("main-canvas");
+    div.appendChild(this.canvas);
+    this.ctx = this.canvas.getContext("2d");
+  }
+
+  //---------------------------------------------------------
   // Create the game board
   //---------------------------------------------------------
   createBoard() {
-    // Create canvas object (TODO - currently using index.html)
-    // Add quarentine location on right side taking up 100 px
-
+    // Canvas is created in the constructor
+    // Add the background
+    this.displayBackground();
+    this.displayHealthyAtHome();
+    // Add the score, high score
+    // Add quarentine location on right side taking up n px's
+    // Set the rules to end the game
 
   }
 
@@ -42,20 +64,26 @@ class GameBoard {
   //---------------------------------------------------------
   displayBackground() {
     this.ctx.beginPath();
-    //let image = this.bkgImage;
-    //image.board = this;
-    //image.onload = () => {
-    //  drawBackground();
-    //};
-    //image.src = "img/teamky-white.png";
-
-    //function drawBackground() {
     // Center image on center of the canvas
     let x = this.ctx.canvas.width / 2 - this.bkgImage.width / 2;
     let y = this.ctx.canvas.height / 2 - this.bkgImage.height / 2;
     this.ctx.drawImage(this.bkgImage, x, y);
-    //image.board.ctx.stroke();
-    //}
+  }
+
+  //---------------------------------------------------------
+  // Create/display healthy at home areas
+  //---------------------------------------------------------
+  displayHealthyAtHome() {
+    // Lets start with just a 130 px area on right side of screen
+    let x = this.ctx.canvas.width - this.hahSize;
+    let y = this.ctx.canvas.height;
+
+    this.ctx.strokeStyle = 'green';
+    this.ctx.lineWidth = 3.0;
+    this.ctx.beginPath();
+    this.ctx.moveTo(x, 0);
+    this.ctx.lineTo(x, y);
+    this.ctx.stroke();
   }
 }
 
@@ -71,10 +99,24 @@ class Score {
     this.shots = 0;
     this.miss = 100;
     this.ctx = ctx;
+    this.bonus = 10000;
   }
 
   //--------------------------------------------------------------
-  // Create object to hold the score
+  // Update the score based on the object hit
+  // TODO - implement
+  //--------------------------------------------------------------
+  hitScore(shape) {
+
+    if (debug) {
+      console.log(`Score update ${type}`);
+    }
+  }
+
+
+  //--------------------------------------------------------------
+  // Update the score based on the object hit
+  // TODO - remove this when new method is complete
   //--------------------------------------------------------------
   updateScore(type) {
     if (type == 1) {
