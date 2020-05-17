@@ -9,7 +9,8 @@
 // test(s) to run in the body of the function
 //-------------------------------------------------------------
 function test_harness() {
-  test_background();
+  //test_background();
+  test_gameover();
 }
 
 //-------------------------------------------------------------
@@ -29,9 +30,22 @@ function test_animation() {
 }
 
 //-------------------------------------------------------------
-// Test new animation class
+// Test creating a global background
 //-------------------------------------------------------------
 function test_background() {
   let board = new GameBoard();
   board.displayBackground();
+}
+
+//-------------------------------------------------------------
+// Test creating a end game board
+//-------------------------------------------------------------
+function test_gameover() {
+
+  let board = new GameBoard();
+  let canvas = document.getElementById("canvas");
+  let ctx = canvas.getContext("2d");
+  let score = new Score(ctx);
+  board.score = score;
+  board.createEndScore();
 }

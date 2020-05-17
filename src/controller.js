@@ -13,7 +13,9 @@ class Controller {
       this.debug = new Debug();
       console.log('Controller:constructor');
     }
-    board = new GameBoard();
+    this.score = new Score();
+    board = new GameBoard(this.score);
+
     this.canvas = document.getElementById("canvas");
     this.ctx = canvas.getContext("2d");
     this.state = "";
@@ -23,7 +25,7 @@ class Controller {
     this.andy = "";
     this.rona = "";
     this.playIcon = "";
-    this.score = "";
+
     this.infectedShapes = [];
     this.creator = "";
     this.vel = "";
@@ -66,11 +68,9 @@ class Controller {
       console.log('Controller:splash');
     }
 
-    const x = 0,
-      y = 140;
-
     // clear out the canvas
-    this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+    board.clearBoard();
+
     this.ctx.beginPath();
 
     // Draw the rona
@@ -105,8 +105,7 @@ class Controller {
     }
 
     // Create score object
-    this.score = new Score(this.ctx);
-    this.score.drawScore();
+    board.displayScore(this.score.getScore());
 
     // Listen for mouse click event on the canvas
     addListener(this.canvas, this.shapes, this.score);
@@ -139,10 +138,7 @@ class Controller {
     if (debug) {
       console.log('Controller:play');
     }
-    // Clear the playing field
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-    //createBackground(this.ctx);
+    // Clear the playing field and create the board
     board.createBoard();
 
     if (debug) {
@@ -158,10 +154,28 @@ class Controller {
     checkCollisions(this.shapes, this.infectedShapes);
 
     // Update the score
-    this.score.drawScore();
+    //this.score.drawScore();
+    board.displayScore(this.score.getScore());
 
     // Check to see if the game is over
-
+    if (this.score.checkForEnd(this.shapes)) {
+      let alive = 0;
+      let quart = 0;
+      let dead = 0;
+      for (let i = 0; i < this.shapes.length; i++) {
+        if (this.shapes[i].alive) {
+          alive++;
+        }
+        if (this.shapes[i].quarantened) {
+          quart++;
+        }
+        if (this.shapes[i].dead) {
+          dead++;
+        }
+      }
+      console.log(`Alive=${alive}, Quarantened=${quart}, Dead=${dead}`);
+      this.state = this.endSetup;
+    }
 
     this.ctx.restore();
 
@@ -175,6 +189,26 @@ class Controller {
   }
 
   //----------------------------------------------------------
+  // End of the game has been reached, this will setup the view
+  // for the end of the game
+  //----------------------------------------------------------
+  endSetup() {
+    // set high score for later
+    //this.score.setHiScore(this.score.getScore());
+
+    // Create a rectangle over the main area
+    board.createEndScore();
+    // Write the 
+
+
+    // Go to end state to wait for a restart
+    this.state = this.end;
+    if (debug) {
+      console.log('Controller:endSetup');
+    }
+  }
+
+  //----------------------------------------------------------
   // End of the game has been reached
   //----------------------------------------------------------
   end() {
@@ -182,5 +216,6 @@ class Controller {
       console.log('Controller:end');
     }
   }
+
 
 }

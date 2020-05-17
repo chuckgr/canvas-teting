@@ -19,6 +19,7 @@ class Shape {
         this.eFactor = 2;
         this.infected = false;
         this.infectedDays = 0;
+        this.quarantened = false;
     }
 
     // -------------------------------------------------------------
@@ -40,7 +41,7 @@ class Shape {
     // Mark this shape as exploded, then remove
     // -------------------------------------------------------------
     explode() {
-        this.img = "img/explosion.png";
+        //this.img = "img/explosion.png";
         this.exploding = 6;
     }
 }
@@ -97,6 +98,7 @@ class UserImage extends Shape {
     // Mark this shape as exploded, then remove
     // -------------------------------------------------------------
     explode() {
+        this.quarantened = true;
         this.addAnimation(new ExplosionAnimation(10, 10, 10));
     }
 
