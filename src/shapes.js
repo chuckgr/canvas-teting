@@ -51,9 +51,9 @@ class Shape {
 class UserImage extends Shape {
     constructor(x, y, w, h, img) {
         super(x, y);
-        this.image = new Image();
-        this.facemask = new Image();
-        this.img = img;
+        this.image = img;
+        this.facemask = document.getElementById("facemask");
+        //this.img = img;
         this.width = w;
         this.height = h;
         this.type = "";
@@ -75,19 +75,16 @@ class UserImage extends Shape {
                 this.anim.animate(context, this);
             }
 
-            this.image.src = this.img;
-
-
             context.drawImage(this.image, this.x, this.y, this.width, this.height);
             if (this.infected && (this.infectedDays >= INCUBATIONDAYS && this.infectedDays < DEATHDAYS)) {
-                this.facemask.src = "img/facemask.png";
+                //this.facemask.src = "img/facemask.png";
                 context.drawImage(this.facemask, this.x, this.y, this.width, this.height);
             }
 
             if (debug) {
                 context.font = '12px monospace';
                 context.strokeStyle = "rgb(111,022,033)";
-                //context.fillText(this.x + "," + this.y, this.x + this.l, this.y);
+                context.fillText(this.x + "," + this.y, this.x + this.l, this.y);
                 context.fillText(this.infectedDays, this.x + this.l, this.y + 10);
             }
 

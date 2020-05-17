@@ -125,7 +125,8 @@ class BallonAnimation extends Animation {
 class ExplosionAnimation extends Animation {
     constructor(xSpeed, ySpeed) {
         super(xSpeed, ySpeed);
-        this.img = "img/explosion.png"; // Image to explode with
+        //this.img = "img/explosion.png"; // Image to explode with
+        this.img = document.getElementById("exploded"); // Image to explode with
         this.expFrames = 3; // Number of frames to animate the explosion
         this.eFactor = 2; // Size to increase/reduce the image size per frame
     }
@@ -233,15 +234,14 @@ class BobbleAnimation extends Animation {
 }
 
 //-------------------------------------------------------------
-// Outer Edge animation object
+// Quarantine animation object
 //
-// This animation will position all of the shapes on the outer 
-// edge of the canvas with a velocity towards the middle at
-// different speeds.
+// This animation will position all of the shapes to the
+// quarentine area
 //
 // TODO - Implement
 //-------------------------------------------------------------
-class OuterEdgeAnimation extends Animation {
+class QuarantineAnimation extends Animation {
     constructor(xSpeed, ySpeed) {
         super(xSpeed, ySpeed);
         this.frames = 20;

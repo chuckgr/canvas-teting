@@ -40,16 +40,16 @@ class Controller {
       console.log('Controller:splashSetup');
     }
     // Add in the rona
-    this.rona = new UserImage(10, 60, 400, 400, "img/Coronavirus-CDC.png");
+    this.rona = new UserImage(10, 60, 400, 400, document.getElementById("rona"));
     this.rona.setDirection = -1;
     this.rona.addAnimation(new BobbleHeadAnimation(10, 10));
 
     // Add in the large Andy head
-    this.andy = new UserImage(canvas.width / 2, 40, 400, 400, "img/andy-headshot1.png");
+    this.andy = new UserImage(canvas.width / 2, 40, 400, 400, document.getElementById("andy"));
     this.andy.addAnimation(new BobbleHeadAnimation(10, 10));
 
     // Show the Play button
-    this.playIcon = new UserImage(350, 320, 100, 100, "img/play1.png");
+    this.playIcon = new UserImage(350, 320, 100, 100, document.getElementById("play"));
 
     this.canvas.addEventListener('click', splashListener);
 
@@ -91,20 +91,17 @@ class Controller {
     if (debug) {
       console.log('Controller:playSetup');
     }
-    // Create all of the shapes to be used and the animation for them
-    //
+    // Create all of the shapes to be used and the animation for the shapes
     this.creator = new AvitarCreator(new EdgeVelocity(count), new AnimationFactory(), count, this.ctx);
-    //this.creator = new AvitarCreator(new RandomVelocity(), new AnimationFactory(), count, this.ctx);
     this.shapes = this.creator.getAvitars();
-    //this.shapes = createImageShapes(count);
-    //createAnimations(this.shapes, 'Linear');
 
     // Infect one of the shapes with the 'Rona
     let infectLocation = Math.floor(Math.random() * count);
     this.infectedShapes.push(infectLocation);
     this.shapes[infectLocation].infect();
     if (debug) {
-      this.shapes[infectLocation].img = "img/chuck.png";
+      // TODO - fix this as it fails now that we get the images from HTML
+      this.shapes[infectLocation].img = document.getElementById("testimg");
     }
 
     // Create score object
@@ -128,7 +125,6 @@ class Controller {
         }
       }
     }, 1000, this);
-    //}, 1000, this.shapes, this.infectedShapes, this.timerCount, this);
 
     // Jump to the game
     this.state = this.play;
@@ -148,8 +144,6 @@ class Controller {
 
     //createBackground(this.ctx);
     board.createBoard();
-    //board.displayBackground();
-    //board.displayHealthyAtHome();
 
     if (debug) {
       this.debug.writeDebug(this);
