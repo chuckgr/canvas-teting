@@ -78,14 +78,14 @@ class GameBoard {
     const esHeight = 400;
     const goX = (this.boardWidth / 2) - (esWidth / 2);
     const goY = (this.boardHeight / 2) - (esHeight / 2);
-    let textXOffset = 75;
+    let textXOffset = 65;
     let textYOffset = 40;
     const goText = "Game Over";
     const hiScoreTxt = "High Score: ";
     const scoreTxt = "Score: ";
     let currXOffset = textXOffset;
     let currYOffset = textYOffset;
-    const scoresXOffset = 200;
+    const scoresXOffset = 280;
 
     this.ctx.beginPath();
     // Clear/Draw a rectangle in the middle of the playing area
@@ -131,7 +131,8 @@ class GameBoard {
   //--------------------------------------------------------------
   drawText(text, size, x, y, w, h) {
     this.ctx.save();
-    this.ctx.font = size + 'px arial';
+    //this.ctx.font = size + 'px arial';
+    this.ctx.font = size + 'px verdana';
     if (x == 'center') {
       let textSize = this.ctx.measureText(text);
       x = parseInt((w / 2) - (Math.floor(textSize.width / 2)));
@@ -183,7 +184,7 @@ class GameBoard {
   displayScore(score) {
     this.ctx.strokeStyle = "rgb(111,022,033)";
     this.ctx.lineWidth = 2;
-    this.ctx.font = '20px arial';
+    this.ctx.font = '20px verdana';
     this.ctx.fillText("Score: " + score, 10, 20);
     this.ctx.stroke();
   }
