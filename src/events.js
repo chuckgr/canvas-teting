@@ -72,3 +72,18 @@ function splashListener(event) {
     controller.state = controller.playSetup;
   }
 }
+
+//----------------------------------------------------------
+// Method that gets called on the canvas click event 
+// for the start of the game with a logo and instructions
+//----------------------------------------------------------
+function restartGameListener(event) {
+  // Check for correct event and remove the listeners
+  if (event.type === "click" || (event.type === "keydown" && event.code === "Enter")) {
+    // remove events
+    let canvas = document.getElementById("canvas");
+    canvas.removeEventListener("click", splashListener);
+    //canvas.removeEventListener("keydown", splashIO);
+    controller.state = controller.playSetup;
+  }
+}

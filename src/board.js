@@ -87,6 +87,7 @@ class GameBoard {
     let currYOffset = textYOffset;
     const scoresXOffset = 280;
 
+    this.ctx.save();
     this.ctx.beginPath();
     // Clear/Draw a rectangle in the middle of the playing area
     this.ctx.clearRect(goX, goY, esWidth, esHeight);
@@ -121,6 +122,10 @@ class GameBoard {
     // Write stats
 
     // Show restart button
+
+    // Rest the translation
+    this.ctx.translate(0, 0);
+    this.ctx.restore();
   }
 
   //--------------------------------------------------------------

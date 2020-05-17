@@ -200,6 +200,8 @@ class Controller {
     board.createEndScore();
     // Write the 
 
+    // Add a listener to restart the game
+    this.canvas.addEventListener('click', restartGameListener);
 
     // Go to end state to wait for a restart
     this.state = this.end;
