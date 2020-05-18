@@ -46,16 +46,15 @@ let debug =
   true;
 //false;
 let count = 16;
-let stopCount = 0;
 let sameTouch = [];
-const stopOn = 50;
 let reDraw = false;
 let timerCount = 0;
 const INCUBATIONDAYS = 4;
 const DEATHDAYS = 30;
+const DEATHPCT = 3;
 const TOUCHESTOINFECT = 2;
-const TOUCHRANDOM = 3;
-const SPEEDMAX = 6;
+const TOUCHRANDOM = 4;
+const SPEEDMAX = 5;
 
 // This is the main controller for the game
 let controller;

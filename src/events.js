@@ -90,6 +90,7 @@ function restartGameListener(event) {
     if (event.pageX > 380 && event.pageX < 445 && event.pageY > 480 && event.pageY < 533) {
       canvas.removeEventListener("click", restartGameListener);
       board.reset();
+      controller.timerCount = 0;
       controller.state = controller.playSetup;
     }
   }

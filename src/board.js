@@ -332,7 +332,17 @@ class Score {
   //    - Time to clear the board
   //--------------------------------------------------------------
   calcScore(shapes) {
-
+    for (let i = 0; i < shapes.length; i++) {
+      if (!shapes[i].infected && !shapes[i].quarantened) {
+        this.score += this.bonus;
+      }
+      if (shapes[i].quarantened && shapes[i].alive) {
+        this.score += this.multi;
+      }
+      if (shapes[i].dead) {
+        this.score -= this.miss;
+      }
+    }
   }
 
 

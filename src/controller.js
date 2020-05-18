@@ -30,6 +30,7 @@ class Controller {
     this.creator = "";
     this.vel = "";
     this.timerCount = 0;
+    this.timer = "";
   }
 
   //----------------------------------------------------------
@@ -159,6 +160,7 @@ class Controller {
 
     // Check to see if the game is over
     if (this.score.checkForEnd(this.shapes)) {
+      this.score.calcScore(this.shapes);
       let alive = 0;
       let quart = 0;
       let dead = 0;
@@ -177,15 +179,6 @@ class Controller {
       this.state = this.endSetup;
     }
 
-    this.ctx.restore();
-
-    if (debug) {
-      stopCount++;
-      if (stopCount >= stopOn) {
-        //this.state = this.end;
-      }
-    }
-
   }
 
   //----------------------------------------------------------
@@ -193,8 +186,8 @@ class Controller {
   // for the end of the game
   //----------------------------------------------------------
   endSetup() {
-    // set high score for later
-    //this.score.setHiScore(this.score.getScore());
+    // Stop the timer
+    clearInterval(this.timer);
 
     // Create a rectangle over the main area
     board.createEndScore();
