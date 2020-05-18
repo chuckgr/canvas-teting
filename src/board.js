@@ -22,8 +22,16 @@ class GameBoard {
     this.mainAreaHeight = this.boardHeight;
     this.createCanvas();
     this.bkgImage = document.getElementById("teamky");
-    //this.bkgImage.board = this;
+    this.currQuarnLoc = 0;
+    this.quarnLocations = [];
+    this.createQuarnLocations();
+  }
 
+  reset() {
+    this.currQuarnLoc = 0;
+    this.quarnLocations = [];
+    this.createQuarnLocations();
+    this.score.reset();
   }
 
   //---------------------------------------------------------
@@ -44,6 +52,23 @@ class GameBoard {
     const div = document.getElementById("main-canvas");
     div.appendChild(this.canvas);
     this.ctx = this.canvas.getContext("2d");
+  }
+
+  //---------------------------------------------------------
+  // Create the loactions for the quarantine
+  //---------------------------------------------------------
+  createQuarnLocations() {
+    let strtX = this.boardWidth - this.hahSize;
+    let strtY = 10;
+    for (let i = 0; i < count; i++) {
+      if (i % 2 == 0) {
+        this.quarnLocations.push([strtX, strtY]);
+      } else {
+        this.quarnLocations.push([strtX + 65, strtY]);
+        strtY += 65;
+      }
+    }
+
   }
 
   //---------------------------------------------------------
@@ -122,8 +147,11 @@ class GameBoard {
     // Write stats
 
     // Show restart button
+    // Show the Play button
+    let playIcon = new UserImage(180, 320, 50, 50, document.getElementById("play"));
+    playIcon.draw(this.ctx);
 
-    // Rest the translation
+    // Reset the translation
     this.ctx.translate(0, 0);
     this.ctx.restore();
   }
@@ -193,6 +221,15 @@ class GameBoard {
     this.ctx.fillText("Score: " + score, 10, 20);
     this.ctx.stroke();
   }
+
+  //--------------------------------------------------------------
+  // Get the next location in the quarantene area for an avatar
+  //--------------------------------------------------------------
+  getQuarnLocation() {
+    this.currQuarnLoc++;
+    console.log(`${this.currQuarnLoc}`);
+    return this.quarnLocations[this.currQuarnLoc - 1];
+  }
 }
 
 
@@ -203,14 +240,17 @@ class Score {
   constructor() {
     this.score = 0;
     this.hiScore = 0;
-    this.multi = 1000;
     this.objects = 0;
     this.shots = 0;
     this.miss = 100;
-    //this.ctx = ctx;
+    this.multi = 1000;
     this.bonus = 10000;
   }
 
+  reset() {
+    this.score = 0;
+    this.shots = 0;
+  }
   //--------------------------------------------------------------
   // Update the score based on the object hit
   // TODO - implement
@@ -286,7 +326,7 @@ class Score {
   // Scores will be added throughout by updateScore(), once it
   // has been determined that the game round is over add in
   // extra for:
-  //    + Number of avitars uninfected in play area
+  //    + Number of avatars uninfected in play area
   //    - Number dead
   //    + Recovered
   //    - Time to clear the board
@@ -300,7 +340,7 @@ class Score {
   // Check to see if we are done with this round
   //
   // Right now we are looking to see if there are uninfected
-  // avitars in the game area to end the game
+  // avatars in the game area to end the game
   //--------------------------------------------------------------
   checkForEnd(shapes) {
     let done = true;

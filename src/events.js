@@ -29,12 +29,14 @@ function addListener(canvElem, shapes, score) {
     shot.play();
 
     if (debug) {
-      console.log(`event at ${x}, ${y}`);
+      //console.log(`event at ${x}, ${y}`);
     }
     if (event.type === "click") {
       for (let i = 0; i < shapes.length; i++) {
         if (y > shapes[i].y && y < shapes[i].y + shapes[i].height && x > shapes[i].x && x < shapes[i].x + shapes[i].width) {
-          shapes[i].explode();
+          //shapes[i].explode();
+          shapes[i].quarantine();
+
           hit = true;
           // if it's the rona play the explosion sound
           if (shapes[i].infected || shapes[i].alive) {
@@ -80,10 +82,15 @@ function splashListener(event) {
 function restartGameListener(event) {
   // Check for correct event and remove the listeners
   if (event.type === "click" || (event.type === "keydown" && event.code === "Enter")) {
+    //console.log(` Click at x=${event.pageX}, y=${event.pageY}`);
     // remove events
     let canvas = document.getElementById("canvas");
-    canvas.removeEventListener("click", splashListener);
-    //canvas.removeEventListener("keydown", splashIO);
-    controller.state = controller.playSetup;
+
+    // Did they hit the play button?
+    if (event.pageX > 380 && event.pageX < 445 && event.pageY > 480 && event.pageY < 533) {
+      canvas.removeEventListener("click", restartGameListener);
+      board.reset();
+      controller.state = controller.playSetup;
+    }
   }
 }

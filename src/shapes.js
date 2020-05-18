@@ -98,8 +98,15 @@ class UserImage extends Shape {
     // Mark this shape as exploded, then remove
     // -------------------------------------------------------------
     explode() {
-        this.quarantened = true;
         this.addAnimation(new ExplosionAnimation(10, 10, 10));
+    }
+
+    // -------------------------------------------------------------
+    // Move this shape to quarantine
+    // -------------------------------------------------------------
+    quarantine() {
+        this.quarantened = true;
+        this.addAnimation(new QuarantineAnimation(10, 10, 10));
     }
 
     // -------------------------------------------------------------
