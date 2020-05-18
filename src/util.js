@@ -83,8 +83,8 @@ class Debug {
     y += increment;
     ctx.fillText("Timer count      = " + ctl.timerCount, x, y);
     y += (increment * 2);
-    ctx.fillText("  X     Y  Alive Infected Infected Days Touches", x, y);
-    const format = "xxxx  yyyy aaaaa   iiiii       dddd       oooo";
+    ctx.fillText("  X     Y  Alive Infected Infected Days Touches Quarantined", x, y);
+    const format = "xxxx  yyyy aaaaa   iiiii       dddd       oooo     qqqq";
     y += increment;
     newFormat = format;
     for (let i = 0; i < ctl.shapes.length; i++) {
@@ -100,6 +100,8 @@ class Debug {
       newFormat = newFormat.replace("dddd", modStr);
       modStr = numRep(ctl.shapes[i].touches);
       newFormat = newFormat.replace("oooo", modStr);
+      modStr = numRep(ctl.shapes[i].quarantined);
+      newFormat = newFormat.replace("qqqq", modStr);
 
       ctx.fillText(newFormat, x, y);
       y += increment;

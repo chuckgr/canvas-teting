@@ -155,7 +155,6 @@ class Controller {
     checkCollisions(this.shapes, this.infectedShapes);
 
     // Update the score
-    //this.score.drawScore();
     board.displayScore(this.score.getScore());
 
     // Check to see if the game is over
@@ -168,14 +167,14 @@ class Controller {
         if (this.shapes[i].alive) {
           alive++;
         }
-        if (this.shapes[i].quarantened) {
+        if (this.shapes[i].quarantined) {
           quart++;
         }
         if (this.shapes[i].dead) {
           dead++;
         }
       }
-      console.log(`Alive=${alive}, Quarantened=${quart}, Dead=${dead}`);
+      console.log(`Alive=${alive}, quarantined=${quart}, Dead=${dead}`);
       this.state = this.endSetup;
     }
 
@@ -188,6 +187,9 @@ class Controller {
   endSetup() {
     // Stop the timer
     clearInterval(this.timer);
+
+    // Remove the score from the main screen
+    board.clearScore();
 
     // Create a rectangle over the main area
     board.createEndScore();

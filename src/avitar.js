@@ -36,7 +36,7 @@ class AvitarCreator {
         shape = new UserImage(v[0], v[1], this.AVITARSIZE, this.AVITARSIZE, document.getElementById("virginia"));
         shape.type = shapeType;
       }
-      console.log(shape);
+      //console.log(shape);
       if (shape != "") {
         shape.addAnimation(this.anim.createAnimation('Linear', shape));
         shapes.push(shape);

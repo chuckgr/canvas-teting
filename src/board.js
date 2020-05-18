@@ -22,6 +22,7 @@ class GameBoard {
     this.mainAreaHeight = this.boardHeight;
     this.createCanvas();
     this.bkgImage = document.getElementById("teamky");
+    this.scrollImg = document.getElementById("scroll");
     this.currQuarnLoc = 0;
     this.quarnLocations = [];
     this.createQuarnLocations();
@@ -114,25 +115,16 @@ class GameBoard {
 
     this.ctx.save();
     this.ctx.beginPath();
-    // Clear/Draw a rectangle in the middle of the playing area
+    // Clear a rectangle in the middle of the playing area
     this.ctx.clearRect(goX, goY, esWidth, esHeight);
-    this.ctx.fillStyle = '#6cc5af';
-    this.ctx.fillRect(goX, goY, esWidth, esHeight);
 
-    // Draw a border aroiund it
-    this.ctx.strokeStyle = 'blue';
-    //this.ctx.fillStyle = '#56abf1';
-    this.ctx.lineWidth = 3.0;
-    this.ctx.rect(goX, goY, esWidth, esHeight);
-
+    // Load up a scroll image
+    this.ctx.drawImage(this.scrollImg, goX, goY, esWidth, esHeight);
     // Make the top corner of new rectange 0,0
     this.ctx.translate(goX, goY);
 
-    //this.ctx.lineTo(x, y);
-    //this.ctx.stroke();
-
     // Write "Game Over" in large print in center of new rect.
-    this.drawText(goText, 25, 'center', (textYOffset * 1), esWidth, esHeight);
+    this.drawText(goText, 25, 'center', (textYOffset - 5), esWidth, esHeight);
 
     // Write Final score
     currYOffset += textYOffset;
@@ -219,6 +211,15 @@ class GameBoard {
     this.ctx.lineWidth = 2;
     this.ctx.font = '20px verdana';
     this.ctx.fillText("Score: " + score, 10, 20);
+    this.ctx.stroke();
+  }
+
+  //--------------------------------------------------------------
+  // Clear the score in the upper left corner
+  //--------------------------------------------------------------
+  clearScore() {
+    this.ctx.fillStyle = "rgb(255,255,255)";
+    this.ctx.fillRect(10, 5, 250, 30);
     this.ctx.stroke();
   }
 
@@ -333,10 +334,10 @@ class Score {
   //--------------------------------------------------------------
   calcScore(shapes) {
     for (let i = 0; i < shapes.length; i++) {
-      if (!shapes[i].infected && !shapes[i].quarantened) {
+      if (!shapes[i].infected && !shapes[i].quarantined) {
         this.score += this.bonus;
       }
-      if (shapes[i].quarantened && shapes[i].alive) {
+      if (shapes[i].quarantined && shapes[i].alive) {
         this.score += this.multi;
       }
       if (shapes[i].dead) {
@@ -355,7 +356,7 @@ class Score {
   checkForEnd(shapes) {
     let done = true;
     for (let i = 0; i < shapes.length; i++) {
-      if (shapes[i].infected && !shapes[i].quarantened) {
+      if (shapes[i].infected && !shapes[i].quarantined) {
         done = false;
       }
     }

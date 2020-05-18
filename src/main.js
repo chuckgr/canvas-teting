@@ -43,8 +43,8 @@ function mainLoop() {
 // TODO - Remove unneeded variables and clean up per reqs.
 //----------------------------------------------------------
 let debug =
-  true;
-//false;
+  //  true;
+  false;
 let count = 16;
 let sameTouch = [];
 let reDraw = false;

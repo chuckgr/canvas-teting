@@ -19,7 +19,7 @@ class Shape {
         this.eFactor = 2;
         this.infected = false;
         this.infectedDays = 0;
-        this.quarantened = false;
+        this.quarantined = false;
     }
 
     // -------------------------------------------------------------
@@ -105,7 +105,7 @@ class UserImage extends Shape {
     // Move this shape to quarantine
     // -------------------------------------------------------------
     quarantine() {
-        this.quarantened = true;
+        this.quarantined = true;
         this.addAnimation(new QuarantineAnimation(10, 10, 10));
     }
 
@@ -139,10 +139,16 @@ class UserImage extends Shape {
                     this.infected = true;
                 }
             } else if (this.infectedDays == DEATHDAYS) {
-                //this.alive = false;
-                this.imgage = document.getElementById("skull");
+                if (this.quarantined) {
+                    if (Math.random() * (100 * DEATHPCT) == 150) {
+                        his.alive = false;
+                        this.image = document.getElementById("skull");
+                    } else {
+                        this.quarantined = false;
+                        this.infectedDays = 0;
+                    }
+                }
             }
         }
     }
-
 }
