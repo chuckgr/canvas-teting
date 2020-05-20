@@ -157,8 +157,6 @@ class ExplosionAnimation extends Animation {
     }
 }
 
-
-
 //-------------------------------------------------------------
 // Quarantine animation object
 // TODO - 
@@ -168,8 +166,8 @@ class QuarantineAnimation extends Animation {
         super(xSpeed, ySpeed);
         //this.img = "img/explosion.png"; // Image to explode with
         //this.img = document.getElementById("exploded"); // Image to explode with
-        this.expFrames = 3; // Number of frames to animate the explosion
-        this.eFactor = 2; // Size to increase/reduce the image size per frame
+        //this.expFrames = 3; // Number of frames to animate the explosion
+        //this.eFactor = 2; // Size to increase/reduce the image size per frame
         this.locs = board.getQuarnLocation();
     }
 
@@ -178,16 +176,10 @@ class QuarantineAnimation extends Animation {
     // 
     //---------------------------------------------------------
     animate(ctx, shape) {
-        //if (this.locs.length == 0) {
-        //    this.locs = board.getQuarnLocation();
         shape.x = this.locs[0];
         shape.y = this.locs[1];
-        //}
     }
 }
-
-
-
 
 //-------------------------------------------------------------
 // Bobblehead animation object

@@ -10,7 +10,8 @@
 //-------------------------------------------------------------
 function test_harness() {
   //test_background();
-  test_gameover();
+  //test_gameover();
+  test_listeners();
 }
 
 //-------------------------------------------------------------
@@ -48,4 +49,19 @@ function test_gameover() {
   let score = new Score(ctx);
   board.score = score;
   board.createEndScore();
+}
+
+//-------------------------------------------------------------
+// Test creating/removing event listerners 
+//-------------------------------------------------------------
+function test_listeners() {
+  let board = new GameBoard();
+  board.canvas.addEventListener('click', clicker);
+
+  function clicker() {
+    console.log('Click event from clicker');
+    board.canvas.removeEventListener('click', clicker);
+  }
+
+
 }

@@ -7,12 +7,15 @@
 // Method to add the listener to the canvas and specify
 // the function to call when fired for game play
 //----------------------------------------------------------
-function addListener(canvElem, shapes, score) {
+function addRemoveListener(canvElem, shapes, score, type) {
   let canvLeft = canvElem.offsetLeft + canvElem.clientLeft;
   let canvTop = canvElem.offsetTop + canvElem.clientTop;
-  let ctx = canvElem.getContext('2d');
 
-  canvElem.addEventListener('click', handleClick);
+  if (type == 'remove') {
+    canvElem.removeEventListener('click', handleClick);
+  } else {
+    canvElem.addEventListener('click', handleClick);
+  }
 
   //----------------------------------------------------------
   // Gets called when the mouse is clicked in the canvas
@@ -78,16 +81,23 @@ function splashListener(event) {
 //----------------------------------------------------------
 // Method that gets called on the canvas click event 
 // for the start of the game with a logo and instructions
+// TODO - Remove fixed locations for play button 
 //----------------------------------------------------------
 function restartGameListener(event) {
   // Check for correct event and remove the listeners
   if (event.type === "click" || (event.type === "keydown" && event.code === "Enter")) {
-    //console.log(` Click at x=${event.pageX}, y=${event.pageY}`);
-    // remove events
+    if (debug) {
+      console.log(` Click at x=${event.pageX}, y=${event.pageY}`);
+    }
+
+    // Remove event listener
     let canvas = document.getElementById("canvas");
 
     // Did they hit the play button?
-    if (event.pageX > 380 && event.pageX < 445 && event.pageY > 480 && event.pageY < 533) {
+    if ((event.pageX > 430 && event.pageX < 490 && event.pageY > 480 && event.pageY < 540) || event.code === "Enter") {
+      if (debug) {
+        console.log('restartGameListener: Play button hit');
+      }
       canvas.removeEventListener("click", restartGameListener);
       board.reset();
       controller.timerCount = 0;

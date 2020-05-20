@@ -98,6 +98,7 @@ class Controller {
 
     // Infect one of the shapes with the 'Rona
     let infectLocation = Math.floor(Math.random() * count);
+    this.infectedShapes = [];
     this.infectedShapes.push(infectLocation);
     this.shapes[infectLocation].infect();
     if (debug) {
@@ -109,7 +110,7 @@ class Controller {
     board.displayScore(this.score.getScore());
 
     // Listen for mouse click event on the canvas
-    addListener(this.canvas, this.shapes, this.score);
+    addRemoveListener(this.canvas, this.shapes, this.score, 'add');
 
     // Intro sound
     intro.play();
@@ -154,9 +155,6 @@ class Controller {
     // Check for collisions with infected head
     checkCollisions(this.shapes, this.infectedShapes);
 
-    // Update the score
-    board.displayScore(this.score.getScore());
-
     // Check to see if the game is over
     if (this.score.checkForEnd(this.shapes)) {
       this.score.calcScore(this.shapes);
@@ -188,18 +186,19 @@ class Controller {
     // Stop the timer
     clearInterval(this.timer);
 
-    // Remove the score from the main screen
-    board.clearScore();
+    // Remove the listener on the canvas for game play
+    addRemoveListener(this.canvas, this.shapes, this.score, 'remove');
 
     // Create a rectangle over the main area
     board.createEndScore();
-    // Write the 
 
     // Add a listener to restart the game
     this.canvas.addEventListener('click', restartGameListener);
+    this.canvas.addEventListener('keydown', restartGameListener);
 
     // Go to end state to wait for a restart
     this.state = this.end;
+
     if (debug) {
       console.log('Controller:endSetup');
     }

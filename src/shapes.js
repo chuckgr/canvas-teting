@@ -77,8 +77,8 @@ class UserImage extends Shape {
             }
 
             context.drawImage(this.image, this.x, this.y, this.width, this.height);
-            if (this.infected && (this.infectedDays >= INCUBATIONDAYS && this.infectedDays < DEATHDAYS)) {
-                //this.facemask.src = "img/facemask.png";
+            if (this.infected && (this.infectedDays >= INCUBATIONDAYS && this.alive)) {
+                // Facemask on if infected
                 context.drawImage(this.facemask, this.x, this.y, this.width, this.height);
             }
 
@@ -138,14 +138,16 @@ class UserImage extends Shape {
                 if (this.touched) {
                     this.infected = true;
                 }
-            } else if (this.infectedDays == DEATHDAYS) {
+            } else if (this.infectedDays >= DEATHDAYS) {
                 if (this.quarantined) {
-                    if (Math.random() * (100 * DEATHPCT) == 150) {
+                    if (Math.random() * (10 * DEATHPCT) == 15) {
                         his.alive = false;
                         this.image = document.getElementById("skull");
                     } else {
-                        this.quarantined = false;
-                        this.infectedDays = 0;
+                        // We are recovered
+                        // TODO - finish this up to make it move to the main playing area
+                        //this.quarantined = false;
+                        //this.infectedDays = 0;
                     }
                 }
             }

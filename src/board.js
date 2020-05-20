@@ -11,12 +11,11 @@
 // -------------------------------------------------------------
 class GameBoard {
   constructor(score) {
-    //this.velocity = new EdgeVelocity();
     this.score = score;
     this.canvas = "";
     this.ctx = "";
     this.hahSize = 120;
-    this.boardWidth = 800;
+    this.boardWidth = 900;
     this.boardHeight = 600;
     this.mainAreaWidth = this.boardWidth - this.hahSize;
     this.mainAreaHeight = this.boardHeight;
@@ -241,7 +240,7 @@ class Score {
   constructor() {
     this.score = 0;
     this.hiScore = 0;
-    this.objects = 0;
+    //this.objects = 0;
     this.shots = 0;
     this.miss = 100;
     this.multi = 1000;
@@ -310,6 +309,7 @@ class Score {
     console.log(this.hiScore);
     return this.hiScore;
   }
+
   //--------------------------------------------------------------
   // Save the high score
   //--------------------------------------------------------------
