@@ -50,7 +50,7 @@ class GameBoard {
     this.canvas.id = "canvas";
     this.canvas.width = this.boardWidth;
     this.canvas.height = this.boardHeight;
-    this.canvas.style.zIndex = 1;
+    this.canvas.style.zIndex = 0;
     this.canvas.style.border = "solid 2pt rgb(8, 112, 248)";
     const div = document.getElementById("main-canvas");
     div.appendChild(this.canvas);
@@ -119,6 +119,8 @@ class GameBoard {
     this.ctx.beginPath();
     // Clear a rectangle in the middle of the playing area
     this.ctx.clearRect(goX, goY, esWidth, esHeight);
+    //this.ctx.fillStyle = "rgb(255,255,255)";
+    //this.ctx.fillRect(goX, goY, esWidth, esHeight);
 
     // Load up a scroll image
     this.ctx.drawImage(this.scrollImg, goX, goY, esWidth, esHeight);
@@ -269,6 +271,7 @@ class Score {
     } else if (shape.infected && shape.touches > INCUBATIONDAYS) {
       this.score += this.multi;
     } else if (!shape.infected) {
+      cant.play();
       this.score -= Math.round(this.multi / 2);
     } else if (!shape.alive) {
       this.score -= Math.round(this.multi);

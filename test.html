@@ -14,26 +14,36 @@
     <script type="text/javascript" src="src/board.js"></script>
     <script type="text/javascript" src="src/tests.js"></script>
 </head>
+<style>
+    body {
+        background: rgb(182, 216, 236) url("img/teamkentucky.png") repeat fixed center;
+    }
+</style>
 
 <body onload="test_harness()">
     <h3>Pandemic</h3>
     <div class="container" style="display: flex; height: 500px;">
         <div id="main-canvas">
         </div>
-        <div style="flex-grow: 1;">
+        <div id="test-canvas">
             <!-- 
+            -->
+        </div>
+
+        <!-- 
             <form onsubmit="JavaScript:getForm()">
                 Number of shapes (1-100):
                 <input type="number" id="count" name="max" l min="1" max="100" value="50"> <br><br>
                 <input name="Submit" type="submit" value="Update" />
             </form>
             -->
-        </div>
-        <div style="color: #6cc5af;" </div> <!-- Pre-load the images -->
+
+        <div style="color: #6cc5af;">
+            <!-- Pre-load the images -->
             <img src="img/andy-headshot1.png" id="andy" style="display: none;" />
             <img src="img/Coronavirus-CDC.png" id="rona" style="display: none;" />
             <img src="img/teamky-white.png" id="teamky" style="display: none;" />
-            <p />
+        </div>
 </body>
 
 </html>

@@ -11,7 +11,9 @@
 function test_harness() {
   //test_background();
   //test_gameover();
-  test_listeners();
+  //test_listeners();
+  test_resetHiScore()
+  //test_background();
 }
 
 //-------------------------------------------------------------
@@ -63,5 +65,29 @@ function test_listeners() {
     board.canvas.removeEventListener('click', clicker);
   }
 
+
+}
+
+//-------------------------------------------------------------
+// Test opaque game board
+//-------------------------------------------------------------
+function test_background() {
+  let board = new GameBoard();
+  board.ctx.save();
+  board.ctx.fillStyle('#00ffff');
+  board.ctx.fillRect(0, 0, 800, 600);
+  board.ctx.stroke();
+  board.ctx.restore();
+
+}
+
+//-------------------------------------------------------------
+// reset hi score
+//-------------------------------------------------------------
+function test_resetHiScore() {
+  let ctl = new Controller();
+  let board = new GameBoard();
+
+  ctl.score.setHiScore(0);
 
 }

@@ -69,3 +69,5 @@ const explode = new Audio("snd/explode.mp3");
 explode.load();
 const intro = new Audio("snd/intro.mp3");
 intro.load();
+const cant = new Audio("snd/you-cant-be-doing-that.mp3");
+cant.load();
