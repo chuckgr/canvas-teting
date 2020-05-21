@@ -264,6 +264,15 @@ class Score {
   // TODO - implement
   //--------------------------------------------------------------
   hitScore(shape) {
+    if (shape.infected && shape.touches <= INCUBATIONDAYS) {
+      this.score += this.multi * 2;
+    } else if (shape.infected && shape.touches > INCUBATIONDAYS) {
+      this.score += this.multi;
+    } else if (!shape.infected) {
+      this.score -= Math.round(this.multi / 2);
+    } else if (!shape.alive) {
+      this.score -= Math.round(this.multi);
+    }
 
     if (debug) {
       console.log(`Score update ${type}`);

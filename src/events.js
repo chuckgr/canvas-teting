@@ -38,20 +38,14 @@ function addRemoveListener(canvElem, shapes, score, type) {
       for (let i = 0; i < shapes.length; i++) {
         if (y > shapes[i].y && y < shapes[i].y + shapes[i].height && x > shapes[i].x && x < shapes[i].x + shapes[i].width) {
           //shapes[i].explode();
+          explode.play();
           shapes[i].quarantine();
-
+          score.hitScore(shapes[i]);
           hit = true;
-          // if it's the rona play the explosion sound
-          if (shapes[i].infected || shapes[i].alive) {
-            explode.play();
-            score.updateScore(1);
-          } else {
-            score.updateScore(2);
-          }
+
           if (debug) {
             console.log(`Hit at ${x}, ${y} for item at [${i}] at ${shapes[i].x}, ${shapes[i].y}, ${shapes[i].width}, ${shapes[i].height} type=${shapes[i].type}`);
           }
-
           break;
         }
       }
