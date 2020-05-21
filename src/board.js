@@ -258,7 +258,7 @@ class Score {
     this.score = 0;
     this.shots = 0;
   }
-  
+
   //--------------------------------------------------------------
   // Update the score based on the object hit
   // TODO - implement
@@ -270,6 +270,17 @@ class Score {
     }
   }
 
+  //--------------------------------------------------------------
+  // Update the score based on the object miss
+  // TODO - implement
+  //--------------------------------------------------------------
+  missScore() {
+    this.shots++;
+    this.score -= this.miss;
+    if (debug) {
+      console.log(`missScore: ${this.shots}`);
+    }
+  }
 
   //--------------------------------------------------------------
   // Update the score based on the object hit
@@ -280,9 +291,8 @@ class Score {
       this.score = this.score + this.multi;
     } else if (type == 2) {
       this.score = this.score - Math.floor(this.multi / 2);
-    } else {
-      this.score = this.score - this.miss;
     }
+
     if (debug) {
       console.log(`Score update ${type}`);
     }

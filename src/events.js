@@ -57,7 +57,7 @@ function addRemoveListener(canvElem, shapes, score, type) {
       }
       // No object was hit
       if (!hit) {
-        score.updateScore(3);
+        score.missScore();
       }
     }
   }

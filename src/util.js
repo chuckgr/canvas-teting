@@ -82,6 +82,8 @@ class Debug {
     ctx.fillText("Infected shapes  = " + ctl.infectedShapes.length, x, y);
     y += increment;
     ctx.fillText("Timer count      = " + ctl.timerCount, x, y);
+    y += increment;
+    ctx.fillText("Score            = " + ctl.score.getScore(), x, y);
     y += (increment * 2);
     ctx.fillText("  X     Y  Alive Infected Infected Days Touches Quarantined", x, y);
     const format = "xxxx  yyyy aaaaa   iiiii       dddd       oooo     qqqq";
