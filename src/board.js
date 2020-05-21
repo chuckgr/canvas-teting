@@ -27,6 +27,9 @@ class GameBoard {
     this.createQuarnLocations();
   }
 
+  //---------------------------------------------------------
+  // Return the game to it's original state
+  //---------------------------------------------------------
   reset() {
     this.currQuarnLoc = 0;
     this.quarnLocations = [];
@@ -226,9 +229,13 @@ class GameBoard {
   // Get the next location in the quarantene area for an avatar
   //--------------------------------------------------------------
   getQuarnLocation() {
+    console.log(`Next quarn location ${this.currQuarnLoc}`);
+    let loc = this.quarnLocations[this.currQuarnLoc];
     this.currQuarnLoc++;
-    console.log(`${this.currQuarnLoc}`);
-    return this.quarnLocations[this.currQuarnLoc - 1];
+    if (this.currQuarnLoc >= count) {
+      this.currQuarnLoc = 0;
+    }
+    return loc;
   }
 }
 
@@ -251,6 +258,7 @@ class Score {
     this.score = 0;
     this.shots = 0;
   }
+  
   //--------------------------------------------------------------
   // Update the score based on the object hit
   // TODO - implement

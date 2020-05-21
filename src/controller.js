@@ -94,16 +94,22 @@ class Controller {
     }
     // Create all of the shapes to be used and the animation for the shapes
     this.creator = new AvitarCreator(new EdgeVelocity(count), new AnimationFactory(), count, this.ctx);
+    this.shapes = [];
     this.shapes = this.creator.getAvitars();
 
-    // Infect one of the shapes with the 'Rona
-    let infectLocation = Math.floor(Math.random() * count);
+    // Infect one or more of the shapes with the 'Rona
+    let infectCnt = Math.round(Math.random() * 2) + 1;
+    console.log(infectCnt);
     this.infectedShapes = [];
-    this.infectedShapes.push(infectLocation);
-    this.shapes[infectLocation].infect();
+    for (let i = 0; i < infectCnt; i++) {
+      let infectLocation = Math.floor(Math.random() * count);
+      console.log(infectLocation);
+      this.infectedShapes.push(infectLocation);
+      this.shapes[infectLocation].infect();
+    }
     if (debug) {
       // TODO - fix this as it fails now that we get the images from HTML
-      this.shapes[infectLocation].img = document.getElementById("testimg");
+      //this.shapes[infectLocation].img = document.getElementById("testimg");
     }
 
     // Create score object
@@ -116,7 +122,7 @@ class Controller {
     intro.play();
 
     // Start a 1 second timer
-    window.setInterval(function (ctl) {
+    this.timer = window.setInterval(function (ctl) {
       ctl.timerCount++;
       let ctlCounter = ctl.timerCount;
       // Bump the count of infected days for all infected people
