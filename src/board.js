@@ -111,6 +111,10 @@ class GameBoard {
     const goText = "Game Over";
     const hiScoreTxt = "High Score: ";
     const scoreTxt = "Score: ";
+    const infectedTxt = "Infected:";
+    const notInfectedTxt = "Not Infected";
+    const quarnTxt = "Quarantined:";
+    const aliveTxt = "Alive:";
     let currXOffset = textXOffset;
     let currYOffset = textYOffset;
     const scoresXOffset = 280;
@@ -141,9 +145,43 @@ class GameBoard {
     this.drawText(this.score.getHiScore(), 20, scoresXOffset, currYOffset, esWidth, esHeight);
 
     // Write stats
+    let infectedCnt = 0;
+    let quarnCnt = 0;
+    let notInfectedCnt = 0;
+    let aliveCnt = 0;
+    let shapesToCnt = controller.shapes;
+
+    for (let i = 0; i < controller.shapes.length; i++) {
+      if (controller.shapes[i].infected) {
+        infectedCnt++;
+      } else {
+        notInfectedCnt++;
+      }
+      if (controller.shapes[i].quarantined) {
+        quarnCnt++;
+      }
+      if (controller.shapes[i].alive) {
+        aliveCnt++;
+      }
+    }
+
+    currYOffset += textYOffset;
+    this.drawText(infectedTxt, 16, textXOffset, currYOffset, esWidth, esHeight);
+    this.drawText(infectedCnt, 16, scoresXOffset, currYOffset, esWidth, esHeight);
+
+    currYOffset += textYOffset;
+    this.drawText(notInfectedTxt, 16, textXOffset, currYOffset, esWidth, esHeight);
+    this.drawText(notInfectedCnt, 16, scoresXOffset, currYOffset, esWidth, esHeight);
+
+    currYOffset += textYOffset;
+    this.drawText(quarnTxt, 16, textXOffset, currYOffset, esWidth, esHeight);
+    this.drawText(quarnCnt, 16, scoresXOffset, currYOffset, esWidth, esHeight);
+
+    currYOffset += textYOffset;
+    this.drawText(aliveTxt, 16, textXOffset, currYOffset, esWidth, esHeight);
+    this.drawText(aliveCnt, 16, scoresXOffset, currYOffset, esWidth, esHeight);
 
     // Show restart button
-    // Show the Play button
     let playIcon = new UserImage(180, 320, 50, 50, document.getElementById("play"));
     playIcon.draw(this.ctx);
 
@@ -160,7 +198,6 @@ class GameBoard {
   //--------------------------------------------------------------
   drawText(text, size, x, y, w, h) {
     this.ctx.save();
-    //this.ctx.font = size + 'px arial';
     this.ctx.font = size + 'px verdana';
     if (x == 'center') {
       let textSize = this.ctx.measureText(text);
@@ -171,10 +208,8 @@ class GameBoard {
       y = parseInt((h / 2) - (Math.floor(textSize.height / 2)));
     }
 
-    //this.ctx.strokeStyle = "rgb(,022,033)";
     this.ctx.fillStyle = "black";
     this.ctx.lineWidth = 2;
-    //this.ctx.font = size + 'px arial';
     this.ctx.fillText(text, x, y);
     this.ctx.stroke();
     this.ctx.restore();
@@ -278,7 +313,7 @@ class Score {
     }
 
     if (debug) {
-      console.log(`Score update ${type}`);
+      //console.log(`Score update ${type}`);
     }
   }
 

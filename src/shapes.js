@@ -54,7 +54,6 @@ class UserImage extends Shape {
         super(x, y);
         this.image = img;
         this.facemask = document.getElementById("facemask");
-        //this.img = img;
         this.width = w;
         this.height = h;
         this.type = "";
