@@ -12,9 +12,9 @@ function addRemoveListener(canvElem, shapes, score, type) {
   let canvTop = canvElem.offsetTop + canvElem.clientTop;
 
   if (type == 'remove') {
-    canvElem.removeEventListener('click', handleClick);
+    canvElem.removeEventListener('mousedown', handleClick);
   } else {
-    canvElem.addEventListener('click', handleClick);
+    canvElem.addEventListener('mousedown', handleClick);
   }
 
   //----------------------------------------------------------
@@ -34,19 +34,20 @@ function addRemoveListener(canvElem, shapes, score, type) {
     if (debug) {
       //console.log(`event at ${x}, ${y}`);
     }
-    if (event.type === "click") {
+    if (event.type === "mousedown") {
       for (let i = 0; i < shapes.length; i++) {
         if (y > shapes[i].y && y < shapes[i].y + shapes[i].height && x > shapes[i].x && x < shapes[i].x + shapes[i].width) {
-          //shapes[i].explode();
-          explode.play();
-          shapes[i].quarantine();
-          score.hitScore(shapes[i]);
-          hit = true;
+          if (!shapes[i].quarantined) {
+            explode.play();
+            shapes[i].quarantine();
+            score.hitScore(shapes[i]);
+            hit = true;
 
-          if (debug) {
-            console.log(`Hit at ${x}, ${y} for item at [${i}] at ${shapes[i].x}, ${shapes[i].y}, ${shapes[i].width}, ${shapes[i].height} type=${shapes[i].type}`);
+            if (debug) {
+              console.log(`Hit at ${x}, ${y} for item at [${i}] at ${shapes[i].x}, ${shapes[i].y}, ${shapes[i].width}, ${shapes[i].height} type=${shapes[i].type}`);
+            }
+            break;
           }
-          break;
         }
       }
       // No object was hit
