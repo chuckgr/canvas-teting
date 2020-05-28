@@ -7,11 +7,11 @@ class AnimationFactory {
     }
 
     createAnimation(type, shape) {
+        let vx = 1,
+            vy = 1;
+
         switch (type) {
             case 'Linear':
-                let vx = 1,
-                    vy = 1;
-
                 if (shape.x > window.canvas.width) {
                     vx = -1;
                 }
@@ -19,6 +19,11 @@ class AnimationFactory {
                     vy = -1;
                 }
                 return new LinearAnimation(
+                    Math.floor(((Math.random() * SPEEDMAX) + 1) * vx),
+                    Math.floor(((Math.random() * SPEEDMAX) + 1) * vy)
+                );
+            case 'LeaveHome':
+                return new LeaveHomeAnimation(
                     Math.floor(((Math.random() * SPEEDMAX) + 1) * vx),
                     Math.floor(((Math.random() * SPEEDMAX) + 1) * vy)
                 );
@@ -258,21 +263,26 @@ class BobbleAnimation extends Animation {
 }
 
 //-------------------------------------------------------------
-// Quarantine animation object
+// LeaveHome animation object
 //
-// This animation will position all of the shapes to the
-// quarentine area
+// This animation will move the avatar from the healthy at home
+// area to the game board as the game is started or they have
+// recovered from the virus.  It will load the Linear animation 
+// once the Avatars right side clears the boarder.
 //
 // TODO - Implement
 //-------------------------------------------------------------
-class OldQuarantineAnimation extends Animation {
+class LeaveHomeAnimation extends Animation {
     constructor(xSpeed, ySpeed) {
         super(xSpeed, ySpeed);
-        this.frames = 20;
+        // How many frames to animate
+        this.frames = 130;
+        // Current frame of animation
         this.current = 1;
-        this.direction = 1;
-        this.count = 5;
-        this.deg = 1; // Radians to rotate the object
+        // X Direction of the animation
+        this.xDirection = -1;
+        this.count = 0;
+        this.cntToLeave = Math.ceil(Math.random() * (this.frames / 2));
     }
 
     //---------------------------------------------------------
@@ -283,9 +293,41 @@ class OldQuarantineAnimation extends Animation {
     }
 
     //---------------------------------------------------------
-    // Move the object left and right to simulate bobble
+    // Move the object out of the box
     //---------------------------------------------------------
     animate(ctx, shape) {
+        this.count++;
+        if (this.count > this.cntToLeave) {
+            // Go to new x,y
+            //if (shape.x > 0) {}
+            shape.x += (shape.anim.xSpeed * this.xDirection);
+            shape.y += shape.anim.ySpeed;
 
+            // Check if we hit the walls
+            if (shape.x >= (ctx.width - shape.width)) {
+                this.xSpeed *= -1; // reverse direction
+                shape.x = ctx.width - shape.width;
+            } else if (shape.x <= 0) {
+                shape.x = 0;
+                this.xSpeed *= -1;
+            }
+            // Check if we hit the top/bottom
+            if (shape.y >= (board.mainAreaHeight - shape.height)) {
+                this.ySpeed *= -1;
+                shape.y = board.mainAreaHeight - shape.height;
+            } else if (shape.y <= 0) {
+                shape.y = 0;
+                this.ySpeed *= -1;
+            }
+
+            if (this.current < this.frames) {
+                shape.x += this.xDirection;
+                this.current++;
+                // We are at the edge of the border, now switch to Linear animation    
+            } else {
+                shape.addAnimation(new LinearAnimation(shape.anim.xSpeed, shape.anim.ySpeed));
+                this.current = 0;
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@ function test_harness() {
   //test_background();
   //test_gameover();
   //test_listeners();
-  test_resetHiScore()
+  test_resetHiScore();
   //test_background();
 }
 

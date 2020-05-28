@@ -56,6 +56,7 @@ class UserImage extends Shape {
         this.facemask = document.getElementById("facemask");
         this.width = w;
         this.height = h;
+        this.quarnLocs = [0, 0];
         this.type = "";
         this.touches = 0;
         this.touched = false;

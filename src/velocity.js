@@ -87,3 +87,29 @@ class EdgeVelocity extends Velocity {
   }
 
 }
+
+// -------------------------------------------------------------
+// Class for the healthy at Home velocity (starting locations)
+//
+// This class is used to position all of the pieces on the  
+// healthy at home area on the board. 
+// TODO - 
+// -------------------------------------------------------------
+class HatHVelocity extends Velocity {
+  constructor(count) {
+    super();
+    this.locs = board.quarnLocations;
+    this.currentAvitar = 0;
+
+  }
+
+  //---------------------------------------------------------
+  // Return the starting position for the game pieces
+  // on the outer edge, we need 
+  //---------------------------------------------------------
+  getVelocity() {
+    this.currentAvitar++;
+    return this.locs[this.currentAvitar - 1];
+  }
+
+}

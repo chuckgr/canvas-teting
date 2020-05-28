@@ -38,7 +38,8 @@ class AvitarCreator {
       }
       //console.log(shape);
       if (shape != "") {
-        shape.addAnimation(this.anim.createAnimation('Linear', shape));
+        //shape.addAnimation(this.anim.createAnimation('Linear', shape));
+        shape.addAnimation(this.anim.createAnimation('LeaveHome', shape));
         shapes.push(shape);
       }
       shapeType = Math.floor(Math.random() * this.NUMSHAPES);

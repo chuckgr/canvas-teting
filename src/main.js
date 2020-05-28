@@ -43,16 +43,16 @@ function mainLoop() {
 // TODO - Remove unneeded variables and clean up per reqs.
 //----------------------------------------------------------
 let debug =
-  //true;
-  false;
+  true;
+//false;
 let count = 16;
 let sameTouch = [];
 let reDraw = false;
 let timerCount = 0;
-const INCUBATIONDAYS = 2;
+const INCUBATIONDAYS = 4;
 const DEATHDAYS = 30;
 const DEATHPCT = 3;
-const TOUCHESTOINFECT = 2;
+const TOUCHESTOINFECT = 3;
 const TOUCHRANDOM = 4;
 const SPEEDMAX = 5;
 

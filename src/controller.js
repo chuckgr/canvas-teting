@@ -93,7 +93,8 @@ class Controller {
       console.log('Controller:playSetup');
     }
     // Create all of the shapes to be used and the animation for the shapes
-    this.creator = new AvitarCreator(new EdgeVelocity(count), new AnimationFactory(), count, this.ctx);
+    //this.creator = new AvitarCreator(new EdgeVelocity(count), new AnimationFactory(), count, this.ctx);
+    this.creator = new AvitarCreator(new HatHVelocity(count), new AnimationFactory(), count, this.ctx);
     this.shapes = [];
     this.shapes = this.creator.getAvitars();
 
