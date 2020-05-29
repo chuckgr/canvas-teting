@@ -22,6 +22,7 @@ class GameBoard {
     this.createCanvas();
     this.bkgImage = document.getElementById("teamky");
     this.scrollImg = document.getElementById("scroll");
+    this.houseImg = document.getElementById("house");
     this.currQuarnLoc = 0;
     this.quarnLocations = [];
     this.createQuarnLocations();
@@ -240,6 +241,13 @@ class GameBoard {
     this.ctx.moveTo(x, 0);
     this.ctx.lineTo(x, y);
     this.ctx.stroke();
+
+    // Now we add in houses for everyone
+    let curr = [];
+    for (let i = 0; i < this.quarnLocations.length; i++) {
+      curr = this.quarnLocations[i];
+      this.ctx.drawImage(this.houseImg, curr[0], curr[1], 60, 60);
+    }
   }
 
   //--------------------------------------------------------------
