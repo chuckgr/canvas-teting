@@ -12,8 +12,8 @@ function test_harness() {
   //test_background();
   //test_gameover();
   //test_listeners();
-  test_resetHiScore();
-  //test_background();
+  //test_resetHiScore();
+  test_background();
 }
 
 //-------------------------------------------------------------
@@ -74,8 +74,8 @@ function test_listeners() {
 function test_background() {
   let board = new GameBoard();
   board.ctx.save();
-  board.ctx.fillStyle('#00ffff');
-  board.ctx.fillRect(0, 0, 800, 600);
+  board.ctx.fillStyle = '#ffffff';
+  board.ctx.fillRect(0, 0, 900, 600);
   board.ctx.stroke();
   board.ctx.restore();
 

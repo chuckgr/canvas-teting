@@ -73,9 +73,10 @@ class Debug {
 
     ctx.save();
     // Clear the playing field
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.strokeStyle = "#000000";
+    ctx.fillStyle = "#000000";
     ctx.font = '12px monospace';
     ctx.fillText("Number of shapes = " + ctl.shapes.length, x, y);
     y += increment;
@@ -110,6 +111,7 @@ class Debug {
       newFormat = format;
     }
 
+    ctx.stroke();
     ctx.restore();
 
     // Format the number to 3 digits

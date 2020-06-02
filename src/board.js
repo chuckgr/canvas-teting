@@ -79,7 +79,8 @@ class GameBoard {
   // Clear the entire game board
   //---------------------------------------------------------
   clearBoard() {
-    this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+    this.ctx.fillStyle = "#ffffff";
+    this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
   }
 
   //---------------------------------------------------------
@@ -123,9 +124,8 @@ class GameBoard {
     this.ctx.save();
     this.ctx.beginPath();
     // Clear a rectangle in the middle of the playing area
-    this.ctx.clearRect(goX, goY, esWidth, esHeight);
-    //this.ctx.fillStyle = "rgb(255,255,255)";
-    //this.ctx.fillRect(goX, goY, esWidth, esHeight);
+    this.fillStyle = "#ffffff";
+    this.ctx.fillRect(goX, goY, esWidth, esHeight);
 
     // Load up a scroll image
     this.ctx.drawImage(this.scrollImg, goX, goY, esWidth, esHeight);
