@@ -13,7 +13,8 @@ function test_harness() {
   //test_gameover();
   //test_listeners();
   //test_resetHiScore();
-  test_background();
+  //test_background();
+  test_arrayReduce();
 }
 
 //-------------------------------------------------------------
@@ -89,5 +90,23 @@ function test_resetHiScore() {
   let board = new GameBoard();
 
   ctl.score.setHiScore(0);
+
+}
+
+//-------------------------------------------------------------
+// Test using array.reduce() 
+//-------------------------------------------------------------
+function test_arrayReduce() {
+  let ctl = new Controller();
+  let board = new GameBoard();
+  let creator = new AvitarCreator(new HatHVelocity(count), new AnimationFactory(), count, ctl.ctx);
+
+  let shapes = creator.getAvitars();
+
+
+  let alive = shapes.reduce((sum, curr) => {
+    return sum += (curr.alive) ? 1 : 0;
+  }, 0);
+  console.log(alive);
 
 }
