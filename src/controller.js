@@ -99,19 +99,7 @@ class Controller {
     this.shapes = this.creator.getAvitars();
 
     // Infect one or more of the shapes with the 'Rona
-    let infectCnt = Math.round(Math.random() * 2) + 1;
-    console.log(infectCnt);
-    this.infectedShapes = [];
-    for (let i = 0; i < infectCnt; i++) {
-      let infectLocation = Math.floor(Math.random() * count);
-      console.log(infectLocation);
-      this.infectedShapes.push(infectLocation);
-      this.shapes[infectLocation].infect();
-    }
-    if (debug) {
-      // TODO - fix this as it fails now that we get the images from HTML
-      //this.shapes[infectLocation].img = document.getElementById("testimg");
-    }
+    this.creator.infectAvatars();
 
     // Create score object
     board.displayScore(this.score.getScore());
@@ -157,7 +145,7 @@ class Controller {
     }
 
     // Check for collisions with infected head
-    checkCollisions(this.shapes, this.infectedShapes);
+    this.creator.checkCollisions();
 
     // Check to see if the game is over
     if (this.score.checkForEnd(this.shapes)) {

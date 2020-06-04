@@ -6,7 +6,7 @@
 // playing board.  Setup is determinecd by the classes passed
 // for velocity and animation.
 //
-// This class is 
+// 
 // -------------------------------------------------------------
 class AvitarCreator {
   constructor(vel, anim, count, ctx) {
@@ -16,11 +16,17 @@ class AvitarCreator {
     this.AVITARSIZE = 60;
     this.COUNT = count;
     this.ctx = ctx;
+    this.shapes = [];
+    this.infected = [];
   }
 
+  // -------------------------------------------------------------
+  // Return an array of avatars based on the number defined
+  // in global COUNT var 
+  // -------------------------------------------------------------
   getAvitars() {
     let shape = "";
-    let shapes = [];
+    //let shapes = [];
     let shapeType = Math.round(Math.random() * this.NUMSHAPES);
     let v = [];
 
@@ -40,10 +46,69 @@ class AvitarCreator {
       if (shape != "") {
         //shape.addAnimation(this.anim.createAnimation('Linear', shape));
         shape.addAnimation(this.anim.createAnimation('LeaveHome', shape));
-        shapes.push(shape);
+        this.shapes.push(shape);
       }
       shapeType = Math.floor(Math.random() * this.NUMSHAPES);
     }
-    return shapes;
+    return this.shapes;
   }
+
+  // -------------------------------------------------------------
+  // Infect one or more avatars with the corona
+  // -------------------------------------------------------------
+  infectAvatars() {
+    // Infect one or more of the shapes with the 'Rona
+    let infectCnt = Math.round(Math.random() * 2) + 1;
+    if (debug) {
+      console.log(`# infected at start = ${infectCnt}`);
+    }
+    for (let i = 0; i < infectCnt; i++) {
+      let infectLocation = Math.floor(Math.random() * count);
+      if (debug) {
+        console.log(`Infected index = ${infectLocation}`);
+      }
+      this.infected.push(infectLocation);
+      this.shapes[infectLocation].infect();
+    }
+    if (debug) {
+      // TODO - fix this as it fails now that we get the images from HTML
+      //this.shapes[infectLocation].img = document.getElementById("testimg");
+    }
+  }
+
+  //--------------------------------------------------------------
+  // Check for avatar collisions
+  //--------------------------------------------------------------
+  checkCollisions() {
+    let nub = 0;
+    const IMGWIDTH = 30;
+    let touchRan = 0;
+    let found = false;
+    for (let i = 0; i < this.infected.length; i++) {
+      for (let j = 0; j < this.shapes.length; j++) {
+        if (this.shapes[this.infected[i]].alive && /*!shapes[j].infected &&*/ this.shapes[j].alive) {
+          if (this.infected[i] != j) {
+            if ((this.shapes[this.infected[i]].x < this.shapes[j].x + IMGWIDTH &&
+                this.shapes[this.infected[i]].x + IMGWIDTH > this.shapes[j].x) &&
+              this.shapes[this.infected[i]].y < this.shapes[j].y + IMGWIDTH &&
+              this.shapes[this.infected[i]].y + IMGWIDTH > this.shapes[j].y) {
+
+              touchRan = Math.round(Math.random() * TOUCHRANDOM);
+
+              if (!sameTouch.includes(j) && touchRan == 1) {
+                this.shapes[j].touch();
+                sameTouch = [];
+                sameTouch.push(j);
+              }
+
+              if (!this.infected.includes(j) && this.shapes[j].infected) {
+                this.infected.push(j);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
 }
