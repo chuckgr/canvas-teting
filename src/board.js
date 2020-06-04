@@ -39,9 +39,11 @@ class GameBoard {
   }
 
   //---------------------------------------------------------
-  // Return the game pieces for the current run
+  // Actions to board when the timer fires
   //---------------------------------------------------------
-  getShapes() {}
+  timerTick() {
+    controller.shapes.forEach((s) => s.timerTick());
+  }
 
   //---------------------------------------------------------
   // Create the canvas for the game board

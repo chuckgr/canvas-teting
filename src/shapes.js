@@ -44,6 +44,13 @@ class Shape {
         //this.img = "img/explosion.png";
         this.exploding = 6;
     }
+
+    // -------------------------------------------------------------
+    // Action to happen at each timer tick
+    // -------------------------------------------------------------
+    timerTick() {
+
+    }
 }
 
 // -------------------------------------------------------------
@@ -128,6 +135,16 @@ class UserImage extends Shape {
         this.infected = true;
 
     }
+
+    // -------------------------------------------------------------
+    // Actions for whern the timer ticks
+    // -------------------------------------------------------------
+    timerTick() {
+        if (this.infected) {
+            this.infectedDays++;
+        }
+    }
+
     // -------------------------------------------------------------
     // Called from the timer tick to indicate a new day of incubation
     // -------------------------------------------------------------

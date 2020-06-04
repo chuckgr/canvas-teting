@@ -124,14 +124,11 @@ class Controller {
 
     // Start a 1 second timer
     this.timer = window.setInterval(function (ctl) {
+      // Track the number of ticks
       ctl.timerCount++;
       let ctlCounter = ctl.timerCount;
-      // Bump the count of infected days for all infected people
-      if (ctl.shapes.length > 0) {
-        for (let i = 0; i < ctl.infectedShapes.length; i++) {
-          ctl.shapes[ctl.infectedShapes[i]].addInfectedDay();
-        }
-      }
+      // Notify the board 
+      board.timerTick();
     }, 1000, this);
 
     // Jump to the game
