@@ -82,7 +82,7 @@ class Debug {
     // Format the number to l digits
     function numRep(n, l) {
       let newStr = "" + parseInt(n);
-      return newStr.padStart(l, '0');
+      return newStr.padStart(l, ' ');
     }
 
     // Format the string to 5 chars
