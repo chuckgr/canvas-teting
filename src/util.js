@@ -24,7 +24,7 @@ class Debug {
   //--------------------------------------------------------------
   // Display shape debug info in debug canvas
   //--------------------------------------------------------------
-  writeDebug(ctl) {
+  writeDebug(ctl, creator) {
 
     let canvas = document.getElementById("debug-canvas");
     let ctx = canvas.getContext("2d");
@@ -44,30 +44,31 @@ class Debug {
     ctx.font = '12px monospace';
     ctx.fillText("Number of shapes = " + ctl.shapes.length, x, y);
     y += increment;
-    ctx.fillText("Infected shapes  = " + ctl.infectedShapes.length, x, y);
+    ctx.fillText("Infected shapes  = " + creator.numInfected(), x, y);
     y += increment;
     ctx.fillText("Timer count      = " + ctl.timerCount, x, y);
     y += increment;
     ctx.fillText("Score            = " + ctl.score.getScore(), x, y);
     y += (increment * 2);
-    ctx.fillText("  X     Y  Alive Infected Infected Days Touches Quarantined", x, y);
-    const format = "xxxx  yyyy aaaaa   iiiii       dddd       oooo     qqqq";
+    ctx.fillText("    X    Y  Alive Infected Inf Days Touches Quarantined", x, y);
+    const format = "xxx  yyy aaaaa   iiiii    ddd      oooo     qqqq";
     y += increment;
     newFormat = format;
     for (let i = 0; i < ctl.shapes.length; i++) {
-      modStr = numRep(ctl.shapes[i].x);
-      newFormat = newFormat.replace("xxxx", modStr);
-      modStr = numRep(ctl.shapes[i].y);
-      newFormat = newFormat.replace("yyyy", modStr);
+      newFormat = numRep(i, 2) + " " + newFormat;
+      modStr = numRep(ctl.shapes[i].x, 3);
+      newFormat = newFormat.replace("xxx", modStr);
+      modStr = numRep(ctl.shapes[i].y, 3);
+      newFormat = newFormat.replace("yyy", modStr);
       modStr = strRep(ctl.shapes[i].alive);
       newFormat = newFormat.replace("aaaaa", modStr);
       modStr = strRep(ctl.shapes[i].infected);
       newFormat = newFormat.replace("iiiii", modStr);
-      modStr = numRep(ctl.shapes[i].infectedDays);
-      newFormat = newFormat.replace("dddd", modStr);
-      modStr = numRep(ctl.shapes[i].touches);
+      modStr = numRep(ctl.shapes[i].infectedDays, 3);
+      newFormat = newFormat.replace("ddd", modStr);
+      modStr = numRep(ctl.shapes[i].touches, 4);
       newFormat = newFormat.replace("oooo", modStr);
-      modStr = numRep(ctl.shapes[i].quarantined);
+      modStr = strRep(ctl.shapes[i].quarantined);
       newFormat = newFormat.replace("qqqq", modStr);
 
       ctx.fillText(newFormat, x, y);
@@ -78,22 +79,10 @@ class Debug {
     ctx.stroke();
     ctx.restore();
 
-    // Format the number to 3 digits
-    function numRep(n) {
-      let newStr = "";
-      let newN = parseInt(n);
-      if (newN === 0) {
-        newStr = "0000";
-      } else if (newN < 10) {
-        newStr = "000" + n;
-      } else if (newN < 100) {
-        newStr = "00" + n;
-      } else if (newN < 1000) {
-        newStr = "0" + n;
-      } else {
-        newStr = "" + n;
-      }
-      return newStr;
+    // Format the number to l digits
+    function numRep(n, l) {
+      let newStr = "" + parseInt(n);
+      return newStr.padStart(l, '0');
     }
 
     // Format the string to 5 chars

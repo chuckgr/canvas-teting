@@ -25,8 +25,6 @@ class Controller {
     this.andy = "";
     this.rona = "";
     this.playIcon = "";
-
-    this.infectedShapes = [];
     this.creator = "";
     this.vel = "";
     this.timerCount = 0;
@@ -136,7 +134,7 @@ class Controller {
     board.createBoard();
 
     if (debug) {
-      this.debug.writeDebug(this);
+      this.debug.writeDebug(this, this.creator);
     }
 
     // Draw all of the shapes on the canvas
