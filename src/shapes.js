@@ -9,11 +9,6 @@ class Shape {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        /*
-        this.strokeStyle = "rgb(" + Math.floor((Math.random() * 255)) + "," +
-            Math.floor((Math.random() * 255)) + "," +
-            Math.floor((Math.random() * 255)) + ")";
-            */
         this.alive = true;
         this.exploding = 0;
         this.eFactor = 2;
@@ -91,9 +86,8 @@ class UserImage extends Shape {
 
             if (debug) {
                 context.font = '12px monospace';
-                context.strokeStyle = "rgb(111,022,033)";
-                context.fillText(this.x + "," + this.y, this.x + this.l, this.y);
-                context.fillText(this.infectedDays, this.x + this.l, this.y + 10);
+                context.fillStyle = "#000000";
+                context.fillText(this.x + "," + this.y, this.x + this.width, this.y);
             }
 
             context.stroke();
@@ -137,7 +131,7 @@ class UserImage extends Shape {
     }
 
     // -------------------------------------------------------------
-    // Actions for whern the timer ticks
+    // Actions for when the timer ticks
     // -------------------------------------------------------------
     timerTick() {
         if (this.infected) {
