@@ -16,7 +16,7 @@ class Debug {
     this.canvas.width = 500;
     this.canvas.height = 500;
     this.canvas.style.zIndex = 8;
-    this.canvas.style.border = "solid 3pt rgb(8, 112, 248)";
+    this.canvas.style.border = "solid 2pt rgb(8, 112, 248)";
     const div = document.getElementById("test-canvas");
     div.appendChild(this.canvas);
   }
