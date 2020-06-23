@@ -134,9 +134,28 @@ class UserImage extends Shape {
     // Actions for when the timer ticks
     // -------------------------------------------------------------
     timerTick() {
-        if (this.infected) {
-            this.infectedDays++;
+        //this.addInfectedDay();
+        if (this.alive) {
+            if (this.infected) {
+                this.infectedDays++;
+            }
+            if (this.infectedDays >= DEATHDAYS) {
+                if (this.quarantined) {
+                    if (Math.random() * (10 * DEATHPCT) == 15) {
+                        his.alive = false;
+                        this.image = document.getElementById("skull");
+                    } else {
+                        // We are recovered
+                        // TODO - finish this up to make it move to the main playing area
+                        this.quarantined = false;
+                        this.infectedDays = 0;
+                        this.addAnimation(new LeaveHomeAnimation(Math.floor(((Math.random() * SPEEDMAX) + 1) * 1),
+                            Math.floor(((Math.random() * SPEEDMAX) + 1) * 1)));
+                    }
+                }
+            }
         }
+
     }
 
     // -------------------------------------------------------------
