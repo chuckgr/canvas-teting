@@ -15,6 +15,7 @@ class Shape {
         this.infected = false;
         this.infectedDays = 0;
         this.quarantined = false;
+        this.immune = false;
     }
 
     // -------------------------------------------------------------
@@ -116,7 +117,7 @@ class UserImage extends Shape {
     touch() {
         this.touches++;
         this.touched = true;
-        if (this.touches >= TOUCHESTOINFECT) {
+        if (this.touches >= TOUCHESTOINFECT && !this.immune) {
             this.infected = true;
         }
     }
@@ -134,9 +135,9 @@ class UserImage extends Shape {
     // Actions for when the timer ticks
     // -------------------------------------------------------------
     timerTick() {
-        //this.addInfectedDay();
+        // Update avatar based on the day
         if (this.alive) {
-            if (this.infected) {
+            if (this.infected && !this.immune) {
                 this.infectedDays++;
             }
             if (this.infectedDays >= DEATHDAYS) {
@@ -146,9 +147,10 @@ class UserImage extends Shape {
                         this.image = document.getElementById("skull");
                     } else {
                         // We are recovered
-                        // TODO - finish this up to make it move to the main playing area
                         this.quarantined = false;
                         this.infectedDays = 0;
+                        this.immune = true;
+                        this.infected = false;
                         this.addAnimation(new LeaveHomeAnimation(Math.floor(((Math.random() * SPEEDMAX) + 1) * 1),
                             Math.floor(((Math.random() * SPEEDMAX) + 1) * 1)));
                     }
